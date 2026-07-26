@@ -1,17 +1,19 @@
 # Download Organizer Pro
 
-> A professional PowerShell-based Downloads folder organizer with smart classification, duplicate detection, undo operations, real-time automation, HTML reporting, and modular architecture.
+> A professional PowerShell-based Downloads folder organizer with WPF Desktop GUI, standalone executable build pipeline, smart classification, duplicate detection, undo operations, real-time automation, HTML reporting, and modular architecture.
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-v2.0.0%20Stable-success)
-![Tests](https://img.shields.io/badge/Tests-47%20Passing-brightgreen)
+![Status](https://img.shields.io/badge/Status-v2.1.0%20Desktop-success)
+![Tests](https://img.shields.io/badge/Tests-49%20Passing-brightgreen)
 
 ---
 
 ## Features
 
+- **Native WPF Desktop GUI**: Sleek Dark Mode interface (`Show-OrganizerGUI`) with target folder browser, one-click action buttons, live KPI summary cards, sortable DataGrid, and live console stream.
+- **Standalone Executable Build Pipeline (`build.ps1`)**: Compile into a single `dist/DownloadOrganizerPro.exe` binary with custom application icon (`assets/app.ico`) and zero console window overhead (`-noConsole`).
 - **Categorized Organization**: Automatically organize files by extension into dedicated category folders (`Documents`, `Images`, `Archives`, `Code`, `Applications`, etc.).
 - **Smart Keyword Classification**: Subcategory sorting based on priority-weighted file keyword rules (e.g. `Resume.pdf` -> `Documents/CV`).
 - **SHA256 Duplicate Detection**: Pre-filters by file size and compares SHA256 checksums to flag duplicate downloads.
@@ -26,47 +28,40 @@
 
 ---
 
-## Usage Examples
+## Quick Launch & Usage
 
-### Basic Execution
+### Option 1: Double-Click Desktop GUI (Windows Users)
+Double-click `Run-GUI.bat` or run `dist/DownloadOrganizerPro.exe`.
+
+### Option 2: PowerShell Terminal GUI
 ```powershell
+.\DownloadOrganizer.ps1 -GUI
+```
+
+### Option 3: Command Line (CLI) Mode
+```powershell
+# Basic Organization Run
 .\DownloadOrganizer.ps1
-```
 
-### Dry-Run Simulation
-```powershell
+# Dry-Run Simulation
 .\DownloadOrganizer.ps1 -DryRun
-```
 
-### Recursive Folder Scanning
-```powershell
+# Recursive Folder Scanning
 .\DownloadOrganizer.ps1 -Recurse
-```
 
-### Undo Last Organization Run
-```powershell
+# Undo Last Move Operation
 .\DownloadOrganizer.ps1 -Undo
-```
 
-### Real-Time Folder Watcher
-```powershell
+# Real-Time Folder Watcher
 .\DownloadOrganizer.ps1 -Watcher
-```
 
-### Headless & Background Execution
-```powershell
-.\DownloadOrganizer.ps1 -Silent
-.\DownloadOrganizer.ps1 -Background
-```
-
-### HTML & CSV Report Generation
-```powershell
+# Export HTML & CSV Reports
 .\DownloadOrganizer.ps1 -ExportHTML -ExportCSV
 ```
 
-### View Aggregated Statistics
+### Option 4: Compile Standalone Executable
 ```powershell
-.\DownloadOrganizer.ps1 -Report
+.\build.ps1
 ```
 
 ---
@@ -104,9 +99,12 @@ Downloads/
 
 ```text
 DownloadOrganizerPro/
-├── DownloadOrganizer.ps1    # Main CLI Entry Point
+├── DownloadOrganizer.ps1    # Main Entry Point (CLI & GUI Auto-Launcher)
+├── Run-GUI.bat              # One-Click Windows Batch Launcher
+├── build.ps1                # Automated PS2EXE Executable Compiler
 ├── config.json              # Application Configuration
-├── modules/                 # Modular Domain Engine
+├── assets/                  # Project Branding & App Icon (app.ico)
+├── modules/                 # Modular Domain Engine (15 Modules)
 │   ├── Models.psm1          # Domain Entities (OrganizerFile, OrganizerSummary)
 │   ├── Utils.psm1           # Helper Functions & Hash Calculator
 │   ├── Validation.psm1      # Schema & Path Validation
@@ -121,13 +119,15 @@ DownloadOrganizerPro/
 │   ├── Undo.psm1            # Transaction Manifest Undo Engine
 │   ├── Watcher.psm1         # FileSystemWatcher Real-Time Monitor
 │   ├── Scheduler.psm1       # Windows Task Scheduler Integrator
-│   └── ReportGenerator.psm1 # CSV, JSON & HTML Report Engine
-├── tests/                   # Pester 3.4+ / v5 Unit & Integration Suite
-│   ├── Unit/                # 13 Dedicated Unit Test Files (47 Test Cases)
+│   ├── ReportGenerator.psm1 # CSV, JSON & HTML Report Engine
+│   └── GUI.psm1             # Native WPF Desktop GUI Module
+├── tests/                   # Pester Unit & Integration Suite
+│   ├── Unit/                # 14 Dedicated Unit Test Files (49 Test Cases)
 │   └── run_test.ps1         # Integration Test Runner
 ├── docs/                    # Architectural & Design Documentation
-├── logs/                    # Execution Logs & Reports
-├── .github/                 # GitHub CI Workflows & Templates
+│   ├── GUI_GUIDE.md         # Desktop GUI User Guide
+│   └── BUILD_GUIDE.md       # Executable Build & Compilation Guide
+├── dist/                    # Release Binary Distribution Package
 └── README.md
 ```
 
@@ -154,17 +154,20 @@ DownloadOrganizerPro/
    .\tests\run_test.ps1
    ```
 
-3. **Run Download Organizer Pro**:
+3. **Launch GUI / Compile Executable**:
    ```powershell
-   .\DownloadOrganizer.ps1
+   .\Run-GUI.bat
+   .\build.ps1
    ```
 
 ---
 
 ## Documentation
 
-Full architectural design documents are available in the [docs/](file:///c:/Users/zidan/Desktop/Coding/PROJEK/DownloadOrganizerPro/docs/) directory:
+Full architectural design and user guides are available in the [docs/](file:///c:/Users/zidan/Desktop/Coding/PROJEK/DownloadOrganizerPro/docs/) directory:
 
+- [Desktop GUI User Guide (GUI_GUIDE.md)](file:///c:/Users/zidan/Desktop/Coding/PROJEK/DownloadOrganizerPro/docs/GUI_GUIDE.md)
+- [Executable Build Guide (BUILD_GUIDE.md)](file:///c:/Users/zidan/Desktop/Coding/PROJEK/DownloadOrganizerPro/docs/BUILD_GUIDE.md)
 - [Product Requirements Document (PRD.md)](file:///c:/Users/zidan/Desktop/Coding/PROJEK/DownloadOrganizerPro/docs/PRD.md)
 - [Architecture Document (ARCHITECTURE.md)](file:///c:/Users/zidan/Desktop/Coding/PROJEK/DownloadOrganizerPro/docs/ARCHITECTURE.md)
 - [Configuration Guide (CONFIGURATION.md)](file:///c:/Users/zidan/Desktop/Coding/PROJEK/DownloadOrganizerPro/docs/CONFIGURATION.md)

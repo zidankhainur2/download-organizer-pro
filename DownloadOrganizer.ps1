@@ -1,6 +1,6 @@
 # ===========================================
 # Download Organizer Pro
-# Version 2.0
+# Version 2.1 (Desktop Edition)
 # ===========================================
 
 [CmdletBinding()]
@@ -14,7 +14,8 @@ param(
     [switch]$ExportCSV,
     [switch]$ExportJSON,
     [switch]$ExportHTML,
-    [switch]$Report
+    [switch]$Report,
+    [switch]$GUI
 )
 
 Set-StrictMode -Version Latest
@@ -24,6 +25,32 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path `
     -Parent `
     $MyInvocation.MyCommand.Path
+
+# Import Modules
+Import-Module "$ProjectRoot\modules\Models.psm1" -Force
+Import-Module "$ProjectRoot\modules\Utils.psm1" -Force
+Import-Module "$ProjectRoot\modules\Validation.psm1" -Force
+Import-Module "$ProjectRoot\modules\Config.psm1" -Force
+Import-Module "$ProjectRoot\modules\Scanner.psm1" -Force
+Import-Module "$ProjectRoot\modules\Classifier.psm1" -Force
+Import-Module "$ProjectRoot\modules\SmartClassifier.psm1" -Force
+Import-Module "$ProjectRoot\modules\DuplicateDetector.psm1" -Force
+Import-Module "$ProjectRoot\modules\Mover.psm1" -Force
+Import-Module "$ProjectRoot\modules\Logger.psm1" -Force
+Import-Module "$ProjectRoot\modules\Summary.psm1" -Force
+Import-Module "$ProjectRoot\modules\Undo.psm1" -Force
+Import-Module "$ProjectRoot\modules\Watcher.psm1" -Force
+Import-Module "$ProjectRoot\modules\Scheduler.psm1" -Force
+Import-Module "$ProjectRoot\modules\ReportGenerator.psm1" -Force
+Import-Module "$ProjectRoot\modules\GUI.psm1" -Force
+
+# Launch Desktop GUI Mode if -GUI is specified or run without parameters in interactive session
+$isInteractiveNoArgs = (-not $PSBoundParameters.Count -and [Environment]::UserInteractive)
+
+if ($GUI -or $isInteractiveNoArgs) {
+    Show-OrganizerGUI -ConfigPath (Join-Path $ProjectRoot "config.json")
+    return
+}
 
 # Background Process Launcher
 if ($Background) {
@@ -45,26 +72,10 @@ $logFile = $null
 
 try {
 
-    Import-Module "$ProjectRoot\modules\Models.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Utils.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Validation.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Config.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Scanner.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Classifier.psm1" -Force
-    Import-Module "$ProjectRoot\modules\SmartClassifier.psm1" -Force
-    Import-Module "$ProjectRoot\modules\DuplicateDetector.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Mover.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Logger.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Summary.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Undo.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Watcher.psm1" -Force
-    Import-Module "$ProjectRoot\modules\Scheduler.psm1" -Force
-    Import-Module "$ProjectRoot\modules\ReportGenerator.psm1" -Force
-
     Write-HostConditional ""
     Write-HostConditional "========================================="
     Write-HostConditional "        DOWNLOAD ORGANIZER PRO"
-    Write-HostConditional "               Version 2.0"
+    Write-HostConditional "            Version 2.1"
     Write-HostConditional "========================================="
     Write-HostConditional ""
 

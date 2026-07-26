@@ -1,7 +1,7 @@
 # Architecture
 
 **Project:** Download Organizer Pro  
-**Version:** 2.0.0
+**Version:** 2.1.0
 
 ---
 
@@ -39,7 +39,7 @@ Core principles:
              Scanner Module
                       │
                       ▼
-            OrganizerFile[]
+             OrganizerFile[]
                       │
           ┌───────────┴───────────┐
           ▼                       ▼
@@ -64,8 +64,11 @@ Core principles:
 ```text
 DownloadOrganizerPro/
 
-├── DownloadOrganizer.ps1
-├── config.json
+├── DownloadOrganizer.ps1    # Main CLI & GUI Auto-Launcher
+├── Run-GUI.bat              # One-Click Batch Launcher
+├── build.ps1                # Automated PS2EXE Executable Compiler
+├── config.json              # Application Configuration
+├── assets/                  # Project Branding & app.ico
 │
 ├── modules/
 │   ├── Models.psm1
@@ -82,11 +85,13 @@ DownloadOrganizerPro/
 │   ├── Undo.psm1
 │   ├── Watcher.psm1
 │   ├── Scheduler.psm1
-│   └── ReportGenerator.psm1
+│   ├── ReportGenerator.psm1
+│   └── GUI.psm1             # Native WPF Desktop GUI Module
 │
-├── tests/
-├── docs/
-└── logs/
+├── tests/                   # Pester Unit & Integration Suite
+├── docs/                    # Architectural & User Documentation
+├── dist/                    # Standalone Executable Distribution Package
+└── logs/                    # Execution Logs & Reports
 ```
 
 ---

@@ -27,3 +27,8 @@ $RECYCLE.BIN/
 # AI Context Directory
 .ai/
 
+# Compiled Executables
+*.exe
+dist/*.exe
+
+

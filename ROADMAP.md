@@ -12,8 +12,8 @@ Build a professional, modular, and extensible PowerShell file organizer that is 
 
 # Current Status
 
-**Current Version**: `2.0.0 (Stable Release)`  
-**Test Suite Coverage**: 100% Core Engine & Modules (47 Pester unit tests passing).
+**Current Version**: `2.1.0 (Desktop Edition & Executable Build Pipeline)`  
+**Test Suite Coverage**: 100% Core Engine & GUI Modules (49 Pester unit tests passing).
 
 ---
 
@@ -53,19 +53,34 @@ Build a professional, modular, and extensible PowerShell file organizer that is 
 
 ---
 
-# Version 3.0 (Phase 7 — Next Development Phase)
+# Version 2.1.0 (Completed — Phase 7)
+
+## WPF Desktop GUI & Standalone Executable Pipeline
+- [x] Native WPF XAML Interface Layout (`modules/GUI.psm1`) with Slate/Sky dark mode palette
+- [x] Target Folder Browser & Options Checkboxes
+- [x] One-Click Action Buttons (Start, Watcher, Undo, Stats Report)
+- [x] Live KPI Summary Cards & Sortable Results DataGrid
+- [x] Real-Time Log Console Output Window
+- [x] Automatic GUI launcher (`.\DownloadOrganizer.ps1 -GUI`)
+- [x] One-Click Windows Batch Launcher (`Run-GUI.bat`)
+- [x] Automated PS2EXE Executable Compiler script (`build.ps1`) with `-noConsole` mode
+- [x] Custom Application Icon integration (`assets/app.ico`)
+- [x] Standalone distribution package (`dist/DownloadOrganizerPro.exe`)
+- [x] Desktop GUI & Build Guides (`docs/GUI_GUIDE.md`, `docs/BUILD_GUIDE.md`)
+
+---
+
+# Version 3.0.0 (Phase 8 — Future)
 
 ## Goals
+Transform Download Organizer Pro into an AI-assisted, offline-first intelligent file platform.
 
-Transform Download Organizer Pro into a next-generation file management platform.
-
-### Future Features
-- [ ] WPF / Desktop GUI Interface
-- [ ] Plugin architecture for custom classification extensions
-- [ ] AI-assisted content classification
-- [ ] OCR text extraction for scanned document sorting
-- [ ] Duplicate cleaner utility
-- [ ] Cloud storage sync integration (OneDrive, Google Drive)
+### Planned Features
+- [ ] Offline Local AI classification engine (Ollama REST API integration at `http://localhost:11434`)
+- [ ] Windows Media OCR text extraction for scanned images & documents (`Windows.Media.Ocr`)
+- [ ] Dynamic Plugin Engine (`plugins/` module loader)
+- [ ] Interactive Duplicate Purge & Cleaner Utility
+- [ ] Cloud sync folder integration (OneDrive, Google Drive)
 
 ---
 
@@ -77,5 +92,7 @@ Transform Download Organizer Pro into a next-generation file management platform
 - [x] Complete Development Guide (`docs/DEVELOPMENT.md`)
 - [x] Complete Style Guide (`docs/STYLEGUIDE.md`)
 - [x] Complete Testing Guide (`docs/TESTING.md`)
+- [x] Complete GUI User Guide (`docs/GUI_GUIDE.md`)
+- [x] Complete Build Guide (`docs/BUILD_GUIDE.md`)
 - [x] Continuous Integration workflow (`.github/workflows/ci.yml`)
 - [x] Repository issue and pull request templates
