@@ -1,0 +1,29 @@
+# Logs and Output Reports
+logs/*.log
+logs/reports/*
+logs/transaction-*.json
+
+# OS Generated Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.log.old
+
+# AI Context Directory
+.ai/
+
