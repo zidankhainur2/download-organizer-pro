@@ -13,7 +13,7 @@
 ## Features
 
 - **Native WPF Desktop GUI**: Sleek Dark Mode interface (`Show-OrganizerGUI`) with target folder browser, one-click action buttons, live KPI summary cards, sortable DataGrid, and live console stream.
-- **Standalone Executable Build Pipeline (`build.ps1`)**: Compile into a single `dist/DownloadOrganizerPro.exe` binary with custom application icon (`assets/app.ico`) and zero console window overhead (`-noConsole`).
+- **Standalone Executable Build Pipeline (`build.ps1`)**: Compile into a single-instance `dist/DownloadOrganizerPro.exe` Win32 binary using native C# compiler (`csc.exe`) with custom application icon (`assets/app.ico`) and zero console window overhead.
 - **Categorized Organization**: Automatically organize files by extension into dedicated category folders (`Documents`, `Images`, `Archives`, `Code`, `Applications`, etc.).
 - **Smart Keyword Classification**: Subcategory sorting based on priority-weighted file keyword rules (e.g. `Resume.pdf` -> `Documents/CV`).
 - **SHA256 Duplicate Detection**: Pre-filters by file size and compares SHA256 checksums to flag duplicate downloads.

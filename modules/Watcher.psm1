@@ -66,12 +66,12 @@ function Start-OrganizerWatcher {
     $watcher.EnableRaisingEvents = $true
 
     $action = {
-        param($sender, $eventArgs)
-        $filePath = $eventArgs.FullPath
+        param($src, $evtArgs)
+        $filePath = $evtArgs.FullPath
         $extension = [System.IO.Path]::GetExtension($filePath).ToLower()
 
-        # Ignore temporary download extensions
-        if ($extension -in @(".tmp", ".crdownload", ".part", ".partial")) {
+        # Ignore temporary download extensions, log files, reports, and binaries
+        if ($extension -in @(".tmp", ".crdownload", ".part", ".partial", ".log", ".json", ".csv", ".html", ".ico", ".exe")) {
             return
         }
 
@@ -79,7 +79,11 @@ function Start-OrganizerWatcher {
 
         if (Test-Path -LiteralPath $filePath) {
             try {
-                powershell.exe -NoProfile -ExecutionPolicy Bypass -File $ScriptPath -Silent
+                if ($ScriptPath.EndsWith(".exe", [System.StringComparison]::OrdinalIgnoreCase)) {
+                    Start-Process -FilePath $ScriptPath -ArgumentList "-Silent" -WindowStyle Hidden
+                } else {
+                    Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$ScriptPath`" -Silent" -WindowStyle Hidden
+                }
             }
             catch {
                 # Ignore errors during async watcher trigger
@@ -99,13 +103,16 @@ function Start-OrganizerWatcher {
         StartTime  = (Get-Date)
     }
 
-    return $Global:OrganizerWatcherInstance
+    return $watcher
 
 }
 
 <#
 .SYNOPSIS
-Stops active folder watcher monitoring.
+Stops active FileSystemWatcher folder monitoring.
+
+.DESCRIPTION
+Unregisters object event subscribers and disposes active FileSystemWatcher.
 #>
 function Stop-OrganizerWatcher {
 
@@ -114,29 +121,28 @@ function Stop-OrganizerWatcher {
     param()
 
     if ($null -ne $Global:OrganizerWatcherInstance) {
-        try {
+
+        if ($Global:OrganizerWatcherInstance.Subscriber) {
+            Unregister-Event -SubscriptionId $Global:OrganizerWatcherInstance.Subscriber.Id -ErrorAction SilentlyContinue
+        }
+
+        if ($Global:OrganizerWatcherInstance.Watcher) {
             $Global:OrganizerWatcherInstance.Watcher.EnableRaisingEvents = $false
             $Global:OrganizerWatcherInstance.Watcher.Dispose()
-            Unregister-Event -SourceIdentifier $Global:OrganizerWatcherInstance.Subscriber.Name -ErrorAction SilentlyContinue
         }
-        catch {
-        }
-        finally {
-            $Global:OrganizerWatcherInstance = $null
-        }
+
+        $Global:OrganizerWatcherInstance = $null
         return $true
     }
-
     return $false
-
 }
 
 <#
 .SYNOPSIS
-Returns the status of the folder watcher instance.
+Gets current folder watcher status.
 
 .OUTPUTS
-PSCustomObject
+[PSCustomObject]
 #>
 function Get-OrganizerWatcherStatus {
 
@@ -144,26 +150,25 @@ function Get-OrganizerWatcherStatus {
 
     param()
 
-    if ($null -ne $Global:OrganizerWatcherInstance) {
+    $isActive = ($null -ne $Global:OrganizerWatcherInstance)
+
+    if ($isActive) {
         return [PSCustomObject]@{
             IsActive  = $true
             Path      = $Global:OrganizerWatcherInstance.Path
             StartTime = $Global:OrganizerWatcherInstance.StartTime
         }
     }
-
-    return [PSCustomObject]@{
-        IsActive  = $false
-        Path      = ""
-        StartTime = $null
+    else {
+        return [PSCustomObject]@{
+            IsActive  = $false
+            Path      = $null
+            StartTime = $null
+        }
     }
 
 }
 
 #endregion
 
-Export-ModuleMember `
-    -Function `
-        Start-OrganizerWatcher,
-        Stop-OrganizerWatcher,
-        Get-OrganizerWatcherStatus
+Export-ModuleMember -Function Start-OrganizerWatcher, Stop-OrganizerWatcher, Get-OrganizerWatcherStatus

@@ -1,6 +1,6 @@
 # Executable Build Guide
 
-**Download Organizer Pro v2.1.0** includes an automated build pipeline (`build.ps1`) to compile the PowerShell codebase into a standalone Windows executable (`dist/DownloadOrganizerPro.exe`) with a custom application icon (`assets/app.ico`).
+**Download Organizer Pro v2.1.0** includes an automated native build pipeline (`build.ps1`) to compile the application into a standalone native Windows executable (`dist/DownloadOrganizerPro.exe`) with a custom application icon (`assets/app.ico`).
 
 ---
 
@@ -8,7 +8,7 @@
 
 - Windows 10 / 11 / Server
 - PowerShell 5.1 or newer
-- `ps2exe` PowerShell module (automatically installed by `build.ps1` if not present)
+- Native .NET C# Compiler (`csc.exe` — pre-installed natively on 100% of Windows 10/11 machines)
 
 ---
 
@@ -20,13 +20,14 @@ Run `build.ps1` in PowerShell:
 .\build.ps1
 ```
 
-The build script will perform the following steps:
-1. Verify and install the `ps2exe` module if required (`Install-Module ps2exe`).
-2. Create the output directory `dist/`.
+The build script performs the following steps:
+1. Locate native Windows C# Compiler (`C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe`).
+2. Create output directory `dist/`.
 3. Copy external `config.json` into `dist/config.json`.
-4. Copy `assets/app.ico` into `dist/app.ico`.
-5. Execute `Invoke-PS2EXE` with `-noConsole` flag to produce a pure WPF desktop executable without a CMD terminal window.
-6. Generate user instructions in `dist/README.txt`.
+4. Copy `modules/` into `dist/modules/`.
+5. Copy `assets/app.ico` into `dist/app.ico`.
+6. Compile native Win32 executable (`/target:winexe`) with embedded application icon (`/win32icon`).
+7. Generate user instructions in `dist/README.txt`.
 
 ---
 
@@ -34,21 +35,18 @@ The build script will perform the following steps:
 
 ```text
 dist/
-├── DownloadOrganizerPro.exe   # Standalone Windows GUI Executable
+├── DownloadOrganizerPro.exe   # Native Standalone Windows GUI Executable
 ├── config.json                 # External Configuration File
 ├── app.ico                     # Application Icon
-└── README.txt                  # User Instructions
+├── README.txt                  # User Instructions
+└── modules/                    # Application Engine Modules
 ```
 
 ---
 
-## Testing the Build
+## Benefits of Native Build
 
-To test the compiled executable, navigate to the `dist/` directory and double-click `DownloadOrganizerPro.exe`:
-
-```powershell
-cd dist
-.\DownloadOrganizerPro.exe
-```
-
-The WPF Desktop GUI will open instantly with zero background terminal windows.
+- **Zero Debug Popups**: Eliminates third-party wrapper debug popups.
+- **Zero Console Overhead**: Pure Win32 GUI application launch with 0ms terminal delay.
+- **Clean Exit**: Process terminates instantly when the user closes the WPF window.
+- **Portable**: The `dist/` directory can be zipped and run on any Windows machine.

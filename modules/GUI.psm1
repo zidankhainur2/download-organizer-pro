@@ -92,10 +92,10 @@ function Show-OrganizerGUI {
 
         <!-- Action Buttons -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,16">
-            <Button x:Name="BtnStart" Content="  START ORGANIZING" Width="180" Height="38" Background="#0284C7" Foreground="#FFFFFF" FontWeight="Bold" BorderThickness="0" Margin="0,0,12,0" Cursor="Hand"/>
-            <Button x:Name="BtnWatcher" Content=" START WATCHER" Width="160" Height="38" Background="#0369A1" Foreground="#FFFFFF" FontWeight="Bold" BorderThickness="0" Margin="0,0,12,0" Cursor="Hand"/>
-            <Button x:Name="BtnUndo" Content=" UNDO LAST MOVE" Width="150" Height="38" Background="#334155" Foreground="#F8FAFC" FontWeight="SemiBold" BorderThickness="0" Margin="0,0,12,0" Cursor="Hand"/>
-            <Button x:Name="BtnReportStats" Content=" STATS REPORT" Width="140" Height="38" Background="#334155" Foreground="#F8FAFC" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
+            <Button x:Name="BtnStart" Content="▶  START ORGANIZING" Width="180" Height="38" Background="#0284C7" Foreground="#FFFFFF" FontWeight="Bold" BorderThickness="0" Margin="0,0,12,0" Cursor="Hand"/>
+            <Button x:Name="BtnWatcher" Content="⚡ START WATCHER" Width="160" Height="38" Background="#0369A1" Foreground="#FFFFFF" FontWeight="Bold" BorderThickness="0" Margin="0,0,12,0" Cursor="Hand"/>
+            <Button x:Name="BtnUndo" Content="↺ UNDO LAST MOVE" Width="150" Height="38" Background="#334155" Foreground="#F8FAFC" FontWeight="SemiBold" BorderThickness="0" Margin="0,0,12,0" Cursor="Hand"/>
+            <Button x:Name="BtnReportStats" Content="📊 STATS REPORT" Width="140" Height="38" Background="#334155" Foreground="#F8FAFC" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
         </StackPanel>
 
         <!-- KPI Summary Cards -->
@@ -155,21 +155,21 @@ function Show-OrganizerGUI {
 
     # Controls Binding
     $txtFolderPath = $window.FindName("TxtFolderPath")
-    $btnBrowse = $window.FindName("BtnBrowse")
-    $btnStart = $window.FindName("BtnStart")
-    $btnWatcher = $window.FindName("BtnWatcher")
-    $btnUndo = $window.FindName("BtnUndo")
-    $btnReportStats = $window.FindName("BtnReportStats")
+    $btnBrowse     = $window.FindName("BtnBrowse")
+    $btnStart      = $window.FindName("BtnStart")
+    $btnWatcher    = $window.FindName("BtnWatcher")
+    $btnUndo       = $window.FindName("BtnUndo")
+    $btnReportStats= $window.FindName("BtnReportStats")
     $chkSmartRules = $window.FindName("ChkSmartRules")
-    $chkDryRun = $window.FindName("ChkDryRun")
-    $chkRecurse = $window.FindName("ChkRecurse")
+    $chkDryRun     = $window.FindName("ChkDryRun")
+    $chkRecurse    = $window.FindName("ChkRecurse")
     $chkExportHTML = $window.FindName("ChkExportHTML")
-    $chkExportCSV = $window.FindName("ChkExportCSV")
+    $chkExportCSV  = $window.FindName("ChkExportCSV")
     $txtKpiScanned = $window.FindName("TxtKpiScanned")
-    $txtKpiMoved = $window.FindName("TxtKpiMoved")
-    $txtKpiFailed = $window.FindName("TxtKpiFailed")
-    $txtKpiSize = $window.FindName("TxtKpiSize")
-    $gridResults = $window.FindName("GridResults")
+    $txtKpiMoved   = $window.FindName("TxtKpiMoved")
+    $txtKpiFailed  = $window.FindName("TxtKpiFailed")
+    $txtKpiSize    = $window.FindName("TxtKpiSize")
+    $gridResults   = $window.FindName("GridResults")
     $txtLogConsole = $window.FindName("TxtLogConsole")
 
     # Initial Values
@@ -178,14 +178,20 @@ function Show-OrganizerGUI {
 
     # Event Handlers
     $btnBrowse.Add_Click({
+        try {
             $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
             $dialog.Description = "Select Downloads Target Folder"
             if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
                 $txtFolderPath.Text = $dialog.SelectedPath
             }
-        })
+        }
+        catch {
+            [System.Windows.MessageBox]::Show($_.Exception.Message, "Folder Browser Error", "OK", "Error")
+        }
+    })
 
     $btnStart.Add_Click({
+        try {
             $targetFolder = $txtFolderPath.Text
             if (-not (Test-Path -LiteralPath $targetFolder)) {
                 [System.Windows.MessageBox]::Show("Target folder does not exist: $targetFolder", "Error", "OK", "Error")
@@ -230,9 +236,9 @@ function Show-OrganizerGUI {
             foreach ($f in $files) { $totalBytes += $f.SizeBytes }
             $sizeMB = [Math]::Round($totalBytes / 1MB, 2)
 
-            $txtKpiMoved.Text = $movedCount.ToString()
+            $txtKpiMoved.Text  = $movedCount.ToString()
             $txtKpiFailed.Text = $failedCount.ToString()
-            $txtKpiSize.Text = "$sizeMB MB"
+            $txtKpiSize.Text   = "$sizeMB MB"
 
             $txtLogConsole.AppendText("[SUCCESS] Completed: $movedCount moved, $failedCount failed.`n")
 
@@ -252,9 +258,14 @@ function Show-OrganizerGUI {
                 Export-OrganizerCSV -Results $moveResults -OutputPath $csvFile | Out-Null
                 $txtLogConsole.AppendText("[REPORT] CSV File: $csvFile`n")
             }
-        })
+        }
+        catch {
+            [System.Windows.MessageBox]::Show($_.Exception.Message, "Organize Error", "OK", "Error")
+        }
+    })
 
     $btnWatcher.Add_Click({
+        try {
             $status = Get-OrganizerWatcherStatus
             if ($status.IsActive) {
                 Stop-OrganizerWatcher | Out-Null
@@ -264,15 +275,22 @@ function Show-OrganizerGUI {
             }
             else {
                 $targetFolder = $txtFolderPath.Text
-                $scriptPath = Join-Path $projectRoot "DownloadOrganizer.ps1"
+                $ps1Path = Join-Path $projectRoot "DownloadOrganizer.ps1"
+                $exePath = Join-Path $projectRoot "DownloadOrganizerPro.exe"
+                $scriptPath = if (Test-Path -LiteralPath $ps1Path) { $ps1Path } else { $exePath }
                 Start-OrganizerWatcher -Path $targetFolder -ScriptPath $scriptPath -DebounceSeconds 2 | Out-Null
                 $btnWatcher.Content = "⏹ STOP WATCHER"
                 $btnWatcher.Background = "#DC2626"
                 $txtLogConsole.AppendText("[INFO] Real-Time Folder Watcher Activated for: $targetFolder`n")
             }
-        })
+        }
+        catch {
+            [System.Windows.MessageBox]::Show($_.Exception.Message, "Watcher Error", "OK", "Error")
+        }
+    })
 
     $btnUndo.Add_Click({
+        try {
             $logsDir = Join-Path $projectRoot "logs"
             $undoLogs = Get-UndoLog -LogPath $logsDir
             if ($undoLogs.Count -eq 0) {
@@ -283,18 +301,30 @@ function Show-OrganizerGUI {
             $res = Invoke-UndoOperation -TransactionFile $latest
             $txtLogConsole.AppendText("[UNDO] Restored $($res.RestoredCount) file(s), $($res.FailedCount) failed.`n")
             [System.Windows.MessageBox]::Show("Undo completed!`nRestored: $($res.RestoredCount) file(s)", "Undo Complete", "OK", "Information")
-        })
+        }
+        catch {
+            [System.Windows.MessageBox]::Show($_.Exception.Message, "Undo Error", "OK", "Error")
+        }
+    })
 
     $btnReportStats.Add_Click({
+        try {
             $logsDir = Join-Path $projectRoot "logs"
             $stats = Get-OrganizerStatistics -LogPath $logsDir
             $msg = "HISTORICAL STATISTICS:`n`nTotal Executions Logged: $($stats.TotalExecutions)`nTotal Files Moved: $($stats.TotalMoved)`nTotal Operations Failed: $($stats.TotalFailed)"
             [System.Windows.MessageBox]::Show($msg, "Statistics Dashboard", "OK", "Information")
-        })
+        }
+        catch {
+            [System.Windows.MessageBox]::Show($_.Exception.Message, "Stats Error", "OK", "Error")
+        }
+    })
+
+    $window.Add_Closed({
+        Stop-OrganizerWatcher | Out-Null
+    })
 
     $window.ShowDialog() | Out-Null
-    return $window
-
+    Stop-OrganizerWatcher | Out-Null
 }
 
 <#
@@ -315,7 +345,5 @@ function New-OrganizerWindow {
 
 Export-ModuleMember `
     -Function `
-    Show-OrganizerGUI,
-New-OrganizerWindow
-New-OrganizerWindow
-New-OrganizerWindow
+        Show-OrganizerGUI,
+        New-OrganizerWindow

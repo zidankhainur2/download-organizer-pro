@@ -22,9 +22,27 @@ Set-StrictMode -Version Latest
 
 $ErrorActionPreference = "Stop"
 
-$ProjectRoot = Split-Path `
-    -Parent `
+$currentPath = if (-not [string]::IsNullOrWhiteSpace($PSScriptRoot)) {
+    $PSScriptRoot
+} elseif ($MyInvocation -and $MyInvocation.MyCommand -and (Get-Member -InputObject $MyInvocation.MyCommand -Name "Path") -and $MyInvocation.MyCommand.Path) {
     $MyInvocation.MyCommand.Path
+} else {
+    [System.AppDomain]::CurrentDomain.BaseDirectory
+}
+
+$ProjectRoot = if (Test-Path -LiteralPath $currentPath -PathType Leaf) {
+    Split-Path -Parent $currentPath
+} else {
+    $currentPath
+}
+
+# Ensure ProjectRoot resolves to directory containing modules/
+if (-not (Test-Path -LiteralPath (Join-Path $ProjectRoot "modules"))) {
+    $parentDir = Split-Path -Parent $ProjectRoot
+    if (Test-Path -LiteralPath (Join-Path $parentDir "modules")) {
+        $ProjectRoot = $parentDir
+    }
+}
 
 # Import Modules
 Import-Module "$ProjectRoot\modules\Models.psm1" -Force
@@ -55,7 +73,7 @@ if ($GUI -or $isInteractiveNoArgs) {
 # Background Process Launcher
 if ($Background) {
     Start-Process powershell.exe `
-        -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$MyInvocation.MyCommand.Path`" -Silent" `
+        -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$currentPath`" -Silent" `
         -WindowStyle Hidden
     return
 }
@@ -98,7 +116,7 @@ try {
         Write-HostConditional "Starting Folder Watcher for: $($config.Settings.DownloadsPath)..."
         $watcherInst = Start-OrganizerWatcher `
             -Path $config.Settings.DownloadsPath `
-            -ScriptPath $MyInvocation.MyCommand.Path `
+            -ScriptPath $currentPath `
             -DebounceSeconds ([int]$config.Settings.WatcherDebounceSeconds)
         Write-HostConditional "Folder Watcher Active. Press Ctrl+C to stop."
         return
@@ -156,18 +174,12 @@ try {
         Write-OrganizerLog `
             -LogFile $logFile `
             -Level WARNING `
-            -Message "No files found."
+            -Message "No files found matching criteria."
 
         return
     }
 
     Write-HostConditional "$($files.Count) file(s) found."
-
-    # Duplicate Detection
-    $duplicates = Get-DuplicateFiles -Files $files
-    if ($duplicates.Count -gt 0) {
-        Write-HostConditional "$($duplicates.Count) duplicate file(s) identified via SHA256."
-    }
 
     $classifiedFiles = Set-FileCategory `
         -Files $files `
@@ -175,30 +187,27 @@ try {
 
     if ($config.Settings.EnableSmartRules) {
 
-        $classifiedFiles =
-            Invoke-SmartClassification `
-                -Files $classifiedFiles `
-                -SmartRules $config.SmartRules
+        $classifiedFiles = Invoke-SmartClassification `
+            -Files $classifiedFiles `
+            -SmartRules $config.SmartRules
 
     }
 
-    $moveResults =
-        Move-OrganizerFiles `
-            -Files $classifiedFiles `
-            -BasePath $downloadPath `
-            -DryRun:$isDryRun `
-            -TransactionPath (Join-Path $ProjectRoot "logs")
+    $moveResults = Move-OrganizerFiles `
+        -Files $classifiedFiles `
+        -BasePath $downloadPath `
+        -DryRun:$isDryRun `
+        -TransactionPath (Join-Path $ProjectRoot "logs")
 
     Write-MoveLog `
         -LogFile $logFile `
         -Results $moveResults
 
-    $summary =
-        Get-OrganizerSummary `
-            -Files $classifiedFiles `
-            -Results $moveResults `
-            -StartTime $startTime `
-            -EndTime (Get-Date)
+    $summary = Get-OrganizerSummary `
+        -Files $classifiedFiles `
+        -Results $moveResults `
+        -StartTime $startTime `
+        -EndTime (Get-Date)
 
     Write-OrganizerLog `
         -LogFile $logFile `

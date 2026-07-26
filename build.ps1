@@ -1,11 +1,9 @@
 # ===========================================
-# Download Organizer Pro — Executable Build Script
+# Download Organizer Pro — Native Build Script
 # ===========================================
 
 [CmdletBinding()]
-param(
-    [switch]$SkipModuleInstall
-)
+param()
 
 Set-StrictMode -Version Latest
 
@@ -25,16 +23,31 @@ if (-not (Test-Path -LiteralPath $distDir)) {
     New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 }
 
-$rootExe   = Join-Path $ProjectRoot "DownloadOrganizerPro.exe"
 $outputExe = Join-Path $distDir "DownloadOrganizerPro.exe"
 $iconPath  = Join-Path $ProjectRoot "assets\app.ico"
 $configSrc = Join-Path $ProjectRoot "config.json"
 $configDst = Join-Path $distDir "config.json"
+$ps1Src    = Join-Path $ProjectRoot "DownloadOrganizer.ps1"
+$ps1Dst    = Join-Path $distDir "DownloadOrganizer.ps1"
+
+# Copy DownloadOrganizer.ps1 to dist/
+if (Test-Path -LiteralPath $ps1Src) {
+    Copy-Item -LiteralPath $ps1Src -Destination $ps1Dst -Force
+    Write-Host "[BUILD] Copied DownloadOrganizer.ps1 -> dist/DownloadOrganizer.ps1"
+}
 
 # Copy external config.json to dist/
 if (Test-Path -LiteralPath $configSrc) {
     Copy-Item -LiteralPath $configSrc -Destination $configDst -Force
     Write-Host "[BUILD] Copied config.json -> dist/config.json"
+}
+
+# Copy modules folder to dist/
+$modulesSrc = Join-Path $ProjectRoot "modules"
+$modulesDst = Join-Path $distDir "modules"
+if (Test-Path -LiteralPath $modulesSrc) {
+    Copy-Item -LiteralPath $modulesSrc -Destination $modulesDst -Recurse -Force
+    Write-Host "[BUILD] Copied modules/ -> dist/modules/"
 }
 
 # Copy icon to dist/
@@ -61,37 +74,104 @@ in the 'logs/' subfolder.
 "@
 Set-Content -Path (Join-Path $distDir "README.txt") -Value $readmeText -Encoding UTF8
 
-Write-Host "[BUILD] Locating ps2exe compilation script..."
+Write-Host "[BUILD] Locating Native C# Compiler (csc.exe)..."
 
-$ps2exeScript = Get-ChildItem -Path $env:USERPROFILE, $env:ProgramFiles -Filter "ps2exe.ps1" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
-
-if ($null -eq $ps2exeScript -and -not $SkipModuleInstall) {
-    Write-Host "[BUILD] Installing ps2exe module for CurrentUser..."
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    Install-Module ps2exe -Scope CurrentUser -Force -AllowClobber -SkipPublisherCheck -ErrorAction SilentlyContinue
-    $ps2exeScript = Get-ChildItem -Path $env:USERPROFILE, $env:ProgramFiles -Filter "ps2exe.ps1" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+$cscPath = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+if (-not (Test-Path -LiteralPath $cscPath)) {
+    $cscPath = "C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe"
 }
 
-if ($null -eq $ps2exeScript) {
-    throw "Could not locate ps2exe.ps1 script. Please install ps2exe via: Install-Module ps2exe"
+if (-not (Test-Path -LiteralPath $cscPath)) {
+    throw "Native C# Compiler (csc.exe) not found on system."
 }
 
-Write-Host "[BUILD] Found ps2exe script: $($ps2exeScript.FullName)"
-Write-Host "[BUILD] Compiling DownloadOrganizer.ps1 -> DownloadOrganizerPro.exe..."
+Write-Host "[BUILD] Found C# Compiler: $cscPath"
 
-$inputFile = Join-Path $ProjectRoot "DownloadOrganizer.ps1"
+# Generate C# Single-Instance Mutex Launcher Code using raw single-quoted string
+$csSource = @'
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
+
+class Program {
+    private static Mutex appMutex;
+
+    [STAThread]
+    static void Main() {
+        bool createdNew;
+        appMutex = new Mutex(true, "Global\\DownloadOrganizerPro_SingleInstance_Mutex_2026", out createdNew);
+
+        if (!createdNew) {
+            return;
+        }
+
+        try {
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string scriptPath = Path.Combine(baseDir, "DownloadOrganizer.ps1");
+            if (!File.Exists(scriptPath)) {
+                DirectoryInfo parent = Directory.GetParent(baseDir);
+                if (parent != null) {
+                    string pPath = Path.Combine(parent.FullName, "DownloadOrganizer.ps1");
+                    if (File.Exists(pPath)) {
+                        scriptPath = pPath;
+                    }
+                }
+            }
+
+            if (!File.Exists(scriptPath)) {
+                MessageBox.Show("Could not locate DownloadOrganizer.ps1 script at:\n" + scriptPath, "Download Organizer Pro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "powershell.exe";
+            psi.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File \"" + scriptPath + "\" -GUI";
+            psi.WindowStyle = ProcessWindowStyle.Hidden;
+            psi.CreateNoWindow = true;
+            psi.UseShellExecute = false;
+
+            Process proc = Process.Start(psi);
+            if (proc != null) {
+                proc.WaitForExit();
+            }
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Launcher error: " + ex.Message, "Download Organizer Pro Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally {
+            if (appMutex != null) {
+                appMutex.ReleaseMutex();
+            }
+        }
+    }
+}
+'@
+
+$tempCs = Join-Path $distDir "Launcher.cs"
+Set-Content -Path $tempCs -Value $csSource -Encoding UTF8
+
+Write-Host "[BUILD] Compiling Native Single-Instance Win32 Executable -> dist/DownloadOrganizerPro.exe..."
+
+$cscArgs = @("/target:winexe", "/optimize+", "/r:System.Windows.Forms.dll", "/out:$outputExe")
 
 if (Test-Path -LiteralPath $iconPath) {
-    Write-Host "[BUILD] Compiling with custom icon: assets/app.ico"
-    & $ps2exeScript.FullName $inputFile $rootExe -x64 -iconFile $iconPath -noConsole -title "Download Organizer Pro" -version "2.1.0.0" -copyright "Copyright (c) 2026 zidankhainur" -description "Professional Downloads Folder Organizer Desktop Edition" -product "Download Organizer Pro"
-}
-else {
-    & $ps2exeScript.FullName $inputFile $rootExe -x64 -noConsole -title "Download Organizer Pro" -version "2.1.0.0" -copyright "Copyright (c) 2026 zidankhainur" -description "Professional Downloads Folder Organizer Desktop Edition" -product "Download Organizer Pro"
+    $cscArgs += "/win32icon:$iconPath"
+    Write-Host "[BUILD] Embedded custom Win32 icon: assets/app.ico"
 }
 
-if (Test-Path -LiteralPath $rootExe) {
-    Copy-Item -LiteralPath $rootExe -Destination $outputExe -Force
-    Write-Host "[BUILD] Copied executable -> dist/DownloadOrganizerPro.exe"
+$cscArgs += $tempCs
+
+& $cscPath $cscArgs | Out-Null
+
+Remove-Item -LiteralPath $tempCs -Force -ErrorAction SilentlyContinue
+
+if (Test-Path -LiteralPath $outputExe) {
+    Write-Host "[BUILD] Verified compilation output: dist/DownloadOrganizerPro.exe"
+}
+else {
+    throw "Build failed: Executable dist/DownloadOrganizerPro.exe was not created."
 }
 
 Write-Host ""

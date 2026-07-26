@@ -15,10 +15,12 @@ This project follows **Semantic Versioning (SemVer)**.
 - Added `modules/GUI.psm1` providing a native WPF Desktop Graphical User Interface (`Show-OrganizerGUI`, `New-OrganizerWindow`).
 - Designed modern dark mode WPF interface (Slate/Sky palette) with directory browser, live KPI summary cards, sortable DataGrid, and scrolling log console.
 - Added one-click action buttons for Start Organizing, Real-Time Watcher toggle, Undo last operation, and Statistics Report dashboard dialogs.
-- Created `build.ps1` automated compilation script using `PS2EXE` to package `DownloadOrganizer.ps1` into a standalone `dist/DownloadOrganizerPro.exe` binary with `-noConsole` mode.
-- Integrated custom application icon from `assets/app.ico`.
+- Created native `build.ps1` automated compilation pipeline using Windows C# compiler (`csc.exe`) to package `DownloadOrganizer.ps1` into a clean, single-instance `dist/DownloadOrganizerPro.exe` Win32 binary (`/target:winexe`).
+- Embedded custom Win32 application icon from `assets/app.ico` into executable binary headers.
+- Implemented Global Win32 Single-Instance Mutex (`DownloadOrganizerPro_SingleInstance_Mutex`) in launcher C# binary to eliminate duplicate process queuing.
+- Resolved WPF window teardown loop by allowing natural `ShowDialog()` exit without forced process termination.
 - Created `Run-GUI.bat` helper script for seamless double-click launching on Windows File Explorer.
-- Created `docs/GUI_GUIDE.md` user guide and `docs/BUILD_GUIDE.md` executable build guide.
+- Created `docs/GUI_GUIDE.md` user guide and updated `docs/BUILD_GUIDE.md` executable build guide.
 - Expanded Pester unit test suite to 49 passing tests across 14 module test files.
 
 ---
