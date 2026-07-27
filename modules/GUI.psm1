@@ -42,6 +42,8 @@ function Show-OrganizerGUI {
 
     $config = Get-OrganizerConfig -Path $ConfigPath
 
+    $ProgressPreference = 'SilentlyContinue'
+
     $xamlString = @"
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -192,6 +194,7 @@ function Show-OrganizerGUI {
 
     $btnStart.Add_Click({
         try {
+            $ProgressPreference = 'SilentlyContinue'
             $targetFolder = $txtFolderPath.Text
             if (-not (Test-Path -LiteralPath $targetFolder)) {
                 [System.Windows.MessageBox]::Show("Target folder does not exist: $targetFolder", "Error", "OK", "Error")
@@ -228,7 +231,13 @@ function Show-OrganizerGUI {
                 -DryRun:$chkDryRun.IsChecked `
                 -TransactionPath (Join-Path $projectRoot "logs")
 
-            $gridResults.ItemsSource = $moveResults
+            if ($moveResults.Count -gt 500) {
+                $gridResults.ItemsSource = $moveResults | Select-Object -First 500
+                $txtLogConsole.AppendText("[WARN] UI limited to first 500 items to prevent freezing.`n")
+            }
+            else {
+                $gridResults.ItemsSource = $moveResults
+            }
 
             $movedCount = @($moveResults | Where-Object { $_.Status -like "*Moved*" }).Count
             $failedCount = @($moveResults | Where-Object { $_.Status -eq "Failed" }).Count

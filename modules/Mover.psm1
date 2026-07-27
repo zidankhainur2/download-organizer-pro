@@ -57,10 +57,7 @@ function Move-OrganizerFiles {
 
         $current++
 
-        Write-Progress `
-            -Activity "Moving Files" `
-            -Status "$current / $total : $($file.Name)" `
-            -PercentComplete (($current / $total) * 100)
+        $current++
 
         try {
 
@@ -127,9 +124,7 @@ function Move-OrganizerFiles {
 
     }
 
-    Write-Progress `
-        -Activity "Moving Files" `
-        -Completed
+    # Removed Write-Progress
 
     # Write Transaction Manifest if enabled and not DryRun
     if (-not $DryRun -and -not [string]::IsNullOrWhiteSpace($TransactionPath) -and $movesForTransaction.Count -gt 0) {
