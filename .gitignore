@@ -27,10 +27,10 @@ $RECYCLE.BIN/
 # AI Context Directory
 .ai/
 
-# Compiled Executables
+# Compiled Executables and Build Output
 *.exe
-dist/*.exe
-dist/logs/
+dist/
+
 
 
 
