@@ -9,6 +9,7 @@ function Find-CategoryByExtension {
     param(
 
         [Parameter(Mandatory)]
+        [AllowEmptyString()]
         [string]$Extension,
 
         [Parameter(Mandatory)]
