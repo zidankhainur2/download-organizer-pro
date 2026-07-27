@@ -7,6 +7,17 @@ This project follows **Semantic Versioning (SemVer)**.
 
 ---
 
+## [2.1.1] - 2026-07-27
+
+### Fixed
+- **GUI Stability**: Removed `Write-Progress` UI rendering calls from the Mover module to prevent catastrophic console host crashes when processing thousands of files in background/hidden WindowStyle.
+- **WPF Performance**: Implemented a hard limit of 500 maximum rendering items on the GUI Results DataGrid. This prevents WPF `OutOfMemoryException` and extreme UI freezing when binding massive collections of moved files synchronously.
+- **Classification Engine**: Fixed a parameter binding bug that crashed the application when attempting to classify files that have no extension (empty string error). Added `[AllowEmptyString()]` attribute to `Find-CategoryByExtension`.
+- **CI/CD Pipeline**: Updated GitHub Actions `.github/workflows/ci.yml` Pester execution parameters to be position-based (`-Script` to `-Path` equivalent) to guarantee cross-compatibility between Pester v4 (Local) and Pester v5 (GitHub Actions windows-latest).
+- **Git Ignore Rules**: Fixed `.gitignore` to completely exclude the compiled output directory (`dist/`) and all log files (`logs/`) from version control tracking.
+
+---
+
 ## [2.1.0] - 2026-07-26
 
 ### Added
