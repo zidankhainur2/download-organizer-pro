@@ -1,5 +1,5 @@
 # ===========================================
-# Download Organizer Pro — Native Build Script
+# Download Organizer Pro - Native Build Script
 # ===========================================
 
 [CmdletBinding()]
@@ -25,6 +25,9 @@ if (-not (Test-Path -LiteralPath $distDir)) {
 
 $outputExe = Join-Path $distDir "DownloadOrganizerPro.exe"
 $iconPath  = Join-Path $ProjectRoot "assets\app.ico"
+if (-not (Test-Path -LiteralPath $iconPath)) {
+    $iconPath = Join-Path $ProjectRoot "assets\favicon.ico"
+}
 $configSrc = Join-Path $ProjectRoot "config.json"
 $configDst = Join-Path $distDir "config.json"
 $ps1Src    = Join-Path $ProjectRoot "DownloadOrganizer.ps1"

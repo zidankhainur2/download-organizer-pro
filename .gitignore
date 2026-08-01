@@ -26,6 +26,7 @@ $RECYCLE.BIN/
 
 # AI Context Directory
 .ai/
+.gemini/
 
 # Compiled Executables and Build Output
 *.exe
