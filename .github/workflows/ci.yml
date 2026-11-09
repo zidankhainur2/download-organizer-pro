@@ -7,6 +7,9 @@ on:
     branches: [ main, master, dev ]
 permissions:
   contents: read
+defaults:
+  run:
+    shell: pwsh
 jobs:
   test:
     runs-on: windows-latest
@@ -16,11 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Pester 5.7.1
-        shell: ${{ matrix.shell }}
         run: |
-          Install-Module Pester -RequiredVersion 5.7.1 -Force -SkipPublisherCheck -Scope CurrentUser
+          & '${{ matrix.shell }}' -NoProfile -Command 'Install-Module Pester -RequiredVersion 5.7.1 -Force -SkipPublisherCheck -Scope CurrentUser'
+          if ($LASTEXITCODE -ne 0) { throw 'Pester installation failed.' }
       - name: Unit and integration tests (STA)
-        shell: ${{ matrix.shell }}
         run: |
           & '${{ matrix.shell }}' -NoProfile -STA -File ./tests/Invoke-Tests.ps1
           if ($LASTEXITCODE -ne 0) { throw 'Tests failed.' }
@@ -28,10 +30,10 @@ jobs:
         shell: powershell
         run: ./package.ps1
       - name: Smoke portable package with spaces
-        shell: ${{ matrix.shell }}
         run: |
           $version = (Import-PowerShellDataFile ./DownloadOrganizerPro.psd1).ModuleVersion
-          ./tests/Smoke-Package.ps1 -PackagePath "./dist/DownloadOrganizerPro-$version-portable.zip"
+          & '${{ matrix.shell }}' -NoProfile -STA -File ./tests/Smoke-Package.ps1 -PackagePath "./dist/DownloadOrganizerPro-$version-portable.zip"
+          if ($LASTEXITCODE -ne 0) { throw 'Portable smoke failed.' }
       - name: Retain verified portable release files
         if: matrix.shell == 'powershell'
         uses: actions/upload-artifact@v4
