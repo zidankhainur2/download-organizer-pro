@@ -1,6 +1,6 @@
 # Download Organizer Pro
 
-A portable Windows download organizer with a WPF interface and a PowerShell CLI. Version **2.2.0** is defined in [the module manifest](DownloadOrganizerPro.psd1). Its functionality is verified locally; publication awaits the final Windows CI run. GUI/UI redesign and installer work are reserved for later versions.
+A portable Windows download organizer with a WPF interface and a PowerShell CLI. Version **2.2.0** is defined in [the module manifest](DownloadOrganizerPro.psd1). Its functionality and portable package are verified locally and in [Windows CI](https://github.com/zidankhainur2/download-organizer-pro/actions/runs/42576494007), with 116 tests passing on each engine. See [release readiness](docs/RELEASE.md) for the verified download and publication status. GUI/UI redesign and installer work are reserved for later versions.
 
 Classifies extensions and category-specific filename keywords, flags SHA256 duplicates while retaining every file, and supports recoverable moves, DryRun, watcher automation, scheduled runs, and CSV/JSON/HTML reports.
 

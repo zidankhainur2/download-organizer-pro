@@ -1,0 +1,310 @@
+﻿{
+    "Date":  "2026-11-09T14:10:06.7020960+07:00",
+    "Status":  "lulus",
+    "VerifiedSourceCommit":  "90b164b5a602d66081be1a0c72fb5eb1fa84718d",
+    "Run":  {
+                "RunId":  42576494007,
+                "Sha":  "90b164b5a602d66081be1a0c72fb5eb1fa84718d",
+                "Event":  "push",
+                "Status":  "completed",
+                "Conclusion":  "success",
+                "Url":  "https://github.com/zidankhainur2/download-organizer-pro/actions/runs/42576494007",
+                "Updated":  "2026-11-09T07:03:21Z",
+                "Jobs":  [
+                             {
+                                 "Id":  129025288898,
+                                 "Name":  "test (pwsh)",
+                                 "Status":  "completed",
+                                 "Conclusion":  "success",
+                                 "Url":  "https://github.com/zidankhainur2/download-organizer-pro/actions/runs/42576494007/job/129025288898",
+                                 "Steps":  [
+                                               {
+                                                   "name":  "Set up job",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Run actions/checkout@v4",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Install Pester 5.7.1",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Unit and integration tests (STA)",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Build portable package",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Smoke portable package with spaces",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Retain verified portable release files",
+                                                   "status":  "completed",
+                                                   "conclusion":  "skipped"
+                                               },
+                                               {
+                                                   "name":  "Post Run actions/checkout@v4",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Complete job",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               }
+                                           ]
+                             },
+                             {
+                                 "Id":  129025289178,
+                                 "Name":  "test (powershell)",
+                                 "Status":  "completed",
+                                 "Conclusion":  "success",
+                                 "Url":  "https://github.com/zidankhainur2/download-organizer-pro/actions/runs/42576494007/job/129025289178",
+                                 "Steps":  [
+                                               {
+                                                   "name":  "Set up job",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Run actions/checkout@v4",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Install Pester 5.7.1",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Unit and integration tests (STA)",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Build portable package",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Smoke portable package with spaces",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Retain verified portable release files",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Post Run actions/checkout@v4",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               },
+                                               {
+                                                   "name":  "Complete job",
+                                                   "status":  "completed",
+                                                   "conclusion":  "success"
+                                               }
+                                           ]
+                             }
+                         ]
+            },
+    "Tests":  [
+                  {
+                      "Engine":  "powershell",
+                      "Passed":  116,
+                      "Failed":  0,
+                      "Skipped":  0,
+                      "LogSHA256":  "FAC6F23AB0A2E648289F7CEF871CC9FF4B2B574B3F3EC0BCBD36FC28AF95A4E1"
+                  },
+                  {
+                      "Engine":  "pwsh",
+                      "Passed":  116,
+                      "Failed":  0,
+                      "Skipped":  0,
+                      "LogSHA256":  "39D7550857B726C8F6F47E8B2E88B749F15D39423F1D47ED13DF7FEFC3936A51"
+                  }
+              ],
+    "Artifact":  {
+                     "Status":  "lulus",
+                     "RunId":  42576494007,
+                     "Commit":  "90b164b5a602d66081be1a0c72fb5eb1fa84718d",
+                     "Url":  "https://github.com/zidankhainur2/download-organizer-pro/actions/runs/42576494007",
+                     "ArtifactId":  13655930752,
+                     "ArtifactDigest":  "sha256:45419a273078a5267185050034513968330f5c6d0fb259e5d02e2d7ab1d0bfee",
+                     "Archive":  "DownloadOrganizerPro-2.2.0-portable.zip",
+                     "SHA256":  "3AB094F2685F34CF7C033BA50338411E068238F7CB61A4330D2AEE2699FAE4A8",
+                     "Bytes":  48147,
+                     "PayloadFiles":  28,
+                     "SourceHashesVerified":  true,
+                     "SmokePassedEngines":  [
+                                                "Windows PowerShell 5.1",
+                                                "PowerShell 7"
+                                            ],
+                     "CopiedToDist":  true
+                 },
+    "ReleaseInputs":  [
+                          {
+                              "Path":  ".github/workflows/ci.yml",
+                              "GitBlob":  "45021d07b25b5e3d29a9b02344d1990f76d67e7e"
+                          },
+                          {
+                              "Path":  "assets/app.ico",
+                              "GitBlob":  "898ebaff9c2c2b12ec74b367d6ee60f23a2a8f19"
+                          },
+                          {
+                              "Path":  "assets/favicon.ico",
+                              "GitBlob":  "898ebaff9c2c2b12ec74b367d6ee60f23a2a8f19"
+                          },
+                          {
+                              "Path":  "assets/Launcher.cs",
+                              "GitBlob":  "4400dbfe27c4c29f00dd646bb00eb7704a0c754c"
+                          },
+                          {
+                              "Path":  "assets/OrganizerWindow.xaml",
+                              "GitBlob":  "ef44bc380dd722bd60adfc6aca0adce644f60bcb"
+                          },
+                          {
+                              "Path":  "build.ps1",
+                              "GitBlob":  "7fe25e940f10e26cf8165027ee4ed817eeac6931"
+                          },
+                          {
+                              "Path":  "CHANGELOG.md",
+                              "GitBlob":  "2e99941843cb9654ec3db940da12d4dcd2fd45ec"
+                          },
+                          {
+                              "Path":  "config.json",
+                              "GitBlob":  "0de42c34c77f6809df9f479388c6644bc765db74"
+                          },
+                          {
+                              "Path":  "docs/RELEASE_NOTES_2.2.0.md",
+                              "GitBlob":  "0b52fb98f2d4537962d14bc5b04fc141e6a7c34a"
+                          },
+                          {
+                              "Path":  "DownloadOrganizer.ps1",
+                              "GitBlob":  "0ed501ac7ac4e8613a6b25279d78bb18b8face7e"
+                          },
+                          {
+                              "Path":  "DownloadOrganizerPro.psd1",
+                              "GitBlob":  "3a6ed0d3e4e1387aa654173887bfb1587d8871b5"
+                          },
+                          {
+                              "Path":  "DownloadOrganizerPro.psm1",
+                              "GitBlob":  "efbdecbdc793568236c6e6c6dec40edde37bea07"
+                          },
+                          {
+                              "Path":  "LICENSE",
+                              "GitBlob":  "d0887b1d77f77d6979072e345af8a00b641fe220"
+                          },
+                          {
+                              "Path":  "modules/Classifier.psm1",
+                              "GitBlob":  "4964d2331948738aec7f12bd1a2d2ca4640c6280"
+                          },
+                          {
+                              "Path":  "modules/Config.psm1",
+                              "GitBlob":  "b553acea22375000e5b9516b52d8e89d9552820c"
+                          },
+                          {
+                              "Path":  "modules/DuplicateDetector.psm1",
+                              "GitBlob":  "2a31a58f6c8e077d70d47a427af830b00049235f"
+                          },
+                          {
+                              "Path":  "modules/GUI.psm1",
+                              "GitBlob":  "fbf0d0ba3e295f8e0d40ed3f82dcfd4ab7f958fd"
+                          },
+                          {
+                              "Path":  "modules/Logger.psm1",
+                              "GitBlob":  "b570146962b41499c80b8985995f570626849f9e"
+                          },
+                          {
+                              "Path":  "modules/Models.psm1",
+                              "GitBlob":  "287c3614a3343f0d615624fbbf124420e6fe01f4"
+                          },
+                          {
+                              "Path":  "modules/Mover.psm1",
+                              "GitBlob":  "7fc6c80d351e5b1584f7df4ca554a764c0231487"
+                          },
+                          {
+                              "Path":  "modules/Organizer.psm1",
+                              "GitBlob":  "e990cd1d9420299633075a3900bf298cf039c010"
+                          },
+                          {
+                              "Path":  "modules/ReportGenerator.psm1",
+                              "GitBlob":  "8bb3767f4daf001e78f6e22dce4e9126c78efd44"
+                          },
+                          {
+                              "Path":  "modules/Scanner.psm1",
+                              "GitBlob":  "7a56fac5b4923a0f0d3487deaf1780c75142710b"
+                          },
+                          {
+                              "Path":  "modules/Scheduler.psm1",
+                              "GitBlob":  "185e2bd1f85a90a0d796f4c7028c76fdd2d0a117"
+                          },
+                          {
+                              "Path":  "modules/SmartClassifier.psm1",
+                              "GitBlob":  "f93d0c949e6e99cd6204557ea10201089b0c6cac"
+                          },
+                          {
+                              "Path":  "modules/Summary.psm1",
+                              "GitBlob":  "80d10643854606a37b9016c2c97fa59f988e2c6f"
+                          },
+                          {
+                              "Path":  "modules/Transactions.psm1",
+                              "GitBlob":  "381609f42400dab1eab6409838b0993e272f46de"
+                          },
+                          {
+                              "Path":  "modules/Undo.psm1",
+                              "GitBlob":  "a56b5f5c01ed4aa593697d1eae6c2479461e0b98"
+                          },
+                          {
+                              "Path":  "modules/Utils.psm1",
+                              "GitBlob":  "22cb9c012ba4c3b02df259dfab500fefd260719b"
+                          },
+                          {
+                              "Path":  "modules/Validation.psm1",
+                              "GitBlob":  "989495fdee18b38a585bcd792741833cc9d5457a"
+                          },
+                          {
+                              "Path":  "modules/Watcher.psm1",
+                              "GitBlob":  "d1d32d932b2b73b5ee5d908942f1092c41b07486"
+                          },
+                          {
+                              "Path":  "package.ps1",
+                              "GitBlob":  "809e608552ed405126c381808763a717e06f0f66"
+                          },
+                          {
+                              "Path":  "tests/Invoke-Tests.ps1",
+                              "GitBlob":  "893f0735fa4f5b66fb6c6eb58af65319707a1203"
+                          },
+                          {
+                              "Path":  "tests/Invoke-Verification.ps1",
+                              "GitBlob":  "268bb13dd7b62dfa6f890413ff9faf5232d60f9c"
+                          },
+                          {
+                              "Path":  "tests/Smoke-Package.ps1",
+                              "GitBlob":  "ff7a46b09f8812be9d91699816d2e70b151cf249"
+                          }
+                      ],
+    "RunnerOS":  "Microsoft Windows Server 2025, 10.0.26100",
+    "Notes":  "CI tested the exact committed source after Git LF normalization. Later verification-documentation changes do not alter these release inputs. Downloaded CI artifact reverified locally against an archive of this commit. No tag or public GitHub Release created.",
+    "FirstAttempt":  {
+                         "Commit":  "de212f2d8433f3b45cb029af07efde6c6b4caacf",
+                         "RunId":  42576126860,
+                         "Status":  "failure",
+                         "JobsStarted":  0,
+                         "Reason":  "Unrecognized matrix context in step shell",
+                         "ResolvedBy":  "90b164b5a602d66081be1a0c72fb5eb1fa84718d"
+                     }
+}

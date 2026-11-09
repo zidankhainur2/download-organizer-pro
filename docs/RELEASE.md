@@ -1,6 +1,6 @@
-# Release 2.2.0 - final portable candidate
+# Release 2.2.0 - ready for publication
 
-The 2.2.0 portable release scope is complete. Local functional verification and user-confirmed GUI observations are complete, and a clean release download is prepared. **Publication remains gated on remote Windows CI for the final source commit.** Further GUI/UI and logo redesign, data-location changes, installer/uninstaller and upgrade tooling are explicitly reserved for later versions, as recorded in [ROADMAP](../ROADMAP.md).
+The 2.2.0 portable release scope is complete. Local functional verification, user-confirmed GUI observations and **both remote Windows CI jobs have passed**. A clean release download from the successful CI run has also been verified locally against its committed source. The version is ready for publication; no release tag or GitHub Release has been published by this verification task. Further GUI/UI and logo redesign, data-location changes, installer/uninstaller and upgrade tooling are explicitly reserved for later versions, as recorded in [ROADMAP](../ROADMAP.md).
 
 ## Release preparation
 
@@ -16,7 +16,20 @@ The release gate runs **116/116 tests per engine** (Windows PowerShell 5.1 and P
 
 Application runtime files match the source that passed the 20-scenario GUI verification below; changes in this phase are packaging, test/CI integration and documentation. Existing functional observations are carried forward without repeating unchanged application behavior. The CI workflow now retains the verified ZIP, checksum and manifest and supports a manual run; it does not tag or publish automatically.
 
-Remote refs were checked during preparation: main still points to the original base commit and neither `v2.2.0` nor `2.2.0` exists. No final snapshot has been committed/pushed from this workspace. A passing run for that older commit does not satisfy the final release gate. After approval to commit/push, both [Windows CI jobs](https://github.com/zidankhainur2/download-organizer-pro/actions) must pass for the final commit before tagging/publishing the corresponding verified artifact.
+After user approval, the release snapshot was committed and pushed. The first run rejected matrix expressions in step-level `shell` attributes before starting any jobs. Commit `90b164b5a602d66081be1a0c72fb5eb1fa84718d` corrected the workflow by using a fixed shell and invoking each matrix engine explicitly. It changed no application runtime behavior.
+
+### Remote Windows CI
+
+[Run 42576494007](https://github.com/zidankhainur2/download-organizer-pro/actions/runs/42576494007), triggered by that exact source commit, completed successfully on Windows Server 2025:
+
+| Job | Pester results | Portable build / ZIP smoke |
+|---|---|---|
+| test (powershell) | 116 passed, 0 failed, 0 skipped | lulus |
+| test (pwsh) | 116 passed, 0 failed, 0 skipped | lulus |
+
+The [verified portable artifact](https://github.com/zidankhainur2/download-organizer-pro/actions/runs/42576494007/artifacts/13655930752) contains the versioned ZIP, checksum sidecar and release manifest. Its artifact digest was checked after download; the inner ZIP passed smoke again under local PowerShell 5.1 and 7 against a materialized copy of the exact committed source. The three files in local dist were replaced with this CI artifact. [Remote CI evidence](verification/remote-ci.json) preserves the run, jobs, test counts, source commit and archive checksum. Text files in the commit use Git's LF normalization; the historical local gate hashes remain evidence of their original pre-commit bytes.
+
+The source commit and package above remain the verified release inputs when later commits only update verification documentation. Publishing is a separate action: tag the reviewed source and attach the verified ZIP, checksum and manifest. GitHub emitted non-blocking Node.js 20 compatibility notices for the existing v4 actions, which ran successfully under Node.js 24; no application test failed.
 
 ## Functional verification pass on 2026-11-09
 
@@ -95,11 +108,12 @@ The final Before and After runs were executed sequentially in fresh Windows Powe
 
 Raw records: [Before.json](benchmarks/Before.json), [After.json](benchmarks/After.json). The safe first run costs substantially more time and memory, including content fingerprints and per-file durable progress. Do not describe this as an overall speedup. The second run preserves every organized filename. Later path-resolution, text-encoding and presentation fixes do not change the benchmark fixture's behavior.
 
-## Remaining gate
+## Publication status
 
 - [x] Local GUI verification: resize and keyboard navigation, progress with a large folder, close during active moves, watcher and scheduler controls, and error/conflict presentation; successful session assertions paired with user observations.
 - [x] Clean release ZIP, checksum, payload manifest and release notes prepared; archive safety and extracted runtime verified locally on both engines.
-- [ ] Review the next remote Windows CI run before publishing. Local checks of both engines passed; remote CI was configured but not executed from this workspace.
+- [x] Remote Windows CI: both engine jobs passed for source commit 90b164b, including 116 tests per engine, build, ZIP smoke and artifact upload; downloaded artifact reverified locally against that commit.
+- [ ] Create the release tag and publish the GitHub Release with the verified files. Publication was not part of the commit/push approval.
 
 Keep overwrite backups and transaction/progress files until recovery is no longer needed; retained destination files consume storage. Ambiguous historic DryRun logs cannot reconstruct trustworthy historical failure/run counts and are not rewritten automatically. Legacy manifests lack content fingerprints, so their recovery is necessarily more conservative.
 

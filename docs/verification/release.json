@@ -2,7 +2,7 @@
     "Date":  "2026-11-09T13:50:40.5288274+07:00",
     "Version":  "2.2.0",
     "LocalReadiness":  "lulus",
-    "PublicationReadiness":  "pending final remote CI",
+    "PublicationReadiness":  "lulus",
     "Gate":  {
                  "Date":  "2026-11-09T13:45:07.1994303+07:00",
                  "Head":  "24787f8136de0320ad11fc7c047c7f5c97d7af8b",
@@ -362,14 +362,16 @@
              },
     "Package":  {
                     "Path":  "dist/DownloadOrganizerPro-2.2.0-portable.zip",
-                    "Bytes":  48143,
-                    "SHA256":  "F9027B59BF92C54B0BE77F45F2BD1D55526E0D6D49E04649915F05A4D5FAEFAB",
+                    "Bytes":  48147,
+                    "SHA256":  "3AB094F2685F34CF7C033BA50338411E068238F7CB61A4330D2AEE2699FAE4A8",
                     "ChecksumPath":  "dist/DownloadOrganizerPro-2.2.0-portable.zip.sha256",
                     "ManifestPath":  "dist/DownloadOrganizerPro-2.2.0-release.json",
-                    "ManifestSHA256":  "11389E9F83472BD6A448D9ABA42D696B54E2334D433584CEE7582FB062D0697D",
+                    "ManifestSHA256":  "3CEF6EFEA255D88CAEB657AD723DC51B7356EA8840FC3FD90A9B0BFD32B72708",
                     "PayloadFiles":  28,
                     "Authenticode":  "NotSigned",
-                    "NoUserLogsOrRecoveryData":  true
+                    "NoUserLogsOrRecoveryData":  true,
+                    "SourceCommit":  "90b164b5a602d66081be1a0c72fb5eb1fa84718d",
+                    "CIRunId":  42576494007
                 },
     "GUIEvidence":  {
                         "Path":  "docs/verification/gui.json",
@@ -498,19 +500,26 @@
                   },
     "RemoteRefs":  {
                        "Checked":  "2026-11-09",
-                       "Main":  "24787f8136de0320ad11fc7c047c7f5c97d7af8b",
+                       "Main":  "90b164b5a602d66081be1a0c72fb5eb1fa84718d",
                        "Tag_v2_2_0_Exists":  false,
                        "Tag_2_2_0_Exists":  false,
-                       "FinalSnapshotPushed":  false
+                       "FinalSnapshotPushed":  true
                    },
     "RemoteCI":  {
-                     "Status":  "belum diuji",
-                     "Reason":  "The final source snapshot is uncommitted/unpushed; the previous plan excludes automatic commit/push."
+                     "Status":  "lulus",
+                     "Commit":  "90b164b5a602d66081be1a0c72fb5eb1fa84718d",
+                     "RunId":  42576494007,
+                     "Url":  "https://github.com/zidankhainur2/download-organizer-pro/actions/runs/42576494007",
+                     "Evidence":  "docs/verification/remote-ci.json"
                  },
     "Deferred":  [
                      "Further GUI/UI and logo redesign",
                      "Data-location, access and lifecycle changes",
                      "Installer/uninstaller and upgrade tooling",
                      "Distribution/beta of the new installation experience"
-                 ]
+                 ],
+    "Publication":  {
+                        "TagCreated":  false,
+                        "GitHubReleasePublished":  false
+                    }
 }
