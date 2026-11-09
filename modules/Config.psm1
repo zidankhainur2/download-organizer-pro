@@ -1,4 +1,6 @@
 Set-StrictMode -Version Latest
+Import-Module "$PSScriptRoot/Utils.psm1"
+Import-Module "$PSScriptRoot/Validation.psm1"
 
 #region Public Functions
 
@@ -26,10 +28,12 @@ function Get-OrganizerConfig {
 
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
-        [string]$Path
+        [string]$Path,
+        [string]$DownloadsPath
 
     )
 
+    $Path = Resolve-EnvironmentPath $Path
     if (-not (Test-Path -LiteralPath $Path)) {
 
         throw "Configuration file not found: $Path"
@@ -41,7 +45,7 @@ function Get-OrganizerConfig {
         $config =
             Get-Content `
                 -LiteralPath $Path `
-                -Raw |
+                -Raw -Encoding UTF8 -ErrorAction Stop |
             ConvertFrom-Json
 
     }
@@ -51,6 +55,18 @@ function Get-OrganizerConfig {
 
     }
 
+    if ($DownloadsPath) { $config.Settings.DownloadsPath = $DownloadsPath }
+    $defaults = @{
+        Overwrite = $false; EnableSmartRules = $true
+        CreateLogs = $true; MoveUnknownFiles = $true; CreateCategoryFolders = $true
+        EnableDuplicateDetection = $true; Verbose = $false; DryRun = $false; Recursive = $false
+        IgnorePatterns = @('*.tmp', '*.crdownload', '*.part'); MinAgeDays = 0; MaxAgeDays = 0
+        MinSizeBytes = 0; MaxSizeBytes = 0; WatcherDebounceSeconds = 3; ScheduleIntervalMinutes = 60
+        ExportCSV = $false; ExportJSON = $false; ExportHTML = $false
+    }
+    foreach ($key in $defaults.Keys) {
+        if (-not $config.Settings.PSObject.Properties[$key]) { $config.Settings | Add-Member $key $defaults[$key] }
+    }
     # Resolve DownloadsPath
 
     $config.Settings.DownloadsPath =

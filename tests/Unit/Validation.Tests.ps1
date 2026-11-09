@@ -1,18 +1,25 @@
+BeforeAll {
 $ProjectRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 
-Import-Module "$ProjectRoot\modules\Models.psm1" -Force
-Import-Module "$ProjectRoot\modules\Utils.psm1" -Force
-Import-Module "$ProjectRoot\modules\Validation.psm1" -Force
-Import-Module "$ProjectRoot\modules\Config.psm1" -Force
+Import-Module "$ProjectRoot\modules\Models.psm1"
+Import-Module "$ProjectRoot\modules\Utils.psm1"
+Import-Module "$ProjectRoot\modules\Validation.psm1"
+Import-Module "$ProjectRoot\modules\Config.psm1"
+
+
+. "$ProjectRoot/tests/TestHelpers.ps1"
+$testConfigPath = Join-Path $TestDrive "config.json"
+New-TestConfig $TestDrive | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $testConfigPath
+}
 
 Describe "Validation Module Unit Tests" {
     BeforeAll {
-        $validConfig = Get-OrganizerConfig -Path "$ProjectRoot\config.json"
+        $validConfig = Get-OrganizerConfig -Path $testConfigPath
     }
 
     It "Should return true for valid configuration" {
         $result = Test-OrganizerConfiguration -Config $validConfig
-        $result | Should Be $true
+        $result | Should -Be $true
     }
 
     It "Should throw exception when Settings section is missing" {
@@ -20,7 +27,7 @@ Describe "Validation Module Unit Tests" {
             Categories = $validConfig.Categories
             SmartRules = $validConfig.SmartRules
         }
-        { Test-OrganizerConfiguration -Config $invalid } | Should Throw
+        { Test-OrganizerConfiguration -Config $invalid } | Should -Throw
     }
 
     It "Should throw exception when Categories section is missing" {
@@ -28,7 +35,7 @@ Describe "Validation Module Unit Tests" {
             Settings = $validConfig.Settings
             SmartRules = $validConfig.SmartRules
         }
-        { Test-OrganizerConfiguration -Config $invalid } | Should Throw
+        { Test-OrganizerConfiguration -Config $invalid } | Should -Throw
     }
 
     It "Should throw exception when SmartRules section is missing" {
@@ -36,7 +43,7 @@ Describe "Validation Module Unit Tests" {
             Settings = $validConfig.Settings
             Categories = $validConfig.Categories
         }
-        { Test-OrganizerConfiguration -Config $invalid } | Should Throw
+        { Test-OrganizerConfiguration -Config $invalid } | Should -Throw
     }
 
     It "Should throw exception when DownloadsPath setting is missing" {
@@ -49,7 +56,7 @@ Describe "Validation Module Unit Tests" {
             Categories = $validConfig.Categories
             SmartRules = $validConfig.SmartRules
         }
-        { Test-OrganizerConfiguration -Config $invalid } | Should Throw
+        { Test-OrganizerConfiguration -Config $invalid } | Should -Throw
     }
 
     It "Should throw exception when DownloadsPath directory does not exist" {
@@ -63,7 +70,7 @@ Describe "Validation Module Unit Tests" {
             Categories = $validConfig.Categories
             SmartRules = $validConfig.SmartRules
         }
-        { Test-OrganizerConfiguration -Config $invalid } | Should Throw
+        { Test-OrganizerConfiguration -Config $invalid } | Should -Throw
     }
 
     It "Should throw exception when Category value is null or non-array" {
@@ -75,7 +82,7 @@ Describe "Validation Module Unit Tests" {
             Categories = $invalidCategories
             SmartRules = $validConfig.SmartRules
         }
-        { Test-OrganizerConfiguration -Config $invalid } | Should Throw
+        { Test-OrganizerConfiguration -Config $invalid } | Should -Throw
     }
 
     It "Should throw exception when SmartRule priority is negative" {
@@ -92,6 +99,6 @@ Describe "Validation Module Unit Tests" {
             Categories = $validConfig.Categories
             SmartRules = $invalidSmartRules
         }
-        { Test-OrganizerConfiguration -Config $invalid } | Should Throw
+        { Test-OrganizerConfiguration -Config $invalid } | Should -Throw
     }
 }

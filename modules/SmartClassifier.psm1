@@ -1,167 +1,58 @@
 Set-StrictMode -Version Latest
+Import-Module "$PSScriptRoot/Utils.psm1"
 
-#region Private Functions
-
-function Get-SmartCategory {
-
-    [CmdletBinding()]
-
-    param(
-
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]$FileName,
-
-        [Parameter(Mandatory)]
-        [ValidateNotNull()]
-        [object]$SmartRules
-
-    )
-
-    $normalizedName = Format-FileName -Name $FileName
-
-    $matchedItems = foreach ($category in $SmartRules.PSObject.Properties) {
-
-        if ($null -eq $category.Value) { continue }
-
-        foreach ($subCategory in $category.Value.PSObject.Properties) {
-
-            $rule = $subCategory.Value
-            if ($null -eq $rule) { continue }
-
-            $keywords = $rule.Keywords
-            $priority = if ($null -ne $rule.Priority) { [int]$rule.Priority } else { 0 }
-
-            if ($null -eq $keywords) { continue }
-
-            $score = 0
-
-            foreach ($keyword in $keywords) {
-
-                if ($normalizedName -match [regex]::Escape($keyword.ToLower())) {
-
-                    $score += $priority
-
-                }
-
+function New-SmartRulePatterns {
+    param($SmartRules)
+    foreach ($category in $SmartRules.PSObject.Properties) {
+        foreach ($sub in $category.Value.PSObject.Properties) {
+            $patterns = foreach ($keyword in $sub.Value.Keywords) {
+                $normalized = (Format-FileName $keyword).Trim()
+                '(?<![\p{L}\p{N}])' + ([regex]::Escape($normalized) -replace '\\ ', '\s+') + '(?![\p{L}\p{N}])'
             }
-
-            if ($score -gt 0) {
-
-                [PSCustomObject]@{
-                    Category    = $category.Name
-                    SubCategory = $subCategory.Name
-                    Score       = $score
-                }
-
-            }
-
+            [pscustomobject]@{ Category = $category.Name; SubCategory = $sub.Name; Priority = [int]$sub.Value.Priority; Patterns = @($patterns) }
         }
-
     }
-
-    if ($null -eq $matchedItems) {
-
-        return $null
-
-    }
-
-    return (
-        @($matchedItems) |
-            Sort-Object Score -Descending |
-            Select-Object -First 1
-    )
-
 }
-
-#endregion
-
-#region Public Functions
-
 <#
 .SYNOPSIS
-Applies Smart Rules classification to OrganizerFile objects.
-
-.DESCRIPTION
-Evaluates filename keywords against configured Smart Rules and assigns subcategories and scores.
-
-.PARAMETER Files
-Array or collection of OrganizerFile objects.
-
-.PARAMETER SmartRules
-SmartRules configuration object.
-
-.OUTPUTS
-OrganizerFile[]
-
-.EXAMPLE
-Invoke-SmartClassification -Files $files -SmartRules $config.SmartRules
+Returns the highest-scoring filename stem rule, optionally restricted to a category.
+#>
+function Get-SmartCategory {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][string]$FileName, [Parameter(Mandatory)]$SmartRules, [string]$Category)
+    $patterns = @(New-SmartRulePatterns $SmartRules)
+    Find-SmartMatch $FileName $patterns $Category
+}
+function Find-SmartMatch {
+    param([string]$FileName, [array]$Patterns, [string]$Category)
+    $name = Format-FileName ([IO.Path]::GetFileNameWithoutExtension($FileName))
+    $best = $null
+    $bestScore = 0
+    foreach ($rule in $Patterns) {
+        if ($Category -and $rule.Category -ne $Category) { continue }
+        $score = 0
+        foreach ($pattern in $rule.Patterns) { if ($name -match $pattern) { $score += $rule.Priority } }
+        if ($score -gt $bestScore) {
+            $bestScore = $score
+            $best = [pscustomobject]@{ Category = $rule.Category; SubCategory = $rule.SubCategory; Score = $score }
+        }
+    }
+    $best
+}
+<#
+.SYNOPSIS
+Applies precomputed category-scoped smart patterns to classified files.
 #>
 function Invoke-SmartClassification {
-
     [CmdletBinding()]
-
-    param(
-
-        [Parameter(Mandatory)]
-        [ValidateNotNull()]
-        [array]$Files,
-
-        [Parameter(Mandatory)]
-        [ValidateNotNull()]
-        [object]$SmartRules
-
-    )
-
+    param([Parameter(Mandatory)][AllowEmptyCollection()][array]$Files, [Parameter(Mandatory)]$SmartRules, [string]$Category)
+    $patterns = @(New-SmartRulePatterns $SmartRules)
     foreach ($file in $Files) {
-
-        $result = Get-SmartCategory `
-            -FileName $file.Name `
-            -SmartRules $SmartRules
-
-        if ($null -ne $result) {
-
-            $file.SetSubCategory(
-                $result.SubCategory,
-                $result.Score
-            )
-
-        }
-        else {
-
-            $file.SetSubCategory("", 0)
-
-        }
-
+        $scope = if ($Category) { $Category } else { $file.Category }
+        $match = Find-SmartMatch $file.Name $patterns $scope
+        if ($match) { $file.SetSubCategory($match.SubCategory, $match.Score) }
+        else { $file.SetSubCategory('', 0) }
     }
-
     return $Files
-
 }
-
-function Apply-SmartClassification {
-
-    [CmdletBinding()]
-
-    param(
-
-        [Parameter(Mandatory)]
-        [array]$Files,
-
-        [Parameter(Mandatory)]
-        $SmartRules
-
-    )
-
-    return Invoke-SmartClassification `
-        -Files $Files `
-        -SmartRules $SmartRules
-
-}
-
-#endregion
-
-Export-ModuleMember `
-    -Function `
-        Get-SmartCategory,
-        Invoke-SmartClassification
+Export-ModuleMember -Function Get-SmartCategory, Invoke-SmartClassification

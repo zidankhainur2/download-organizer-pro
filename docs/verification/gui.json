@@ -1,0 +1,1876 @@
+﻿{
+    "Date":  "2026-11-09T11:37:11.3713897+07:00",
+    "Status":  "lulus",
+    "AutomatedSourceId":  "2E9AE0F5BACB380EEC367F8C9BC0D5898F1CD10C1A314C8B2B8B380061A992CB",
+    "Notes":  "Twenty GUI scenarios have filesystem evidence and explicit user observation. Scale/Close use observation of automatic windows. Runtime snapshots are per session; changed paths are listed, and affected failure/worker paths were rerun. Raw sessions and temporary observation helpers are local ignored artifacts; digests and summaries are retained here.",
+    "Cases":  [
+                  {
+                      "Scenario":  "Empty",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T10:59:21.6950956+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper di terminal interaktif dan mengonfirmasi seluruh hasil visual sesuai.",
+                      "Session":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "assets/OrganizerWindow.xaml",
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  0,
+                                      "Scanned":  "0",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T03:59:19.3786572Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0"
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  3786.6539000000002,
+                                      "FirstFeedbackMs":  1489.8073000000002,
+                                      "PeakProcessWorkingSetMB":  274.85,
+                                      "SessionSeconds":  5.8880504999999994
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349/evidence/console.txt",
+                                           "Bytes":  1079,
+                                           "SHA256":  "F950D4A8BC48EA70D0F1A72B01FC13FC0107AC25D7864E338397E5EFC657F939"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349/evidence/final.json",
+                                           "Bytes":  11,
+                                           "SHA256":  "84B1C14E68260082E3E79EDFF0A78F4EBF1942CFD6C593246044EC2149CBB87D"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349/evidence/gui.json",
+                                           "Bytes":  533,
+                                           "SHA256":  "436151145444EFFE7C8C8F89E12E5BF2B6D869DD57700ADBE9050726EF2EBEFB"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349/evidence/initial.json",
+                                           "Bytes":  11,
+                                           "SHA256":  "84B1C14E68260082E3E79EDFF0A78F4EBF1942CFD6C593246044EC2149CBB87D"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349/evidence/result.json",
+                                           "Bytes":  540,
+                                           "SHA256":  "BBE08493D01A4C961491669C4AC33EF8A748548491DD55A5D16B2F2DFD1EE692"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "1214D875DCC130F3519C5BE31BF285D7B43533A3813CD8452124FD5715CEB33F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "8DCD9DB62591938E1C1EA9A336828307B6AB4A43B7D7C28AF991D2411A19F5C9"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Empty-50bd4f9bba534857b245cad16dfbf349/runtime/logs/reports/report-20261109-105920-f477d0c7708b4b72af683f8622c6eeb2.json",
+                                          "SHA256":  "4AE9588346565D51BD3258DF09BDCCD102241740F2B58BB17A02B578DACBE5AD",
+                                          "Total":  0,
+                                          "Moved":  0,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.36075399999999996
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Single",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T10:59:32.2672817+07:00",
+                      "Notes":  "Pengguna mengonfirmasi Browse ke target sesi, path environment, Tab/Shift+Tab, Space pada checkbox yang dikembalikan ke nilai awal, dan Enter pada Start.",
+                      "Session":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "assets/OrganizerWindow.xaml",
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  1,
+                                      "Scanned":  "1",
+                                      "Moved":  "1",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T03:59:29.0714847Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0"
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T03:59:31.9229489Z",
+                                                          "Busy":  false,
+                                                          "Rows":  1,
+                                                          "Scanned":  "1"
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  4161.1689000000006,
+                                      "FirstFeedbackMs":  1441.8873,
+                                      "PeakProcessWorkingSetMB":  270.96,
+                                      "SessionSeconds":  7.1426102999999994
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d/evidence/console.txt",
+                                           "Bytes":  1115,
+                                           "SHA256":  "38726E0963F4DC3798EFF558245719FCCCB9E9C30D8B8E89D28CFF161E530182"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d/evidence/final.json",
+                                           "Bytes":  170,
+                                           "SHA256":  "F6AEFD76823CE5B93891439A9D30F1828D7130534668F68B48157912C2D53119"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d/evidence/gui.json",
+                                           "Bytes":  754,
+                                           "SHA256":  "44520518A6B5E836AB29BDA5B959E7F85BE9988DA2E6FC85249B07AA3BD476CB"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d/evidence/initial.json",
+                                           "Bytes":  159,
+                                           "SHA256":  "B49E9450C824C52F0026909EE283B40FCEF46DDCE7C89EC646A955B4B25B20E5"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d/evidence/result.json",
+                                           "Bytes":  592,
+                                           "SHA256":  "FC41C96B3B71CFBF0DCB07A2554E7EA2EC583F8A3C47E28BAE557E80B837908A"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "1214D875DCC130F3519C5BE31BF285D7B43533A3813CD8452124FD5715CEB33F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "F088277BA86050BA509915F82DCA019BC085429FA23D0C7971729B593D4967B4"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Single-8e9355be0a114d31977cff8836fb495d/runtime/logs/reports/report-20261109-105931-b08bd01785ba4577957477eea43e8615.json",
+                                          "SHA256":  "694597E78CA86D566C815D200D3279715353A5CE3C23F93BBCA6B22684AEF1C3",
+                                          "Total":  1,
+                                          "Moved":  1,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  1.2410077
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Mixed",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:09:35.4092636+07:00",
+                      "Notes":  "Pengguna mengonfirmasi semua sesuai pada 2026-11-09: v2.2.0, 7 hasil, KPI, satu duplikat, resize, Tab/Shift+Tab dan akses kontrol.",
+                      "Session":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  7,
+                                      "Scanned":  "7",
+                                      "Moved":  "7",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:05:06.3946011Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0"
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:05:07.9591993Z",
+                                                          "Busy":  false,
+                                                          "Rows":  7,
+                                                          "Scanned":  "7"
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1266.9886000000001,
+                                      "FirstFeedbackMs":  546.2535,
+                                      "PeakProcessWorkingSetMB":  292.09,
+                                      "SessionSeconds":  222.9536148
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/evidence/console.txt",
+                                           "Bytes":  1352,
+                                           "SHA256":  "A8371AA294C809738690EDD2C8B55A5B4D84729BCB0A4DC8D42A2404E769E173"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/evidence/effective-config.json",
+                                           "Bytes":  10077,
+                                           "SHA256":  "C8F109528758BAA1C709BB7B016AF3DCBB022919B289DF291CEEBDFEAF641517"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/evidence/final.json",
+                                           "Bytes":  1200,
+                                           "SHA256":  "F6F64DA39DD10D83DC2B55054E1C80468F837D5EA8397E1F907F7D7C82B885A8"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/evidence/gui.json",
+                                           "Bytes":  746,
+                                           "SHA256":  "0737805A5BC6BFA53FD63F1B1B5CAB8CDBF5A34993ABAAA0FF7EBFE5A7263C38"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/evidence/initial.json",
+                                           "Bytes":  1116,
+                                           "SHA256":  "DD3798EDF8D12E2C2264B10451FBC9A36E741F0D848745D31166F54519EF6F7F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/evidence/result.json",
+                                           "Bytes":  503,
+                                           "SHA256":  "CADA64EEEB063CDB995297B61674DD2A2B8A0EF032589238864A4E1338C6F78F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "D06E8AA343EA722A6E4D2D40F7BDB05F791CA7D94052377CC7259F4325E5257A"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "92672A9EDF7FA6D655B7ED69C0C89F45CED64663DACDB715C7338637A5216453"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Mixed-cbd56e055d984db780b7527621454103/runtime/logs/reports/report-20261109-110507-7de05e469be747f8826701cf4c97e2f9.json",
+                                          "SHA256":  "44CB8014D02647D0854E0FF06B028221D8C956FAF222F8B658AD9B4A8CEFB90E",
+                                          "Total":  7,
+                                          "Moved":  7,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.68639889999999992
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "SmartOff",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T10:59:42.7950907+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper di terminal interaktif dan mengonfirmasi seluruh hasil visual sesuai.",
+                      "Session":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "assets/OrganizerWindow.xaml",
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  7,
+                                      "Scanned":  "7",
+                                      "Moved":  "7",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T03:59:39.7529037Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0"
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T03:59:42.5119406Z",
+                                                          "Busy":  false,
+                                                          "Rows":  7,
+                                                          "Scanned":  "7"
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  4178.2354000000005,
+                                      "FirstFeedbackMs":  1375.6968000000002,
+                                      "PeakProcessWorkingSetMB":  285.47,
+                                      "SessionSeconds":  7.0163018999999993
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc/evidence/console.txt",
+                                           "Bytes":  1321,
+                                           "SHA256":  "1AA69C884BF54DC3FDD715F2761C36A9D27D90790063F6C20B12AA6CCBD3BC31"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc/evidence/final.json",
+                                           "Bytes":  1187,
+                                           "SHA256":  "9831FCE5E1643C8FA763E624246484F960D8B2FD3F4504957DF7AFAF69E5488E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc/evidence/gui.json",
+                                           "Bytes":  763,
+                                           "SHA256":  "C6DFFA4D69629D9E267CCD40F9DD5279A5B0CF79310A52DCE0EEB406DE5B39CC"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc/evidence/initial.json",
+                                           "Bytes":  1116,
+                                           "SHA256":  "DD3798EDF8D12E2C2264B10451FBC9A36E741F0D848745D31166F54519EF6F7F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc/evidence/result.json",
+                                           "Bytes":  546,
+                                           "SHA256":  "CAD6AA365CE5816FE96CFAD304343CE1DD7E8767833E34D502A1C374709C2A6D"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "1214D875DCC130F3519C5BE31BF285D7B43533A3813CD8452124FD5715CEB33F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "92672A9EDF7FA6D655B7ED69C0C89F45CED64663DACDB715C7338637A5216453"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/SmartOff-8c29bf3f8a5e4bd78b1f69bffaec1cdc/runtime/logs/reports/report-20261109-105942-16f21a4b29d84f98809ffb6f442fd444.json",
+                                          "SHA256":  "65FAA9C3323B050C7EF060F7AE4A3899DFBAEF6F7A70D1882AB380D0A4F349BB",
+                                          "Total":  7,
+                                          "Moved":  7,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  1.3688453
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "UnknownOff",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T10:59:49.3509318+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper di terminal interaktif dan mengonfirmasi seluruh hasil visual sesuai.",
+                      "Session":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "assets/OrganizerWindow.xaml",
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  7,
+                                      "Scanned":  "7",
+                                      "Moved":  "6",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T03:59:47.1868322Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0"
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T03:59:48.9262150Z",
+                                                          "Busy":  false,
+                                                          "Rows":  7,
+                                                          "Scanned":  "7"
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  2513.3995,
+                                      "FirstFeedbackMs":  878.04730000000006,
+                                      "PeakProcessWorkingSetMB":  282.64,
+                                      "SessionSeconds":  4.5477356
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299/evidence/console.txt",
+                                           "Bytes":  1304,
+                                           "SHA256":  "562A95DC488AC1B5F19755FB7243211469BB34CF4C6A440F00DE4275D47EA3C1"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299/evidence/final.json",
+                                           "Bytes":  1192,
+                                           "SHA256":  "642851797D6CE4E2E523F99EFCC8CF317CD21410E0E0353AC6E9C1771CF32B91"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299/evidence/gui.json",
+                                           "Bytes":  745,
+                                           "SHA256":  "1FE6EBBF7C60845C8B8D1D1DF1E5420FD73B06EF9B322682B1A5629C030F37FA"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299/evidence/initial.json",
+                                           "Bytes":  1116,
+                                           "SHA256":  "DD3798EDF8D12E2C2264B10451FBC9A36E741F0D848745D31166F54519EF6F7F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299/evidence/result.json",
+                                           "Bytes":  550,
+                                           "SHA256":  "A832E051B0AABBD7B30052B268C004C5E4FE04A93C3BDD9433A3B659985D3251"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "1214D875DCC130F3519C5BE31BF285D7B43533A3813CD8452124FD5715CEB33F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "112776259AE2DCE76A7D59EE09DBBCC35E9B8A7B82E08ED3C0208C58B05605A8"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/UnknownOff-d5a0d3a43d0c4a6c86ffae81064b5299/runtime/logs/reports/report-20261109-105948-63b0fd33da994b6586c8a7181463664a.json",
+                                          "SHA256":  "6A44B300C7821BE1B8F74EA691E50B8A99544CCCD27ACDDA4CA75BEF5FB4A13D",
+                                          "Total":  7,
+                                          "Moved":  6,
+                                          "Failed":  0,
+                                          "Skipped":  1,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.7712779
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "DryRun",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:31:58.9486649+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper secara interaktif dan mengonfirmasi hasil, pesan error serta pemulihan kontrol sesuai.",
+                      "Session":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c",
+                      "RuntimeDifferencesFromFinalSource":  [
+
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  7,
+                                      "Scanned":  "7",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:31:50.4926433Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:31:51.6985781Z",
+                                                          "Busy":  false,
+                                                          "Rows":  7,
+                                                          "Scanned":  "7",
+                                                          "EnabledControls":  11
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1414.2375,
+                                      "FirstFeedbackMs":  833.5406,
+                                      "PeakProcessWorkingSetMB":  291.43,
+                                      "SessionSeconds":  9.8951361
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/evidence/console.txt",
+                                           "Bytes":  1136,
+                                           "SHA256":  "CEAEF0AB87A755362D778B78EACA6BAE13DE6C3573798BB7CD4E68686ACE7E15"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/evidence/effective-config.json",
+                                           "Bytes":  10076,
+                                           "SHA256":  "798096AFFB22F7C59E5B8D1B1DFE8B9C2586F15F98727CF12ED08AA4A1B342C9"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/evidence/final.json",
+                                           "Bytes":  1116,
+                                           "SHA256":  "DD3798EDF8D12E2C2264B10451FBC9A36E741F0D848745D31166F54519EF6F7F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/evidence/gui.json",
+                                           "Bytes":  832,
+                                           "SHA256":  "B2F88921D0A02FEAEAFE52A49A2C71390E0BAC071310D74D3F19DB81BE4AA73C"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/evidence/initial.json",
+                                           "Bytes":  1116,
+                                           "SHA256":  "DD3798EDF8D12E2C2264B10451FBC9A36E741F0D848745D31166F54519EF6F7F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/evidence/result.json",
+                                           "Bytes":  559,
+                                           "SHA256":  "6DCB76FE91D513C5E9F332558ABB4783514A068F6FE10D3EAC7D6FF89DB2A427"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "19F3BB3566C26DB4B6E0ED14FDB1465D8157BA3060E26BE9D5A483E7041506C1"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "8DCD9DB62591938E1C1EA9A336828307B6AB4A43B7D7C28AF991D2411A19F5C9"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/DryRun-efbb01804f1841519742443c2e34c67c/runtime/logs/reports/report-20261109-113151-a5bfbef47ac74a8880bed0e83535d40e.json",
+                                          "SHA256":  "4016E80A71D4C721D17BD0B586856A694395BD9D5C32301D83630B15FC51A7F1",
+                                          "Total":  7,
+                                          "Moved":  0,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  7,
+                                          "DurationSeconds":  0.5474941
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Rename",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:00:01.7355130+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper di terminal interaktif dan mengonfirmasi seluruh hasil visual sesuai.",
+                      "Session":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "assets/OrganizerWindow.xaml",
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  2,
+                                      "Scanned":  "2",
+                                      "Moved":  "2",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T03:59:59.7463562Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0"
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:00:01.4087147Z",
+                                                          "Busy":  false,
+                                                          "Rows":  2,
+                                                          "Scanned":  "2"
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  2153.6206,
+                                      "FirstFeedbackMs":  847.8705,
+                                      "PeakProcessWorkingSetMB":  290.92,
+                                      "SessionSeconds":  4.044779
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407/evidence/console.txt",
+                                           "Bytes":  1133,
+                                           "SHA256":  "1B5E21AC0CAC3D8F6C73462C0394CE2D1B387FDA8D5ECFDB70A910E253100B05"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407/evidence/final.json",
+                                           "Bytes":  495,
+                                           "SHA256":  "CEBE653719C169B6173F13618A84BFAA188F177E09D81B0F7942FA97D6163651"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407/evidence/gui.json",
+                                           "Bytes":  734,
+                                           "SHA256":  "D237616DC78DE609BC750C007DB7578D18D2DAF83BF7349D03B074A45A5A71E6"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407/evidence/initial.json",
+                                           "Bytes":  469,
+                                           "SHA256":  "98FD8FB123A8846E41151D537B085F449BD442D90AF984A485F455E72FDD09D7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407/evidence/result.json",
+                                           "Bytes":  542,
+                                           "SHA256":  "BE0853E0BF84583F50DE49200199E97DB23FC5102920C0C040EF04ECB653E396"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "1214D875DCC130F3519C5BE31BF285D7B43533A3813CD8452124FD5715CEB33F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "5C1E7CDACCFF558678E11360A70F8CDF3335F5DEAF17B6D09496F9569755292F"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Rename-0193121cc4214591a6a2ae49bed9d407/runtime/logs/reports/report-20261109-110001-ea8b43e28e924e22808e36ad1a763daa.json",
+                                          "SHA256":  "6843D58E001E4E57439645C1784D1D1E24FCF5522F565F54F6E4329017DF1A4A",
+                                          "Total":  2,
+                                          "Moved":  2,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.65544099999999994
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Skip",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:00:07.5609713+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper di terminal interaktif dan mengonfirmasi seluruh hasil visual sesuai.",
+                      "Session":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "assets/OrganizerWindow.xaml",
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  2,
+                                      "Scanned":  "2",
+                                      "Moved":  "1",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:00:05.4084321Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0"
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:00:06.7498103Z",
+                                                          "Busy":  false,
+                                                          "Rows":  2,
+                                                          "Scanned":  "2"
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1965.5435,
+                                      "FirstFeedbackMs":  810.72970000000009,
+                                      "PeakProcessWorkingSetMB":  285.39,
+                                      "SessionSeconds":  3.9657389
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05/evidence/console.txt",
+                                           "Bytes":  1107,
+                                           "SHA256":  "1FE6CCF9641D340E03A367B2516B2921FB477E9AEF01846D801D5D479A6A2189"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05/evidence/final.json",
+                                           "Bytes":  480,
+                                           "SHA256":  "0C240E9AC2A9016834A0DF9744684E4756DEF9633ED0E91DCEC42F3A5763D25E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05/evidence/gui.json",
+                                           "Bytes":  745,
+                                           "SHA256":  "C81DD74EBF3578CA4A051543FE5C3F522A0F818FAD4BC29BEDBDA2EB116168AD"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05/evidence/initial.json",
+                                           "Bytes":  469,
+                                           "SHA256":  "98FD8FB123A8846E41151D537B085F449BD442D90AF984A485F455E72FDD09D7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05/evidence/result.json",
+                                           "Bytes":  538,
+                                           "SHA256":  "DD78FF94D064859F692F07ADF954C405B4B3CFDAF03CE2423C489A9D77D0E0C3"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "1214D875DCC130F3519C5BE31BF285D7B43533A3813CD8452124FD5715CEB33F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "F088277BA86050BA509915F82DCA019BC085429FA23D0C7971729B593D4967B4"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Skip-8cdb7abb5ca247fa95a142c7e2a13c05/runtime/logs/reports/report-20261109-110006-c1399841ca644d84a0ebbe6e214d546a.json",
+                                          "SHA256":  "BE6E3DD187F9A21692A6059FF31696089707AA54EC2EE822C92F005AAB59447F",
+                                          "Total":  2,
+                                          "Moved":  1,
+                                          "Failed":  0,
+                                          "Skipped":  1,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.61151689999999992
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Overwrite",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:32:10.5561277+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper secara interaktif dan mengonfirmasi hasil, pesan error serta pemulihan kontrol sesuai.",
+                      "Session":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701",
+                      "RuntimeDifferencesFromFinalSource":  [
+
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  2,
+                                      "Scanned":  "2",
+                                      "Moved":  "2",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:32:02.4986169Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:32:03.8196944Z",
+                                                          "Busy":  false,
+                                                          "Rows":  2,
+                                                          "Scanned":  "2",
+                                                          "EnabledControls":  11
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1390.2331000000001,
+                                      "FirstFeedbackMs":  815.7906,
+                                      "PeakProcessWorkingSetMB":  293.49,
+                                      "SessionSeconds":  9.8253115
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/evidence/console.txt",
+                                           "Bytes":  1145,
+                                           "SHA256":  "ADAAE2B6F0A8379A2C019B70B9A810885AF5128031B377E922CBCE5277452531"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/evidence/effective-config.json",
+                                           "Bytes":  10131,
+                                           "SHA256":  "CBD26BDAD7EA0FA959887CE0030F4E3E1DB0EDE4AFF680775AA2624E16B85D20"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/evidence/final.json",
+                                           "Bytes":  330,
+                                           "SHA256":  "CFA6E66028F9B493513AFB8372016A45BAA7F9E631671ACCEB528925F5410C48"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/evidence/gui.json",
+                                           "Bytes":  841,
+                                           "SHA256":  "A32AF356CE0C840ACDCCFA19CDB0C82811626171F247572C8A7110D5C3E4C46E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/evidence/initial.json",
+                                           "Bytes":  469,
+                                           "SHA256":  "98FD8FB123A8846E41151D537B085F449BD442D90AF984A485F455E72FDD09D7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/evidence/result.json",
+                                           "Bytes":  565,
+                                           "SHA256":  "F98BFF04417011E3EE0289677DE5EA51731481AA6BC9EE2003E76CB364EB712F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "19F3BB3566C26DB4B6E0ED14FDB1465D8157BA3060E26BE9D5A483E7041506C1"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "5C1E7CDACCFF558678E11360A70F8CDF3335F5DEAF17B6D09496F9569755292F"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Overwrite-cbde15dd958d4d0ea3a53841c08bb701/runtime/logs/reports/report-20261109-113203-fb71648386374c5f84ca1e72d446bf33.json",
+                                          "SHA256":  "848DE2B617AAB4E80BC99C364113A4683C0066356A59C049A14FB9FE9357E80A",
+                                          "Total":  2,
+                                          "Moved":  2,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.6211355
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Undo",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:18:32.4106059+07:00",
+                      "Notes":  "Pengguna mengonfirmasi Undo memulihkan 2 entri tanpa kendala.",
+                      "Session":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  0,
+                                      "Scanned":  "0",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:11:59.3320339Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:11:59.9022827Z",
+                                                          "Busy":  false,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  11
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:12:04.9573843Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:12:05.4801443Z",
+                                                          "Busy":  false,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  11
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1167.3591000000001,
+                                      "FirstFeedbackMs":  570.24880000000007,
+                                      "PeakProcessWorkingSetMB":  279,
+                                      "SessionSeconds":  30.981579699999998
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/evidence/console.txt",
+                                           "Bytes":  1106,
+                                           "SHA256":  "A1850AA002D9CBC753E4A0DE5F41FE8E3963B9BD7674AF78AA9F6CEC43B5BDFC"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/evidence/effective-config.json",
+                                           "Bytes":  10131,
+                                           "SHA256":  "CBD26BDAD7EA0FA959887CE0030F4E3E1DB0EDE4AFF680775AA2624E16B85D20"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/evidence/final.json",
+                                           "Bytes":  469,
+                                           "SHA256":  "98FD8FB123A8846E41151D537B085F449BD442D90AF984A485F455E72FDD09D7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/evidence/gui.json",
+                                           "Bytes":  1413,
+                                           "SHA256":  "3242A9D8156A220C8E375491B3D2BF950E29FBED0F20F91B8F2FC95570A2B4E2"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/evidence/initial.json",
+                                           "Bytes":  469,
+                                           "SHA256":  "98FD8FB123A8846E41151D537B085F449BD442D90AF984A485F455E72FDD09D7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/evidence/result.json",
+                                           "Bytes":  432,
+                                           "SHA256":  "F9209C1BF4E13B5B019052E4A42DCF1EE23968C38EC463605165CCEF074E4AD5"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "D06E8AA343EA722A6E4D2D40F7BDB05F791CA7D94052377CC7259F4325E5257A"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/runtime/logs/reports/report-20261109-111150-cc33b8ffc25b412ca0e44410c0064be3.json",
+                                          "SHA256":  "2764EF135FFE35AE8182E3576D599756F404D0AFEFFCC49A9944FC66085A7A18",
+                                          "Total":  2,
+                                          "Moved":  2,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.73874109999999993
+                                      },
+                                      {
+                                          "Path":  ".tools/verification/Undo-f67f364d2b274ff6817fe694008e93a7/runtime/logs/reports/report-20261109-111159-e034572bed424c6bb160a50bd2106f2b.json",
+                                          "SHA256":  "C8E249D21BC04F9C830426605333D261EEBA6D6FF50AC6BC49D5928E1D94CC0D",
+                                          "Total":  0,
+                                          "Moved":  0,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.0700095
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "UndoConflict",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:18:33.2899616+07:00",
+                      "Notes":  "Pengguna mengonfirmasi sesi ulang langsung Undo menampilkan konflik sumber sesuai harapan.",
+                      "Session":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "modules/GUI.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  0,
+                                      "Scanned":  "0",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:17:21.8345958Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:17:22.1203434Z",
+                                                          "Busy":  false,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  11
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1060.0646000000002,
+                                      "FirstFeedbackMs":  null,
+                                      "PeakProcessWorkingSetMB":  283,
+                                      "SessionSeconds":  23.4833406
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/evidence/console.txt",
+                                           "Bytes":  266,
+                                           "SHA256":  "746E1090BEB9929FE6C27655182A1CFD7AD3409314DB4D5F5D7D8611928F314E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/evidence/effective-config.json",
+                                           "Bytes":  10131,
+                                           "SHA256":  "CBD26BDAD7EA0FA959887CE0030F4E3E1DB0EDE4AFF680775AA2624E16B85D20"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/evidence/final.json",
+                                           "Bytes":  470,
+                                           "SHA256":  "42C4357FCBBAE4D529D058D7B9C61819C1D306DFB841B5BCB733C9268ECC9671"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/evidence/gui.json",
+                                           "Bytes":  835,
+                                           "SHA256":  "95ABB00EA5B5A869318DEF77AA8C1B451EDAED74EF8AF66C9D723ADEB77AAFD6"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/evidence/initial.json",
+                                           "Bytes":  469,
+                                           "SHA256":  "98FD8FB123A8846E41151D537B085F449BD442D90AF984A485F455E72FDD09D7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/evidence/partial-undo.json",
+                                           "Bytes":  593,
+                                           "SHA256":  "1E964B0E11FEF0F4D65DB5D58FB88BBB96C2B4F9964C3045B7E0126465C839AB"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/evidence/result.json",
+                                           "Bytes":  477,
+                                           "SHA256":  "7E65F880A0E23C13FCE535217F8BFFC84F3BC247EDCBCDC5AF8AE881BFA55332"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "29EDF37A4E3A0C785044E40E8DF45EA4FFCD43DD3468A11E5AC6D2C22868A93F"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/UndoConflict-72179431c84b47828589387247079e2a/runtime/logs/reports/report-20261109-111717-79548e9ffe114eb490fa860639ff21cf.json",
+                                          "SHA256":  "7FBE845ADC34CEE14AA6F0751C4E34D1A9F5047A5224DADAA79A6ACD43968BC8",
+                                          "Total":  2,
+                                          "Moved":  2,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.6858984
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "UndoRetry",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:18:34.0984512+07:00",
+                      "Notes":  "Pengguna mengonfirmasi sesi ulang langsung Undo memulihkan hanya satu entri tersisa tanpa error.",
+                      "Session":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "modules/GUI.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  0,
+                                      "Scanned":  "0",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:18:00.6085506Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:18:01.1430039Z",
+                                                          "Busy":  false,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  11
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1186.1055000000001,
+                                      "FirstFeedbackMs":  null,
+                                      "PeakProcessWorkingSetMB":  287.24,
+                                      "SessionSeconds":  6.4338266
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/evidence/console.txt",
+                                           "Bytes":  73,
+                                           "SHA256":  "9366CCBE067CA1EC13A360A77C7D29D7ECA719896FF8BDD4948DF7C4497EC0D9"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/evidence/effective-config.json",
+                                           "Bytes":  10131,
+                                           "SHA256":  "CBD26BDAD7EA0FA959887CE0030F4E3E1DB0EDE4AFF680775AA2624E16B85D20"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/evidence/final.json",
+                                           "Bytes":  469,
+                                           "SHA256":  "98FD8FB123A8846E41151D537B085F449BD442D90AF984A485F455E72FDD09D7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/evidence/gui.json",
+                                           "Bytes":  837,
+                                           "SHA256":  "E840BDD4EF2465C1EFAC00FFEE7BDB905895B6EB1869D6F3C9E6538A985D30B4"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/evidence/initial.json",
+                                           "Bytes":  469,
+                                           "SHA256":  "98FD8FB123A8846E41151D537B085F449BD442D90AF984A485F455E72FDD09D7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/evidence/partial-undo.json",
+                                           "Bytes":  587,
+                                           "SHA256":  "28C2EEB3BEEBD935E3279A58BB8058D0D05765BB234CF892F3DC07C854ED38C1"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/evidence/result.json",
+                                           "Bytes":  477,
+                                           "SHA256":  "EAF613D4E36C96BA80329380FC31397E36DC122DF1F7AC4F063EA6BC79B3D6B2"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "29EDF37A4E3A0C785044E40E8DF45EA4FFCD43DD3468A11E5AC6D2C22868A93F"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/UndoRetry-7f729655c6b54c598f5b57b2c4136c9c/runtime/logs/reports/report-20261109-111757-de733193dd4b4dcca43414f92f061e62.json",
+                                          "SHA256":  "6C33263156A8D58113C79C0B91E102FE380225D88D248221A75EACE32BEC72AB",
+                                          "Total":  2,
+                                          "Moved":  2,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.691306
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Watcher",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:29:59.0337464+07:00",
+                      "Notes":  "Pengguna menjalankan helper dari terminal interaktif dan mengonfirmasi jendela serta seluruh perubahan START/STOP dan Registered/Removed sesuai.",
+                      "Session":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9",
+                      "RuntimeDifferencesFromFinalSource":  [
+
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  0,
+                                      "Scanned":  "0",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+
+                                                  ],
+                                      "MaxDispatcherGapMs":  1451.0882000000001,
+                                      "FirstFeedbackMs":  null,
+                                      "PeakProcessWorkingSetMB":  305.72,
+                                      "SessionSeconds":  48.1411283
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/evidence/console.txt",
+                                           "Bytes":  42,
+                                           "SHA256":  "65EF2BEC210759D87551B102A6D516BD5E091FDF8B9AB192C88A3883E152AA2C"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/evidence/effective-config.json",
+                                           "Bytes":  10224,
+                                           "SHA256":  "E37F92B57854FD877DC8A3A23FDFD9CCF51E64187DC7DDB8927951958612CB17"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/evidence/final.json",
+                                           "Bytes":  3853,
+                                           "SHA256":  "F67E420E5266E741D41AB3EC610E15E33AD1C775FA4F4A8E32528618C41BED0E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/evidence/gui.json",
+                                           "Bytes":  285,
+                                           "SHA256":  "7B2BF8436E00D1DDCC50098C8A48D0EE03C9DCCD38DDEDFF60855479B9A4CC4A"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/evidence/initial.json",
+                                           "Bytes":  11,
+                                           "SHA256":  "84B1C14E68260082E3E79EDFF0A78F4EBF1942CFD6C593246044EC2149CBB87D"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/evidence/result.json",
+                                           "Bytes":  585,
+                                           "SHA256":  "0E11148CD44ABB4BD46000AA5031C81EA6AD5873C4F7CD24AA4049DCFFBAE709"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "19F3BB3566C26DB4B6E0ED14FDB1465D8157BA3060E26BE9D5A483E7041506C1"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/runtime/logs/reports/report-20261109-112916-2ab01423121646db8e43991387e4bb88.json",
+                                          "SHA256":  "98EC1F84EC6CB1F40E44CF9DA61AB923C3E315765737159D3E4ED9958CABC315",
+                                          "Total":  1,
+                                          "Moved":  1,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.6163092
+                                      },
+                                      {
+                                          "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/runtime/logs/reports/report-20261109-112922-ab13c51846fa4b1a8ee1685cecb30ed6.json",
+                                          "SHA256":  "27613F7494BE84C98D047008494F1B1262826CCF3448E2CCB6E02D71CDF0F33D",
+                                          "Total":  1,
+                                          "Moved":  1,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.5861986
+                                      },
+                                      {
+                                          "Path":  ".tools/verification/Watcher-638d1562944f442d9b293d66d54a0af9/runtime/logs/reports/report-20261109-112949-cd285f9d9139409c87fe218e44166da2.json",
+                                          "SHA256":  "68E93E1B35396B9D1500E84EF9C4D57588BE2427D638CDB813A18DD39779BD2B",
+                                          "Total":  20,
+                                          "Moved":  20,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  1.0550167
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Scheduler",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:30:55.0750826+07:00",
+                      "Notes":  "Pengguna menjalankan helper dari terminal interaktif dan mengonfirmasi jendela serta seluruh perubahan START/STOP dan Registered/Removed sesuai.",
+                      "Session":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a",
+                      "RuntimeDifferencesFromFinalSource":  [
+
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  0,
+                                      "Scanned":  "0",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+
+                                                  ],
+                                      "MaxDispatcherGapMs":  2871.92,
+                                      "FirstFeedbackMs":  null,
+                                      "PeakProcessWorkingSetMB":  301.82,
+                                      "SessionSeconds":  16.3255847
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/console.txt",
+                                           "Bytes":  102,
+                                           "SHA256":  "A7014D2D4A0828E8BBC7E198B4D4E1CC484D765291BE2AF0D813069D944BF19E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/effective-config.json",
+                                           "Bytes":  10077,
+                                           "SHA256":  "C8F109528758BAA1C709BB7B016AF3DCBB022919B289DF291CEEBDFEAF641517"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/final.json",
+                                           "Bytes":  170,
+                                           "SHA256":  "F6AEFD76823CE5B93891439A9D30F1828D7130534668F68B48157912C2D53119"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/gui.json",
+                                           "Bytes":  274,
+                                           "SHA256":  "9452E394163FEE0767A661653C29548932F7189481CAE2B0C0B95C62A4FDC800"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/initial.json",
+                                           "Bytes":  159,
+                                           "SHA256":  "B49E9450C824C52F0026909EE283B40FCEF46DDCE7C89EC646A955B4B25B20E5"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/result.json",
+                                           "Bytes":  589,
+                                           "SHA256":  "819A53301493819440D4C22AD556A61A3414140F7B16C2D195221BE8A69FB11C"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/scheduled-task.json",
+                                           "Bytes":  911,
+                                           "SHA256":  "279207EBB0AA79E54F86649B41149EC252A79113833BA5891C0FA2C01F85DF89"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "19F3BB3566C26DB4B6E0ED14FDB1465D8157BA3060E26BE9D5A483E7041506C1"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "F088277BA86050BA509915F82DCA019BC085429FA23D0C7971729B593D4967B4"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Scheduler-7ca03438409949ccbf652fbbab24145a/runtime/logs/reports/report-20261109-113044-f7ab4f9411914cb2aaba4bc1925f1581.json",
+                                          "SHA256":  "BB120B055ED974C43D9B01B7D153E466D5C2AAD34087E7ADD362663053B680FD",
+                                          "Total":  1,
+                                          "Moved":  1,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.6275052
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Unavailable",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:32:22.0704651+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper secara interaktif dan mengonfirmasi hasil, pesan error serta pemulihan kontrol sesuai.",
+                      "Session":  ".tools/verification/Unavailable-5209857ff48a4c559c209c59ef59530a",
+                      "RuntimeDifferencesFromFinalSource":  [
+
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  0,
+                                      "Scanned":  "0",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+
+                                                  ],
+                                      "MaxDispatcherGapMs":  1187.7658000000001,
+                                      "FirstFeedbackMs":  null,
+                                      "PeakProcessWorkingSetMB":  283.54,
+                                      "SessionSeconds":  9.981095
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Unavailable-5209857ff48a4c559c209c59ef59530a/evidence/console.txt",
+                                           "Bytes":  238,
+                                           "SHA256":  "8DA84646A5D1BDA4DFD72EAF87057C72BE5C76C420042BD6F46D95E0738E3A2D"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Unavailable-5209857ff48a4c559c209c59ef59530a/evidence/effective-config.json",
+                                           "Bytes":  10077,
+                                           "SHA256":  "C8F109528758BAA1C709BB7B016AF3DCBB022919B289DF291CEEBDFEAF641517"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Unavailable-5209857ff48a4c559c209c59ef59530a/evidence/final.json",
+                                           "Bytes":  11,
+                                           "SHA256":  "84B1C14E68260082E3E79EDFF0A78F4EBF1942CFD6C593246044EC2149CBB87D"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Unavailable-5209857ff48a4c559c209c59ef59530a/evidence/gui.json",
+                                           "Bytes":  283,
+                                           "SHA256":  "AEB571744E97A21C3A3BB862479977D027B28E4174971D99B60F0955F60716FC"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Unavailable-5209857ff48a4c559c209c59ef59530a/evidence/initial.json",
+                                           "Bytes":  159,
+                                           "SHA256":  "B49E9450C824C52F0026909EE283B40FCEF46DDCE7C89EC646A955B4B25B20E5"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Unavailable-5209857ff48a4c559c209c59ef59530a/evidence/result.json",
+                                           "Bytes":  569,
+                                           "SHA256":  "65735DACA7CB232002FF325CAAE425384886D7DC2B8E3967917445E3E26D1909"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Unavailable-5209857ff48a4c559c209c59ef59530a/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "19F3BB3566C26DB4B6E0ED14FDB1465D8157BA3060E26BE9D5A483E7041506C1"
+                                       }
+                                   ],
+                      "Reports":  [
+
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Locked",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:32:33.6088267+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper secara interaktif dan mengonfirmasi hasil, pesan error serta pemulihan kontrol sesuai.",
+                      "Session":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be",
+                      "RuntimeDifferencesFromFinalSource":  [
+
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  1,
+                                      "Scanned":  "1",
+                                      "Moved":  "0",
+                                      "Failed":  "1",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:32:25.5188174Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:32:26.6332601Z",
+                                                          "Busy":  false,
+                                                          "Rows":  1,
+                                                          "Scanned":  "1",
+                                                          "EnabledControls":  11
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1380.2631000000001,
+                                      "FirstFeedbackMs":  574.1245,
+                                      "PeakProcessWorkingSetMB":  291.95,
+                                      "SessionSeconds":  9.9100599
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be/evidence/console.txt",
+                                           "Bytes":  1581,
+                                           "SHA256":  "1C27C132B179A157188BA19101F37584E7BDE688746A35B9B7D000490059B120"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be/evidence/effective-config.json",
+                                           "Bytes":  10077,
+                                           "SHA256":  "C8F109528758BAA1C709BB7B016AF3DCBB022919B289DF291CEEBDFEAF641517"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be/evidence/final.json",
+                                           "Bytes":  159,
+                                           "SHA256":  "B49E9450C824C52F0026909EE283B40FCEF46DDCE7C89EC646A955B4B25B20E5"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be/evidence/gui.json",
+                                           "Bytes":  841,
+                                           "SHA256":  "216035D08002BC424609B89FDED5E211FAF549E31A30C6144A594C4A1DBBA7A1"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be/evidence/initial.json",
+                                           "Bytes":  159,
+                                           "SHA256":  "B49E9450C824C52F0026909EE283B40FCEF46DDCE7C89EC646A955B4B25B20E5"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be/evidence/result.json",
+                                           "Bytes":  559,
+                                           "SHA256":  "DA97E157233E32FC1A6BC7E6DDF59932AEBFE530118CDC88E7AC4256F07BC8D8"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "19F3BB3566C26DB4B6E0ED14FDB1465D8157BA3060E26BE9D5A483E7041506C1"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Locked-aa554354183448b98cbd276be36377be/runtime/logs/reports/report-20261109-113226-4423af7777bf4b5fa9a67381c41ed9ee.json",
+                                          "SHA256":  "60AE543248E76271857EAF7688DFEF55AF9D2E7720BFFE1BA56A21BDA7B176FB",
+                                          "Total":  1,
+                                          "Moved":  0,
+                                          "Failed":  1,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.4316832
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "WorkerError",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:32:45.0640514+07:00",
+                      "Notes":  "Pengguna menjalankan batch helper secara interaktif dan mengonfirmasi hasil, pesan error serta pemulihan kontrol sesuai.",
+                      "Session":  ".tools/verification/WorkerError-26a394ea7b604294a7e109b70d22c823",
+                      "RuntimeDifferencesFromFinalSource":  [
+
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  0,
+                                      "Scanned":  "0",
+                                      "Moved":  "0",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:32:37.0386990Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      },
+                                                      {
+                                                          "At":  "2026-11-09T04:32:38.3486858Z",
+                                                          "Busy":  false,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  11
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1368.0157000000002,
+                                      "FirstFeedbackMs":  789.6604,
+                                      "PeakProcessWorkingSetMB":  290.61,
+                                      "SessionSeconds":  9.8950315
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/WorkerError-26a394ea7b604294a7e109b70d22c823/evidence/console.txt",
+                                           "Bytes":  601,
+                                           "SHA256":  "750ACF8471470C9727533ECA6836623CB55C4FD4E0904D89C7E5044CBE31A212"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/WorkerError-26a394ea7b604294a7e109b70d22c823/evidence/effective-config.json",
+                                           "Bytes":  10077,
+                                           "SHA256":  "C8F109528758BAA1C709BB7B016AF3DCBB022919B289DF291CEEBDFEAF641517"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/WorkerError-26a394ea7b604294a7e109b70d22c823/evidence/final.json",
+                                           "Bytes":  170,
+                                           "SHA256":  "F6AEFD76823CE5B93891439A9D30F1828D7130534668F68B48157912C2D53119"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/WorkerError-26a394ea7b604294a7e109b70d22c823/evidence/gui.json",
+                                           "Bytes":  841,
+                                           "SHA256":  "295B089721F3D72AD4FC6DAC61431C35C13B1140801D97C9A36060CF7F1AF895"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/WorkerError-26a394ea7b604294a7e109b70d22c823/evidence/initial.json",
+                                           "Bytes":  159,
+                                           "SHA256":  "B49E9450C824C52F0026909EE283B40FCEF46DDCE7C89EC646A955B4B25B20E5"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/WorkerError-26a394ea7b604294a7e109b70d22c823/evidence/result.json",
+                                           "Bytes":  569,
+                                           "SHA256":  "16C210024294FF8F1EF91F41BD7C2F76A899912FFECBDD7693930515FAF8CA45"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/WorkerError-26a394ea7b604294a7e109b70d22c823/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "19F3BB3566C26DB4B6E0ED14FDB1465D8157BA3060E26BE9D5A483E7041506C1"
+                                       }
+                                   ],
+                      "Reports":  [
+
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Scale",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:10:24.8285328+07:00",
+                      "Notes":  "Pengguna mengonfirmasi sesuai dan secara eksplisit menyatakan mengamati jendela uji otomatis; bukan klaim sesi manual terpisah.",
+                      "Session":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "assets/OrganizerWindow.xaml",
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  500,
+                                      "Scanned":  "10000",
+                                      "Moved":  "10000",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:00:26.9223394Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0"
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  1943.5813,
+                                      "FirstFeedbackMs":  630.203,
+                                      "PeakProcessWorkingSetMB":  408.15,
+                                      "SessionSeconds":  416.19397119999996
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/evidence/console.txt",
+                                           "Bytes":  348963,
+                                           "SHA256":  "111F1955048D06883F308153AF7B94AE1E8E9F0BCF5EFB20B8F7E506753B168E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/evidence/final.json",
+                                           "Bytes":  1844898,
+                                           "SHA256":  "116375F80196E460D642ADF83D106331A351A8BD6FEB7BEC3ED78CBECEF9EF9F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/evidence/gui.json",
+                                           "Bytes":  523,
+                                           "SHA256":  "94BD55FA5197720EB0A63634FEF70F59C20DD50C85FD35D66A90EBC80D7AB79E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/evidence/initial.json",
+                                           "Bytes":  1698898,
+                                           "SHA256":  "F7A8B2EB65D1E013E9CE93CF3CC3291BAA0D621A65B03735A81FAAE3EB2B75AA"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/evidence/result.json",
+                                           "Bytes":  564,
+                                           "SHA256":  "6F00E7C0A43E0ED4239B8E0AB3508A2B56B231718E43662031D3EC783630F887"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "1214D875DCC130F3519C5BE31BF285D7B43533A3813CD8452124FD5715CEB33F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/evidence/statistics.json",
+                                           "Bytes":  87,
+                                           "SHA256":  "EDF02D5DC54104805A0FA6E700C72048030B90A85BFA89B9EEAEE7338D5CC312"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/runtime/logs/reports/report-20261109-110717-ada2d19a9c024c34800f51a8b6e0c94e.json",
+                                          "SHA256":  "884D3E94D6481A9066BD2C2B5C2AF0BCF62A9F78535BC36C5CB36AEB232B4B79",
+                                          "Total":  10000,
+                                          "Moved":  10000,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  405.5236059
+                                      },
+                                      {
+                                          "Path":  ".tools/verification/Scale-13663888f9a54f76829d567b665cb743/runtime/logs/reports/report-20261109-110952-c1a0b81604344042bb89d9fa9efd8b39.json",
+                                          "SHA256":  "82A316C8ACB1730C480465AB4F162CB6581076DA0217EE838CC02086FFAE15D0",
+                                          "Total":  10000,
+                                          "Moved":  0,
+                                          "Failed":  0,
+                                          "Skipped":  10000,
+                                          "Planned":  0,
+                                          "DurationSeconds":  108.8589202
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "CloseDuringWork",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:17:56.8884425+07:00",
+                      "Notes":  "Pengguna mengonfirmasi sesuai dan secara eksplisit menyatakan mengamati jendela uji otomatis; bukan klaim sesi manual terpisah.",
+                      "Session":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f",
+                      "RuntimeDifferencesFromFinalSource":  [
+                                                                "DownloadOrganizer.ps1",
+                                                                "modules/GUI.psm1",
+                                                                "modules/Watcher.psm1"
+                                                            ],
+                      "Metrics":  {
+                                      "Rows":  500,
+                                      "Scanned":  "10000",
+                                      "Moved":  "10000",
+                                      "Failed":  "0",
+                                      "Samples":  [
+                                                      {
+                                                          "At":  "2026-11-09T04:09:00.0930748Z",
+                                                          "Busy":  true,
+                                                          "Rows":  0,
+                                                          "Scanned":  "0",
+                                                          "EnabledControls":  0
+                                                      }
+                                                  ],
+                                      "MaxDispatcherGapMs":  2242.6199,
+                                      "FirstFeedbackMs":  1112.3143,
+                                      "PeakProcessWorkingSetMB":  377,
+                                      "SessionSeconds":  415.9886669
+                                  },
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/evidence/console.txt",
+                                           "Bytes":  349063,
+                                           "SHA256":  "BB531001BE8678260950D5436A283EDE1FFE032019A7F17D95D2D82B2651F5E7"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/evidence/effective-config.json",
+                                           "Bytes":  10076,
+                                           "SHA256":  "A0B0922FE8ADD4B8848B39DB450B503B5285573E29777521E05ABFB9AA3CAA8C"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/evidence/final.json",
+                                           "Bytes":  1844898,
+                                           "SHA256":  "116375F80196E460D642ADF83D106331A351A8BD6FEB7BEC3ED78CBECEF9EF9F"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/evidence/gui.json",
+                                           "Bytes":  563,
+                                           "SHA256":  "DA3BE3118BF593AF561B91BA577F9D9E69625BDCF7471E5B31E67B97510B3318"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/evidence/initial.json",
+                                           "Bytes":  1698898,
+                                           "SHA256":  "F7A8B2EB65D1E013E9CE93CF3CC3291BAA0D621A65B03735A81FAAE3EB2B75AA"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/evidence/result.json",
+                                           "Bytes":  584,
+                                           "SHA256":  "5D907FC3662AB6673B6BB5D8E898093AA995346F2AB962EC17609C4D0AF4F51C"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/evidence/source.json",
+                                           "Bytes":  7103,
+                                           "SHA256":  "D06E8AA343EA722A6E4D2D40F7BDB05F791CA7D94052377CC7259F4325E5257A"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/evidence/statistics.json",
+                                           "Bytes":  87,
+                                           "SHA256":  "EDF02D5DC54104805A0FA6E700C72048030B90A85BFA89B9EEAEE7338D5CC312"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/runtime/logs/reports/report-20261109-111551-45c71437f40d422dacf44fd6fb0fa0f8.json",
+                                          "SHA256":  "207CD76EF0C49CD5D11DF982C00AB89C93400F759FE1C1A8776C05ACC35D5DDF",
+                                          "Total":  10000,
+                                          "Moved":  10000,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  407.32792559999996
+                                      },
+                                      {
+                                          "Path":  ".tools/verification/CloseDuringWork-1d7bc6fa7737498b9d6bd361f38afc3f/runtime/logs/reports/report-20261109-111729-d872f019d3aa45a6b750afe06b1f8281.json",
+                                          "SHA256":  "0AD340D17FA28411E70E59B764D7C50FD1063D2B3D350B17311BD1B785C91116",
+                                          "Total":  10000,
+                                          "Moved":  0,
+                                          "Failed":  0,
+                                          "Skipped":  10000,
+                                          "Planned":  0,
+                                          "DurationSeconds":  69.74369209999999
+                                      }
+                                  ]
+                  },
+                  {
+                      "Scenario":  "Launcher",
+                      "Status":  "lulus",
+                      "Filesystem":  "lulus",
+                      "Visual":  "lulus",
+                      "Date":  "2026-11-09T11:34:06.1615688+07:00",
+                      "Notes":  "Pengguna menjalankan helper launcher di terminal interaktif dan mengonfirmasi GUI terlihat, organize selesai serta penutupan normal.",
+                      "Session":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd",
+                      "RuntimeDifferencesFromFinalSource":  [
+
+                                                            ],
+                      "Metrics":  null,
+                      "Evidence":  [
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/effective-config.json",
+                                           "Bytes":  10077,
+                                           "SHA256":  "C8F109528758BAA1C709BB7B016AF3DCBB022919B289DF291CEEBDFEAF641517"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/final.json",
+                                           "Bytes":  170,
+                                           "SHA256":  "F6AEFD76823CE5B93891439A9D30F1828D7130534668F68B48157912C2D53119"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/initial.json",
+                                           "Bytes":  159,
+                                           "SHA256":  "B49E9450C824C52F0026909EE283B40FCEF46DDCE7C89EC646A955B4B25B20E5"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/launcher.json",
+                                           "Bytes":  71,
+                                           "SHA256":  "5E4DED517CB279D30C22F1A39CF46CFD5BDE8C4DA8E1C1BBF9CDFF0895F3CE5E"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/portable-with-public-gui.txt",
+                                           "Bytes":  210,
+                                           "SHA256":  "171C5934CF0792335026BCB80C46B374EC4D31757C6E3096A3B560179BA58279"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/public-controls.json",
+                                           "Bytes":  220,
+                                           "SHA256":  "4B6EE64A75D55DB5AE49F6AEE34B1B27AC7A5CC84B41C2C8A353593486F2E62D"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/result.json",
+                                           "Bytes":  575,
+                                           "SHA256":  "CA37A973BCBBE9FCA085ED2903869CE264B968F53BCD0F7DC70C22FC3514BA41"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/source.json",
+                                           "Bytes":  7381,
+                                           "SHA256":  "862E4014E6FD09E97EE84F9DAF921E9BC491F56DB32A58F577DEF35C969B06F9"
+                                       },
+                                       {
+                                           "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/evidence/statistics.json",
+                                           "Bytes":  83,
+                                           "SHA256":  "6855614575CEE39B6B87DB5C763539D16F09AA079527AD742B06BB566C42BCAD"
+                                       }
+                                   ],
+                      "Reports":  [
+                                      {
+                                          "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/runtime/logs/reports/report-20261109-113337-c9dc5762720f4f26a35c70e2f8dfa9b2.json",
+                                          "SHA256":  "19A419335A634F3C253A76ECB7A956D01E17C8190232535A1A52E4A318351407",
+                                          "Total":  1,
+                                          "Moved":  0,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  1,
+                                          "DurationSeconds":  0.5163118
+                                      },
+                                      {
+                                          "Path":  ".tools/verification/Launcher-1315211ba7494fe8b57285beb1e0d0fd/runtime/logs/reports/report-20261109-113357-995602c9d7a14781a9a108a31abe62c5.json",
+                                          "SHA256":  "1BBF35AC706FE97442D7E254D1FBBC398ECC2C3C7E253133E974DAE05FEA29C7",
+                                          "Total":  1,
+                                          "Moved":  1,
+                                          "Failed":  0,
+                                          "Skipped":  0,
+                                          "Planned":  0,
+                                          "DurationSeconds":  0.513888
+                                      }
+                                  ]
+                  }
+              ],
+    "SupersededFailedAttempts":  [
+                                     {
+                                         "Scenario":  "Mixed",
+                                         "Date":  "2026-11-09T11:11:35.0564313+07:00",
+                                         "Error":  "No JSON execution report: required action was not completed.",
+                                         "Session":  ".tools/verification/Mixed-059b69466970433383bcdbc39ecf88d3",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "Scheduler",
+                                         "Date":  "2026-11-09T11:22:01.8113816+07:00",
+                                         "Error":  "Schedule button did not remove its task.",
+                                         "Session":  ".tools/verification/Scheduler-763e259fcc3f4a30a063654d068f402e",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "Scheduler",
+                                         "Date":  "2026-11-09T11:15:30.0544372+07:00",
+                                         "Error":  "Schedule button did not remove its task.",
+                                         "Session":  ".tools/verification/Scheduler-9e20827497bc4be58769bd1faa36fada",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "Unavailable",
+                                         "Date":  "2026-11-09T11:00:35.9430780+07:00",
+                                         "Error":  "Directory does not exist: C:\\Users\\zidan\\Desktop\\Coding\\PROJEK\\download-organizer-pro\\DownloadOrganizerPro\\.tools\\verification\\Unavailable-a2c41a4c65d5441b8dae12a7754d0f56\\downloads \u0026 [1]",
+                                         "Session":  ".tools/verification/Unavailable-a2c41a4c65d5441b8dae12a7754d0f56",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "UndoConflict",
+                                         "Date":  "2026-11-09T11:12:50.7014177+07:00",
+                                         "Error":  "Undo conflict was not presented.",
+                                         "Session":  ".tools/verification/UndoConflict-7d50763caac54d4fa96af0bcff01b681",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "UndoRetry",
+                                         "Date":  "2026-11-09T11:13:23.4491921+07:00",
+                                         "Error":  "File paths, sizes or SHA256 differ from the expected inventory.",
+                                         "Session":  ".tools/verification/UndoRetry-bf9fc837540340d5b0f2404394026802",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "Watcher",
+                                         "Date":  "2026-11-09T11:21:57.4892684+07:00",
+                                         "Error":  "Exception calling \"ReadAllText\" with \"1\" argument(s): \"Could not find a part of the path \u0027C:\\Users\\zidan\\Desktop\\Coding\\PROJEK\\download-organizer-pro\\DownloadOrganizerPro\\.tools\\verification\\Watcher-21c582bc88c1426c913e5ced2621d190\\downloads \u0026 [1]\\Documents\\created.pdf\u0027.\"",
+                                         "Session":  ".tools/verification/Watcher-21c582bc88c1426c913e5ced2621d190",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "Watcher",
+                                         "Date":  "2026-11-09T11:14:01.8651269+07:00",
+                                         "Error":  "Exception calling \"ReadAllText\" with \"1\" argument(s): \"Could not find a part of the path \u0027C:\\Users\\zidan\\Desktop\\Coding\\PROJEK\\download-organizer-pro\\DownloadOrganizerPro\\.tools\\verification\\Watcher-94113fd2e74d411181a5c3db78573eb2\\downloads \u0026 [1]\\Documents\\created.pdf\u0027.\"",
+                                         "Session":  ".tools/verification/Watcher-94113fd2e74d411181a5c3db78573eb2",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "Watcher",
+                                         "Date":  "2026-11-09T11:14:31.4984048+07:00",
+                                         "Error":  "Exception calling \"ReadAllText\" with \"1\" argument(s): \"Could not find file \u0027C:\\Users\\zidan\\Desktop\\Coding\\PROJEK\\download-organizer-pro\\DownloadOrganizerPro\\.tools\\verification\\Watcher-a51d0867390249c5bbac6175f5fe62cb\\default decoy\\untouched.pdf\u0027.\"",
+                                         "Session":  ".tools/verification/Watcher-a51d0867390249c5bbac6175f5fe62cb",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     },
+                                     {
+                                         "Scenario":  "WorkerError",
+                                         "Date":  "2026-11-09T11:00:47.1112205+07:00",
+                                         "Error":  "Invalid JSON primitive: deliberate.",
+                                         "Session":  ".tools/verification/WorkerError-58665a17f2fb4c169620b265727056d1",
+                                         "Disposition":  "Superseded by the successful recorded scenario; includes development harness/procedure failures and the reproduced PS7 watcher defect."
+                                     }
+                                 ],
+    "ObservationHelpers":  [
+                               {
+                                   "Path":  ".tools/check-verification-resources.ps1",
+                                   "SHA256":  "829F1E8DFA85086B4FB5DFA67E06BBAABF685C1992E3D7AFFFE7E3833C507F66"
+                               },
+                               {
+                                   "Path":  ".tools/drive-public-gui.ps1",
+                                   "SHA256":  "671B18CBE41EDB272924569D4879CB289EE2A1F0272D9B320BCD5554DA911659"
+                               },
+                               {
+                                   "Path":  ".tools/verify-gui-buttons.ps1",
+                                   "SHA256":  "0EEBD756AE6D0EFFFFE5E5566ACF060982C54C258BEEB82069A4CE13AD7A10F7"
+                               },
+                               {
+                                   "Path":  ".tools/verify-gui-services.ps1",
+                                   "SHA256":  "EF851BE82308017E790FCA41BE054A70A2AC4EEF36955E8B417EAC37F132C156"
+                               },
+                               {
+                                   "Path":  ".tools/verify-public-gui.ps1",
+                                   "SHA256":  "68DDA34F22626E2A10EE99FF46465B0728F7511F07C75D81E61B73983EF4C852"
+                               }
+                           ]
+}

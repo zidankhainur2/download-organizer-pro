@@ -1,0 +1,14 @@
+{
+  "Date": "2026-11-09",
+  "Pester": "5.7.1",
+  "WindowsPowerShell": "5.1.26100.9711",
+  "PowerShell7": "7.6.9",
+  "PassedPerEngine": 104,
+  "FailedPerEngine": 0,
+  "CoveragePercent": 79.15,
+  "CommandsAnalyzed": 1367,
+  "CommandsExecuted": 1082,
+  "CommandsMissed": 285,
+  "ModulesAnalyzed": 18,
+  "Scope": "Pester command coverage of modules/*.psm1; excludes child processes, launcher C#, and manual UI actions."
+}

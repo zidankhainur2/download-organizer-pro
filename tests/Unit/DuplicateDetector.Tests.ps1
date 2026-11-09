@@ -1,18 +1,27 @@
+BeforeAll {
 $ProjectRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 
-Import-Module "$ProjectRoot\modules\Models.psm1" -Force
-Import-Module "$ProjectRoot\modules\Utils.psm1" -Force
-Import-Module "$ProjectRoot\modules\DuplicateDetector.psm1" -Force
+Import-Module "$ProjectRoot\modules\Models.psm1"
+Import-Module "$ProjectRoot\modules\Utils.psm1"
+Import-Module "$ProjectRoot\modules\DuplicateDetector.psm1"
+
+
+. "$ProjectRoot/tests/TestHelpers.ps1"
+$testConfigPath = Join-Path $TestDrive "config.json"
+New-TestConfig $TestDrive | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $testConfigPath
+}
 
 Describe "DuplicateDetector Module Unit Tests" {
     BeforeEach {
-        $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) ("DupTest_" + [Guid]::NewGuid().ToString())
+        $tempDir = Join-Path ($TestDrive) ("DupTest_" + [Guid]::NewGuid().ToString())
         New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
     }
 
     AfterEach {
         if (Test-Path $tempDir) {
-            Remove-Item $tempDir -Recurse -Force
+            $resolved = [IO.Path]::GetFullPath($tempDir)
+            if (-not $resolved.StartsWith([IO.Path]::GetFullPath($TestDrive).TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Test cleanup escaped TestDrive.' }
+            Remove-Item -LiteralPath $resolved -Recurse -Force
         }
     }
 
@@ -23,7 +32,7 @@ Describe "DuplicateDetector Module Unit Tests" {
         "identical content" | Set-Content -Path $f2
 
         $isDup = Test-FileDuplicate -Path1 $f1 -Path2 $f2
-        $isDup | Should Be $true
+        $isDup | Should -Be $true
     }
 
     It "Should identify duplicate files and set IsDuplicate flag" {
@@ -40,8 +49,8 @@ Describe "DuplicateDetector Module Unit Tests" {
         $org3 = New-OrganizerFile -File (Get-Item $f3)
 
         $dups = Get-DuplicateFiles -Files @($org1, $org2, $org3)
-        @($dups).Count | Should Be 1
-        $dups[0].Name | Should Be "file2.txt"
-        $dups[0].IsDuplicate | Should Be $true
+        @($dups).Count | Should -Be 1
+        $dups[0].Name | Should -Be "file2.txt"
+        $dups[0].IsDuplicate | Should -Be $true
     }
 }

@@ -1,0 +1,516 @@
+﻿{
+    "Date":  "2026-11-09T13:50:40.5288274+07:00",
+    "Version":  "2.2.0",
+    "LocalReadiness":  "lulus",
+    "PublicationReadiness":  "pending final remote CI",
+    "Gate":  {
+                 "Date":  "2026-11-09T13:45:07.1994303+07:00",
+                 "Head":  "24787f8136de0320ad11fc7c047c7f5c97d7af8b",
+                 "SourceId":  "6E2D1A9A1FC3416167DC8FA4EA5E8F6189A0577EB799F11E3DFBDED6DEAE1530",
+                 "DirtyStatus":  [
+                                     " M .github/ISSUE_TEMPLATE/bug_report.md",
+                                     " M .github/ISSUE_TEMPLATE/feature_request.md",
+                                     " M .github/workflows/ci.yml",
+                                     " M .gitignore",
+                                     " M CHANGELOG.md",
+                                     " M CODE_OF_CONDUCT.md",
+                                     " M CONTRIBUTING.md",
+                                     " M DownloadOrganizer.ps1",
+                                     " M LICENSE",
+                                     " M README.md",
+                                     " M ROADMAP.md",
+                                     " M Run-GUI.bat",
+                                     " M SECURITY.md",
+                                     " M build.ps1",
+                                     " M config.json",
+                                     " M docs/ARCHITECTURE.md",
+                                     " M docs/BUILD_GUIDE.md",
+                                     " M docs/CONFIGURATION.md",
+                                     " M docs/DECISIONS.md",
+                                     " M docs/DEVELOPMENT.md",
+                                     " M docs/GUI_GUIDE.md",
+                                     " M docs/PRD.md",
+                                     " M docs/RELEASE.md",
+                                     " M docs/STYLEGUIDE.md",
+                                     " M docs/TESTING.md",
+                                     " M modules/Classifier.psm1",
+                                     " M modules/Config.psm1",
+                                     " M modules/DuplicateDetector.psm1",
+                                     " M modules/GUI.psm1",
+                                     " M modules/Logger.psm1",
+                                     " M modules/Models.psm1",
+                                     " M modules/Mover.psm1",
+                                     " M modules/ReportGenerator.psm1",
+                                     " M modules/Scanner.psm1",
+                                     " M modules/Scheduler.psm1",
+                                     " M modules/SmartClassifier.psm1",
+                                     " M modules/Summary.psm1",
+                                     " M modules/Undo.psm1",
+                                     " M modules/Utils.psm1",
+                                     " M modules/Validation.psm1",
+                                     " M modules/Watcher.psm1",
+                                     " M tests/Unit/Classifier.Tests.ps1",
+                                     " M tests/Unit/Config.Tests.ps1",
+                                     " M tests/Unit/DuplicateDetector.Tests.ps1",
+                                     " M tests/Unit/GUI.Tests.ps1",
+                                     " M tests/Unit/Logger.Tests.ps1",
+                                     " M tests/Unit/Mover.Tests.ps1",
+                                     " M tests/Unit/ReportGenerator.Tests.ps1",
+                                     " M tests/Unit/Scanner.Tests.ps1",
+                                     " M tests/Unit/Scheduler.Tests.ps1",
+                                     " M tests/Unit/SmartClassifier.Tests.ps1",
+                                     " M tests/Unit/Summary.Tests.ps1",
+                                     " M tests/Unit/Undo.Tests.ps1",
+                                     " M tests/Unit/Validation.Tests.ps1",
+                                     " M tests/Unit/Watcher.Tests.ps1",
+                                     " M tests/run_test.ps1",
+                                     "?? .editorconfig",
+                                     "?? .gitattributes",
+                                     "?? DownloadOrganizerPro.psd1",
+                                     "?? DownloadOrganizerPro.psm1",
+                                     "?? assets/Launcher.cs",
+                                     "?? assets/OrganizerWindow.xaml",
+                                     "?? docs/AUDIT_REPORT.md",
+                                     "?? docs/GUI_VERIFICATION.md",
+                                     "?? docs/RELEASE_NOTES_2.2.0.md",
+                                     "?? docs/benchmarks/",
+                                     "?? docs/verification/",
+                                     "?? modules/Organizer.psm1",
+                                     "?? modules/Transactions.psm1",
+                                     "?? package.ps1",
+                                     "?? tests/Integration/",
+                                     "?? tests/Invoke-GUIVerification.ps1",
+                                     "?? tests/Invoke-Tests.ps1",
+                                     "?? tests/Invoke-Verification.ps1",
+                                     "?? tests/Measure-Organizer.ps1",
+                                     "?? tests/Smoke-Package.ps1",
+                                     "?? tests/TestHelpers.ps1",
+                                     "?? tests/Unit/Pipeline.Tests.ps1",
+                                     "?? tests/Unit/Safety.Tests.ps1"
+                                 ],
+                 "OS":  "Microsoft Windows NT 10.0.26200.0",
+                 "Files":  [
+                               {
+                                   "Path":  ".github/workflows/ci.yml",
+                                   "SHA256":  "D6EFFCC46B311C6A36DD8B7EF63ECA8A74BEFA1FB3CFC935E9FCF28B39D9BABD"
+                               },
+                               {
+                                   "Path":  "assets/app.ico",
+                                   "SHA256":  "DE78A0CE4B5221A4DA5C883D78739D1D62CFA73A01BEC97C9A1CD68EB50DCEC1"
+                               },
+                               {
+                                   "Path":  "assets/favicon.ico",
+                                   "SHA256":  "DE78A0CE4B5221A4DA5C883D78739D1D62CFA73A01BEC97C9A1CD68EB50DCEC1"
+                               },
+                               {
+                                   "Path":  "assets/Launcher.cs",
+                                   "SHA256":  "38D1141BE549AA47B15FB6314B773953C5F578436F739C13610B024D07055B50"
+                               },
+                               {
+                                   "Path":  "assets/OrganizerWindow.xaml",
+                                   "SHA256":  "E4E960A66B8C644B76800C75451F761A8B42B0BB79E6DF31BFCBEBAE48715391"
+                               },
+                               {
+                                   "Path":  "build.ps1",
+                                   "SHA256":  "439A9AB0F90E924459214555F6FD5F35E5D0937F2AB32B825A833D0820678E0B"
+                               },
+                               {
+                                   "Path":  "CHANGELOG.md",
+                                   "SHA256":  "7D77B23388C81E6F6859341C8C138648D7465746ED5EA9A15E90C13877300D31"
+                               },
+                               {
+                                   "Path":  "config.json",
+                                   "SHA256":  "DC4070E391B04C6AF6E1C53AABDB74C184760EB4516CEE6BF31EF5DA50D2A58F"
+                               },
+                               {
+                                   "Path":  "docs/RELEASE_NOTES_2.2.0.md",
+                                   "SHA256":  "0AC93E3D86410FACF643DD18D9FB94D8ABDF953FBA11AB14079B75584E052C21"
+                               },
+                               {
+                                   "Path":  "DownloadOrganizer.ps1",
+                                   "SHA256":  "08BB4A065B72C30938825797DFE29A997FCCAE2457582883BF447DCE40ADAED1"
+                               },
+                               {
+                                   "Path":  "DownloadOrganizerPro.psd1",
+                                   "SHA256":  "C4520A45CE677D7D65E9A137E5B6E3FE4B71BF59F3D6850BEEB0B03FB2152E46"
+                               },
+                               {
+                                   "Path":  "DownloadOrganizerPro.psm1",
+                                   "SHA256":  "830731441AF584C2B1A13F770F7BFE2255E261CB8E84BFA1983DF6D9984BCD32"
+                               },
+                               {
+                                   "Path":  "LICENSE",
+                                   "SHA256":  "B9F7F4A73BD12E6F7D5CA708A7B32B847533BE3714A964A8DD35BBB68BC5E4F9"
+                               },
+                               {
+                                   "Path":  "modules/Classifier.psm1",
+                                   "SHA256":  "D8D49620F22118F8A9776A3556306E9A81D962E20BC1CE4EF82FB3938495E982"
+                               },
+                               {
+                                   "Path":  "modules/Config.psm1",
+                                   "SHA256":  "14EF59A25356130CB6F99B487E1F82D68A5D46A5EEEDD7B0460C9F34E456792D"
+                               },
+                               {
+                                   "Path":  "modules/DuplicateDetector.psm1",
+                                   "SHA256":  "1E73B3E80C19D2ED8A4188925140FA393E485173F348D451093D5A090346DD4E"
+                               },
+                               {
+                                   "Path":  "modules/GUI.psm1",
+                                   "SHA256":  "60ED626FCFFC3B4E7EE5773CB1B23B03428105BB9DB2CBE4D5DD87AE9055DAD8"
+                               },
+                               {
+                                   "Path":  "modules/Logger.psm1",
+                                   "SHA256":  "184CD8A36213B64F193CD1EE6B5AB93C62F0B867E76A285A95629BB0D385467C"
+                               },
+                               {
+                                   "Path":  "modules/Models.psm1",
+                                   "SHA256":  "FCB3EC749E0B120585643B9EB6EE4C4D8DE50DD2ED8B4DA787B414588AD4C947"
+                               },
+                               {
+                                   "Path":  "modules/Mover.psm1",
+                                   "SHA256":  "7FAB430C5D16110D3614BC3273413D6D738409EDB81C8AC87F407686326A72C4"
+                               },
+                               {
+                                   "Path":  "modules/Organizer.psm1",
+                                   "SHA256":  "E54D247C9F4B46F792017D5EAB36F0847B990A1F3528551C9B16051E6226B6E8"
+                               },
+                               {
+                                   "Path":  "modules/ReportGenerator.psm1",
+                                   "SHA256":  "05F9E52D8572595F0B0E3341FDFC13E750012D9C2A78DFD6CF0324F25DE44643"
+                               },
+                               {
+                                   "Path":  "modules/Scanner.psm1",
+                                   "SHA256":  "7BB3220A63B23A024F9A24EE63305148F49FBAEDF6D6C544A5A5906E6C591B8E"
+                               },
+                               {
+                                   "Path":  "modules/Scheduler.psm1",
+                                   "SHA256":  "C3D350972B2C9C08CDE6720042A002BB666C85A010A7F80243AB128AB61F14B7"
+                               },
+                               {
+                                   "Path":  "modules/SmartClassifier.psm1",
+                                   "SHA256":  "F5CADB2354DD979B9422B9A2BAD104CC1A51CF0ECC8C6F0FC5281A0030DD127C"
+                               },
+                               {
+                                   "Path":  "modules/Summary.psm1",
+                                   "SHA256":  "D9D7E50093202A604CE17721944A545F34ECEA511A55C62E17C63450B92CBEB4"
+                               },
+                               {
+                                   "Path":  "modules/Transactions.psm1",
+                                   "SHA256":  "18F7DE399162287FDC1E95025762304C68802B0939C2C1A4BEBCB8E28E33019B"
+                               },
+                               {
+                                   "Path":  "modules/Undo.psm1",
+                                   "SHA256":  "EC4A897F9E0F6FAD03CD1F3F3EBDE7CE24CCC8AF1D1F4AC0C6FA8766A081A8F6"
+                               },
+                               {
+                                   "Path":  "modules/Utils.psm1",
+                                   "SHA256":  "021667B9A456D1D02244EC41CC3D75EBC5C3EA9322F08D8262FABE117A444158"
+                               },
+                               {
+                                   "Path":  "modules/Validation.psm1",
+                                   "SHA256":  "87AE359C7EAD9426ED787933F7CAB8B6A5A8C796941790F5427CB6F749229B89"
+                               },
+                               {
+                                   "Path":  "modules/Watcher.psm1",
+                                   "SHA256":  "2EA50F087B1DF680DBD1B78FDDC88B704D58D0CDCCA969D6E9CA82049B581CB3"
+                               },
+                               {
+                                   "Path":  "package.ps1",
+                                   "SHA256":  "C955A6AB6F1D69EDB385DB7A5DACC401D38AA74C48EB13829659C3216593362C"
+                               },
+                               {
+                                   "Path":  "tests/Integration/GUIVerification.Integration.Tests.ps1",
+                                   "SHA256":  "77773967EB47FDEA288A62FA588FFAC43119EB1DC17BBC008B114F9F0D1838B9"
+                               },
+                               {
+                                   "Path":  "tests/Integration/Organizer.Integration.Tests.ps1",
+                                   "SHA256":  "A2970DC4C037DF0ECACE70A3163C199B258FA7BE312D3323E4360F8164699A8D"
+                               },
+                               {
+                                   "Path":  "tests/Integration/ReleasePackage.Integration.Tests.ps1",
+                                   "SHA256":  "17C146D137C8693C13FD6225EFC3D14FDCC472023046415DB6C13FE26AFC74A9"
+                               },
+                               {
+                                   "Path":  "tests/Integration/ScheduledTask.Manual.ps1",
+                                   "SHA256":  "78F32549248775EAD3FDA3B3DFA49050DB37F16F918B3DF6596512531B74A518"
+                               },
+                               {
+                                   "Path":  "tests/Invoke-GUIVerification.ps1",
+                                   "SHA256":  "9E8EA6EDC1883E49500863F83D01C4E2D220C20F586039718A491306AC1DF651"
+                               },
+                               {
+                                   "Path":  "tests/Invoke-Tests.ps1",
+                                   "SHA256":  "8CAA7752247BD066622807530E6267EA0050ABB7548E76438669AB39089506EB"
+                               },
+                               {
+                                   "Path":  "tests/Invoke-Verification.ps1",
+                                   "SHA256":  "8BC8CA5A9ACDC84F496E83F466571CEBD75C61245AA0DA6DB02CDF9F32DE3A80"
+                               },
+                               {
+                                   "Path":  "tests/Measure-Organizer.ps1",
+                                   "SHA256":  "E15EA450E8742CDEC5E32E4B930D9325881FD87D8AC89C4CEA291E5D416457C2"
+                               },
+                               {
+                                   "Path":  "tests/run_test.ps1",
+                                   "SHA256":  "FE50831A69115802431F0A7CF8C18642B76B70F2264BF3C7EA9CB8ED5F49AAC5"
+                               },
+                               {
+                                   "Path":  "tests/Smoke-Package.ps1",
+                                   "SHA256":  "4E9C055F5D34082636C9B5650922C5FFB7647457AC20E7E4BB97315F5786AF1B"
+                               },
+                               {
+                                   "Path":  "tests/TestHelpers.ps1",
+                                   "SHA256":  "4E6A85D54C068B5C7EAB24B4544ADB9FE3AC49C62246F3E021429437731D3BA3"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Classifier.Tests.ps1",
+                                   "SHA256":  "BF0467036DC0B57599035DC399EACA5167BD697E62FC49CBD5F98D9AABD13006"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Config.Tests.ps1",
+                                   "SHA256":  "49D559EFE40F9649633B6CDEA565C83B85FDB3AD4005FA5F8D21FDEBA382F180"
+                               },
+                               {
+                                   "Path":  "tests/Unit/DuplicateDetector.Tests.ps1",
+                                   "SHA256":  "5831AAABBABAD4CC58766EF935BB0C3E25384E76F93EEE719758DD458C68BD5E"
+                               },
+                               {
+                                   "Path":  "tests/Unit/GUI.Tests.ps1",
+                                   "SHA256":  "7D5F44F3CBE1405D91DB025211348E418BB47E72EC49E8F1CFD0FC40127A94BE"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Logger.Tests.ps1",
+                                   "SHA256":  "BCFD3C0FE69FF96EF9ACFD2CF6F79BD1CBE54E917CE6426BD20BF26E0BCB579F"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Mover.Tests.ps1",
+                                   "SHA256":  "048406DF5B20B985F08C9DC78F3485E073C400D61F78F6A86CC67341FEA7B628"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Pipeline.Tests.ps1",
+                                   "SHA256":  "7671B5C3C980F8DE3CBFB95214B3B3DA1920B420846F3D65453A00C03FA05946"
+                               },
+                               {
+                                   "Path":  "tests/Unit/ReportGenerator.Tests.ps1",
+                                   "SHA256":  "049195D0C88CDA785FECB013D2963619E431A98CAF2CE1DDEEFC69BFE928340D"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Safety.Tests.ps1",
+                                   "SHA256":  "D18F007F1B4215937BF71B630CB2AEEE25F0E25B829C64B0F0E083BD6D5CA4D8"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Scanner.Tests.ps1",
+                                   "SHA256":  "461506374A0FE8E583629A0B4599D46ED77ACFA99F839343A797F179FCA1DDA6"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Scheduler.Tests.ps1",
+                                   "SHA256":  "7EFF69B6A4A58D0E2023A2E4DC19A75BF1620CB16B627F7429D9EEC9AB869C8F"
+                               },
+                               {
+                                   "Path":  "tests/Unit/SmartClassifier.Tests.ps1",
+                                   "SHA256":  "DA1AAE91DED6902BDF5146E95ECE74629E211BA62DD4A9F811EDEF6BDFBFFB0E"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Summary.Tests.ps1",
+                                   "SHA256":  "02CEC2AE6858E7C2F1C4CAB9DF8E9090B535DDE6A31C13C61DF7ACD3D9AAE650"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Undo.Tests.ps1",
+                                   "SHA256":  "9EBA72D985E22F5BF0ECF7D4F204EBB309C39BB360CDF19B3010809BF0728A08"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Validation.Tests.ps1",
+                                   "SHA256":  "7F0763A5B467813F77191219E494D2977C732EFD19DA8992AEAAC4DB26C2B3B6"
+                               },
+                               {
+                                   "Path":  "tests/Unit/Watcher.Tests.ps1",
+                                   "SHA256":  "F2C9CE3A3EC71D0BF6448B57090ED8E12DAB618E9303BA16E663D8083EFCC6C1"
+                               }
+                           ],
+                 "Engines":  [
+                                 {
+                                     "PowerShell":  "5.1.26100.9711",
+                                     "Apartment":  "STA",
+                                     "Pester":  "5.7.1",
+                                     "Result":  "Passed",
+                                     "Total":  116,
+                                     "Passed":  116,
+                                     "Failed":  0,
+                                     "Skipped":  0,
+                                     "FailedContainers":  0,
+                                     "CoveragePercent":  83.6113125453227
+                                 },
+                                 {
+                                     "PowerShell":  "7.6.9",
+                                     "Apartment":  "STA",
+                                     "Pester":  "5.7.1",
+                                     "Result":  "Passed",
+                                     "Total":  116,
+                                     "Passed":  116,
+                                     "Failed":  0,
+                                     "Skipped":  0,
+                                     "FailedContainers":  0,
+                                     "CoveragePercent":  null
+                                 }
+                             ],
+                 "Syntax":  "lulus",
+                 "Manifest":  "lulus",
+                 "Build":  "lulus",
+                 "Portable":  "lulus",
+                 "Error":  "",
+                 "Evidence":  "C:\\Users\\zidan\\Desktop\\Coding\\PROJEK\\download-organizer-pro\\DownloadOrganizerPro\\.tools\\verification\\Automated-fb32aef2dc504148b7096a4e1a860f29"
+             },
+    "Package":  {
+                    "Path":  "dist/DownloadOrganizerPro-2.2.0-portable.zip",
+                    "Bytes":  48143,
+                    "SHA256":  "F9027B59BF92C54B0BE77F45F2BD1D55526E0D6D49E04649915F05A4D5FAEFAB",
+                    "ChecksumPath":  "dist/DownloadOrganizerPro-2.2.0-portable.zip.sha256",
+                    "ManifestPath":  "dist/DownloadOrganizerPro-2.2.0-release.json",
+                    "ManifestSHA256":  "11389E9F83472BD6A448D9ABA42D696B54E2334D433584CEE7582FB062D0697D",
+                    "PayloadFiles":  28,
+                    "Authenticode":  "NotSigned",
+                    "NoUserLogsOrRecoveryData":  true
+                },
+    "GUIEvidence":  {
+                        "Path":  "docs/verification/gui.json",
+                        "FunctionalSourceId":  "2E9AE0F5BACB380EEC367F8C9BC0D5898F1CD10C1A314C8B2B8B380061A992CB",
+                        "RuntimeUnchanged":  true,
+                        "ComparedFiles":  [
+                                              {
+                                                  "Path":  "assets/app.ico",
+                                                  "SHA256":  "DE78A0CE4B5221A4DA5C883D78739D1D62CFA73A01BEC97C9A1CD68EB50DCEC1"
+                                              },
+                                              {
+                                                  "Path":  "assets/favicon.ico",
+                                                  "SHA256":  "DE78A0CE4B5221A4DA5C883D78739D1D62CFA73A01BEC97C9A1CD68EB50DCEC1"
+                                              },
+                                              {
+                                                  "Path":  "assets/Launcher.cs",
+                                                  "SHA256":  "38D1141BE549AA47B15FB6314B773953C5F578436F739C13610B024D07055B50"
+                                              },
+                                              {
+                                                  "Path":  "assets/OrganizerWindow.xaml",
+                                                  "SHA256":  "E4E960A66B8C644B76800C75451F761A8B42B0BB79E6DF31BFCBEBAE48715391"
+                                              },
+                                              {
+                                                  "Path":  "config.json",
+                                                  "SHA256":  "DC4070E391B04C6AF6E1C53AABDB74C184760EB4516CEE6BF31EF5DA50D2A58F"
+                                              },
+                                              {
+                                                  "Path":  "DownloadOrganizer.ps1",
+                                                  "SHA256":  "08BB4A065B72C30938825797DFE29A997FCCAE2457582883BF447DCE40ADAED1"
+                                              },
+                                              {
+                                                  "Path":  "DownloadOrganizerPro.psd1",
+                                                  "SHA256":  "C4520A45CE677D7D65E9A137E5B6E3FE4B71BF59F3D6850BEEB0B03FB2152E46"
+                                              },
+                                              {
+                                                  "Path":  "DownloadOrganizerPro.psm1",
+                                                  "SHA256":  "830731441AF584C2B1A13F770F7BFE2255E261CB8E84BFA1983DF6D9984BCD32"
+                                              },
+                                              {
+                                                  "Path":  "modules/Classifier.psm1",
+                                                  "SHA256":  "D8D49620F22118F8A9776A3556306E9A81D962E20BC1CE4EF82FB3938495E982"
+                                              },
+                                              {
+                                                  "Path":  "modules/Config.psm1",
+                                                  "SHA256":  "14EF59A25356130CB6F99B487E1F82D68A5D46A5EEEDD7B0460C9F34E456792D"
+                                              },
+                                              {
+                                                  "Path":  "modules/DuplicateDetector.psm1",
+                                                  "SHA256":  "1E73B3E80C19D2ED8A4188925140FA393E485173F348D451093D5A090346DD4E"
+                                              },
+                                              {
+                                                  "Path":  "modules/GUI.psm1",
+                                                  "SHA256":  "60ED626FCFFC3B4E7EE5773CB1B23B03428105BB9DB2CBE4D5DD87AE9055DAD8"
+                                              },
+                                              {
+                                                  "Path":  "modules/Logger.psm1",
+                                                  "SHA256":  "184CD8A36213B64F193CD1EE6B5AB93C62F0B867E76A285A95629BB0D385467C"
+                                              },
+                                              {
+                                                  "Path":  "modules/Models.psm1",
+                                                  "SHA256":  "FCB3EC749E0B120585643B9EB6EE4C4D8DE50DD2ED8B4DA787B414588AD4C947"
+                                              },
+                                              {
+                                                  "Path":  "modules/Mover.psm1",
+                                                  "SHA256":  "7FAB430C5D16110D3614BC3273413D6D738409EDB81C8AC87F407686326A72C4"
+                                              },
+                                              {
+                                                  "Path":  "modules/Organizer.psm1",
+                                                  "SHA256":  "E54D247C9F4B46F792017D5EAB36F0847B990A1F3528551C9B16051E6226B6E8"
+                                              },
+                                              {
+                                                  "Path":  "modules/ReportGenerator.psm1",
+                                                  "SHA256":  "05F9E52D8572595F0B0E3341FDFC13E750012D9C2A78DFD6CF0324F25DE44643"
+                                              },
+                                              {
+                                                  "Path":  "modules/Scanner.psm1",
+                                                  "SHA256":  "7BB3220A63B23A024F9A24EE63305148F49FBAEDF6D6C544A5A5906E6C591B8E"
+                                              },
+                                              {
+                                                  "Path":  "modules/Scheduler.psm1",
+                                                  "SHA256":  "C3D350972B2C9C08CDE6720042A002BB666C85A010A7F80243AB128AB61F14B7"
+                                              },
+                                              {
+                                                  "Path":  "modules/SmartClassifier.psm1",
+                                                  "SHA256":  "F5CADB2354DD979B9422B9A2BAD104CC1A51CF0ECC8C6F0FC5281A0030DD127C"
+                                              },
+                                              {
+                                                  "Path":  "modules/Summary.psm1",
+                                                  "SHA256":  "D9D7E50093202A604CE17721944A545F34ECEA511A55C62E17C63450B92CBEB4"
+                                              },
+                                              {
+                                                  "Path":  "modules/Transactions.psm1",
+                                                  "SHA256":  "18F7DE399162287FDC1E95025762304C68802B0939C2C1A4BEBCB8E28E33019B"
+                                              },
+                                              {
+                                                  "Path":  "modules/Undo.psm1",
+                                                  "SHA256":  "EC4A897F9E0F6FAD03CD1F3F3EBDE7CE24CCC8AF1D1F4AC0C6FA8766A081A8F6"
+                                              },
+                                              {
+                                                  "Path":  "modules/Utils.psm1",
+                                                  "SHA256":  "021667B9A456D1D02244EC41CC3D75EBC5C3EA9322F08D8262FABE117A444158"
+                                              },
+                                              {
+                                                  "Path":  "modules/Validation.psm1",
+                                                  "SHA256":  "87AE359C7EAD9426ED787933F7CAB8B6A5A8C796941790F5427CB6F749229B89"
+                                              },
+                                              {
+                                                  "Path":  "modules/Watcher.psm1",
+                                                  "SHA256":  "2EA50F087B1DF680DBD1B78FDDC88B704D58D0CDCCA969D6E9CA82049B581CB3"
+                                              }
+                                          ],
+                        "Scenarios":  20,
+                        "Status":  "lulus"
+                    },
+    "Resources":  {
+                      "Date":  "2026-11-09T13:50:38.5032950+07:00",
+                      "Status":  "lulus",
+                      "Scope":  "GUID tasks from this workspace session markers and processes invoking its runtime or verification helpers; read-only, no global kill or task removal.",
+                      "SessionCount":  58,
+                      "ActiveSessionTasks":  [
+
+                                             ],
+                      "ActiveSessionProcesses":  [
+
+                                                 ]
+                  },
+    "RemoteRefs":  {
+                       "Checked":  "2026-11-09",
+                       "Main":  "24787f8136de0320ad11fc7c047c7f5c97d7af8b",
+                       "Tag_v2_2_0_Exists":  false,
+                       "Tag_2_2_0_Exists":  false,
+                       "FinalSnapshotPushed":  false
+                   },
+    "RemoteCI":  {
+                     "Status":  "belum diuji",
+                     "Reason":  "The final source snapshot is uncommitted/unpushed; the previous plan excludes automatic commit/push."
+                 },
+    "Deferred":  [
+                     "Further GUI/UI and logo redesign",
+                     "Data-location, access and lifecycle changes",
+                     "Installer/uninstaller and upgrade tooling",
+                     "Distribution/beta of the new installation experience"
+                 ]
+}

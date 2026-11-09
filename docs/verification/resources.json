@@ -1,0 +1,12 @@
+﻿{
+    "Date":  "2026-11-09T13:50:38.5032950+07:00",
+    "Status":  "lulus",
+    "Scope":  "GUID tasks from this workspace session markers and processes invoking its runtime or verification helpers; read-only, no global kill or task removal.",
+    "SessionCount":  58,
+    "ActiveSessionTasks":  [
+
+                           ],
+    "ActiveSessionProcesses":  [
+
+                               ]
+}

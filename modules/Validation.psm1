@@ -1,4 +1,5 @@
 Set-StrictMode -Version Latest
+Import-Module "$PSScriptRoot/Utils.psm1"
 
 #region Private Functions
 
@@ -49,6 +50,7 @@ function Assert-CategoryCollection {
     )
 
     foreach ($category in $Categories.PSObject.Properties) {
+        Assert-DirectoryComponent $category.Name
 
         if ($null -eq $category.Value) {
 
@@ -60,6 +62,9 @@ function Assert-CategoryCollection {
 
             throw "Category '$($category.Name)' must be an array."
 
+        }
+        foreach ($extension in $category.Value) {
+            if ($extension -isnot [string] -or $extension -notmatch '^\.?[\p{L}\p{N}]+$') { throw 'Extensions must be simple extension strings.' }
         }
 
     }
@@ -76,8 +81,10 @@ function Assert-SmartRules {
     )
 
     foreach ($category in $Rules.PSObject.Properties) {
+        Assert-DirectoryComponent $category.Name
 
         foreach ($sub in $category.Value.PSObject.Properties) {
+            Assert-DirectoryComponent $sub.Name
 
             $rule = $sub.Value
 
@@ -93,9 +100,12 @@ function Assert-SmartRules {
 
             }
 
-            if ($rule.Priority -lt 0) {
+            if ($rule.Keywords -isnot [array] -or @($rule.Keywords | Where-Object { $_ -isnot [string] -or [string]::IsNullOrWhiteSpace($_) }).Count -gt 0) {
+                throw 'Keywords must be an array of nonempty strings.'
+            }
+            if (($rule.Priority -isnot [int] -and $rule.Priority -isnot [long]) -or $rule.Priority -lt 0 -or $rule.Priority -gt [int]::MaxValue) {
 
-                throw "Priority cannot be negative."
+                throw 'Priority must be a nonnegative 32-bit integer.'
 
             }
 
@@ -184,6 +194,19 @@ function Test-OrganizerConfiguration {
 
     Assert-DirectoryExists `
         -Path $downloadPath
+
+    if ($settings.ContainsKey('ConflictAction') -and $settings.ConflictAction -notin @('Rename', 'Skip', 'Overwrite')) {
+        throw 'ConflictAction must be Rename, Skip, or Overwrite.'
+    }
+    foreach ($name in @('CreateLogs', 'MoveUnknownFiles', 'Overwrite', 'EnableSmartRules', 'CreateCategoryFolders', 'Verbose', 'DryRun', 'Recursive', 'EnableDuplicateDetection', 'ExportCSV', 'ExportJSON', 'ExportHTML')) {
+        if ($settings.ContainsKey($name) -and $settings[$name] -isnot [bool]) { throw "$name must be a boolean." }
+    }
+    foreach ($name in @('MinAgeDays', 'MaxAgeDays', 'MinSizeBytes', 'MaxSizeBytes', 'WatcherDebounceSeconds', 'ScheduleIntervalMinutes')) {
+        if ($settings.ContainsKey($name) -and (($settings[$name] -isnot [int] -and $settings[$name] -isnot [long]) -or $settings[$name] -lt 0)) { throw "$name must be a nonnegative integer." }
+    }
+    if ($settings.ContainsKey('ScheduleIntervalMinutes') -and $settings.ScheduleIntervalMinutes -lt 1) { throw 'Schedule interval must be at least one minute.' }
+    if ($settings.ContainsKey('WatcherDebounceSeconds') -and $settings.WatcherDebounceSeconds -lt 1) { throw 'Watcher debounce must be at least one second.' }
+    if ($settings.ContainsKey('IgnorePatterns') -and ($settings.IgnorePatterns -isnot [array] -or @($settings.IgnorePatterns | Where-Object { $_ -isnot [string] -or [string]::IsNullOrWhiteSpace($_) }).Count -gt 0)) { throw 'IgnorePatterns must be an array of nonempty strings.' }
 
     Assert-CategoryCollection `
         -Categories $Config.Categories

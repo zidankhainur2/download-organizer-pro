@@ -1,4 +1,6 @@
 Set-StrictMode -Version Latest
+Import-Module "$PSScriptRoot/Models.psm1"
+Import-Module "$PSScriptRoot/Utils.psm1"
 
 #region Public Functions
 
@@ -35,11 +37,11 @@ function Get-OrganizerSummary {
 
         [Parameter(Mandatory)]
         [ValidateNotNull()]
-        [array]$Files,
+        [AllowEmptyCollection()][array]$Files,
 
         [Parameter(Mandatory)]
         [ValidateNotNull()]
-        [array]$Results,
+        [AllowEmptyCollection()][array]$Results,
 
         [Parameter(Mandatory)]
         [datetime]$StartTime,
@@ -59,8 +61,11 @@ function Get-OrganizerSummary {
     $summary.Moved = if ($null -ne $movedFiles) { @($movedFiles).Count } else { 0 }
     $summary.Failed = if ($null -ne $failedFiles) { @($failedFiles).Count } else { 0 }
     $summary.Skipped = if ($null -ne $skippedFiles) { @($skippedFiles).Count } else { 0 }
+    $summary.Planned = @($Results | Where-Object { $_.Status -eq 'Planned' }).Count
+    $summary.Duplicates = @($Files | Where-Object { $_.IsDuplicate }).Count
 
-    $totalBytes = ($Files | Measure-Object -Property SizeBytes -Sum).Sum
+    $totalBytes = 0L
+    foreach ($file in $Files) { $totalBytes += $file.SizeBytes }
 
     if ($null -ne $totalBytes) {
         $summary.TotalSizeMB = [Math]::Round($totalBytes / 1MB, 2)
@@ -105,52 +110,16 @@ function Show-OrganizerSummary {
 
     )
 
-    Write-Host ""
-    Write-Host "===================================="
-    Write-Host " DOWNLOAD ORGANIZER PRO REPORT"
-    Write-Host "===================================="
-    Write-Host ""
-
-    $scanned = if ($null -ne $Summary.TotalFiles) { $Summary.TotalFiles } else { $Summary.TotalScanned }
-    $moved   = if ($null -ne $Summary.Moved) { $Summary.Moved } else { $Summary.TotalMoved }
-    $failed  = if ($null -ne $Summary.Failed) { $Summary.Failed } else { $Summary.TotalFailed }
-
-    Write-Host "Files scanned : $scanned"
-    Write-Host "Files moved   : $moved"
-    Write-Host "Failed        : $failed"
-    Write-Host ""
-
-    Write-Host "Total Size:"
-    Write-Host "$($Summary.TotalSizeMB) MB"
-    Write-Host ""
-
-    Write-Host "Categories:"
-    Write-Host ""
-
-    if ($Summary.Categories -is [hashtable]) {
-        foreach ($key in ($Summary.Categories.Keys | Sort-Object)) {
-            Write-Host ("{0,-20} {1}" -f $key, $Summary.Categories[$key])
-        }
-    }
-    elseif ($null -ne $Summary.Categories) {
-        foreach ($category in $Summary.Categories) {
-            Write-Host ("{0,-20} {1}" -f $category.Category, $category.Count)
-        }
-    }
-
-    Write-Host ""
-    Write-Host "Duration:"
-    $durationSeconds = if ($Summary.Duration -is [timespan]) { $Summary.Duration.TotalSeconds } else { $Summary.Duration }
-    Write-Host ("{0:N2} seconds" -f $durationSeconds)
-
-    if (-not [string]::IsNullOrWhiteSpace($LogFile)) {
-        Write-Host ""
-        Write-Host "Log:"
-        Write-Host $LogFile
-    }
-
-    Write-Host ""
-    Write-Host "===================================="
+    $lines = @(
+        'Download Organizer Pro report'
+        "Files scanned: $($Summary.TotalFiles)"
+        "Moved: $($Summary.Moved); Failed: $($Summary.Failed); Skipped: $($Summary.Skipped); Planned: $($Summary.Planned)"
+        "Duplicates: $($Summary.Duplicates); Size: $($Summary.TotalSizeMB) MB"
+        "Duration: $(Format-Duration $Summary.Duration)"
+    )
+    foreach ($key in ($Summary.Categories.Keys | Sort-Object)) { $lines += "$key : $($Summary.Categories[$key])" }
+    if ($LogFile) { $lines += "Log: $LogFile" }
+    $lines -join "`n"
 
 }
 

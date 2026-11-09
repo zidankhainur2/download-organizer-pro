@@ -1,10 +1,17 @@
+BeforeAll {
 $ProjectRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 
-Import-Module "$ProjectRoot\modules\Watcher.psm1" -Force
+Import-Module "$ProjectRoot\modules\Watcher.psm1"
+
+
+. "$ProjectRoot/tests/TestHelpers.ps1"
+$testConfigPath = Join-Path $TestDrive "config.json"
+New-TestConfig $TestDrive | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $testConfigPath
+}
 
 Describe "Watcher Module Unit Tests" {
     BeforeEach {
-        $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) ("WatcherTest_" + [Guid]::NewGuid().ToString())
+        $tempDir = Join-Path ($TestDrive) ("WatcherTest_" + [Guid]::NewGuid().ToString())
         New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
 
         $dummyScript = Join-Path $tempDir "dummy_script.ps1"
@@ -14,18 +21,20 @@ Describe "Watcher Module Unit Tests" {
     AfterEach {
         Stop-OrganizerWatcher | Out-Null
         if (Test-Path $tempDir) {
-            Remove-Item $tempDir -Recurse -Force
+            $resolved = [IO.Path]::GetFullPath($tempDir)
+            if (-not $resolved.StartsWith([IO.Path]::GetFullPath($TestDrive).TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Test cleanup escaped TestDrive.' }
+            Remove-Item -LiteralPath $resolved -Recurse -Force
         }
     }
 
     It "Should start watcher instance and return active status" {
         $dummyScript = Join-Path $tempDir "dummy_script.ps1"
         $inst = Start-OrganizerWatcher -Path $tempDir -ScriptPath $dummyScript -DebounceSeconds 1
-        $inst | Should Not Be $null
+        $inst | Should -Not -Be $null
 
         $status = Get-OrganizerWatcherStatus
-        $status.IsActive | Should Be $true
-        $status.Path | Should Be $tempDir
+        $status.IsActive | Should -Be $true
+        $status.Path | Should -Be $tempDir
     }
 
     It "Should stop watcher instance cleanly" {
@@ -33,9 +42,9 @@ Describe "Watcher Module Unit Tests" {
         Start-OrganizerWatcher -Path $tempDir -ScriptPath $dummyScript -DebounceSeconds 1
 
         $stopped = Stop-OrganizerWatcher
-        $stopped | Should Be $true
+        $stopped | Should -Be $true
 
         $status = Get-OrganizerWatcherStatus
-        $status.IsActive | Should Be $false
+        $status.IsActive | Should -Be $false
     }
 }

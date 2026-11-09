@@ -1,46 +1,13 @@
-# Desktop GUI Guide
+# Desktop GUI
 
-**Download Organizer Pro v2.1.0** includes a high-performance, native Windows Presentation Framework (WPF) Desktop Graphical User Interface.
+Launch `Run-GUI.bat`, `DownloadOrganizerPro.exe`, or `powershell.exe -STA -File .\DownloadOrganizer.ps1 -GUI`. An interactive script invocation with no arguments also opens the GUI.
 
----
+The folder field expands environment variables. Smart rules, DryRun, recursion, HTML, and CSV checkboxes initialize from configuration; they override settings for that run. Start runs the same pipeline as the CLI in a background STA runspace. Controls that could conflict are disabled until completion; progress and results appear through the UI dispatcher.
 
-## Overview
+KPI cards show scanned files, real moves, failures, and total size. The console summary also shows Skipped, Planned, and duplicate counts. The results grid flags duplicate files and displays at most 500 rows. Exported reports include every result. DryRun rows are Planned and never increment real move/failure statistics.
 
-The Desktop GUI provides complete visual control over file organization, real-time folder watching, undo operations, report exports, and statistics dashboards with 0ms startup overhead and zero external dependencies.
+Start Watcher monitors the selected folder using the loaded configuration path; Stop Watcher removes subscriptions and its timer. Automation uses the configuration file's settings, while the folder selection is passed explicitly. Schedule toggles the current-user DownloadOrganizerPro task using ScheduleIntervalMinutes and the selected folder. Errors are displayed in the console.
 
----
+Undo restores the latest incomplete transaction, including overwrite backups, and reports source conflicts without replacing existing files. Closing waits for any active GUI transaction to finish, then disposes its runspace. A previously launched watcher worker can finish safely after monitoring stops.
 
-## How to Launch
-
-### Option 1: Double-Click Helper (Recommended for Windows Users)
-Double-click `Run-GUI.bat` in File Explorer.
-
-### Option 2: PowerShell Terminal
-Run in PowerShell terminal:
-```powershell
-.\DownloadOrganizer.ps1
-```
-Or explicitly specify the GUI flag:
-```powershell
-.\DownloadOrganizer.ps1 -GUI
-```
-
----
-
-## Interface Layout & Controls
-
-1. **Target Folder Bar**: Displays and allows browsing (`Browse...`) for any target directory on your machine.
-2. **Options Checkboxes**:
-   - `Enable Smart Rules`: Applies keyword-based subcategory rules (e.g. `Resume.pdf` -> `Documents/CV`).
-   - `Dry-Run Mode`: Simulates file moves without modifying files on disk.
-   - `Recurse Subfolders`: Scans nested folders recursively.
-   - `Export HTML Dashboard`: Generates a dark-mode interactive HTML report.
-   - `Export CSV Report`: Generates structured CSV data output.
-3. **One-Click Action Buttons**:
-   - `▶ START ORGANIZING`: Runs full scanning, classification, and movement pipeline.
-   - `⚡ START WATCHER` / `⏹ STOP WATCHER`: Toggles background real-time folder monitoring.
-   - `↺ UNDO LAST MOVE`: Restores files moved during the last execution using transaction logs.
-   - `📊 STATS REPORT`: Displays cumulative historical metrics dialog.
-4. **KPI Summary Cards**: Live counters for **SCANNED**, **MOVED**, **FAILED**, and **TOTAL SIZE (MB)**.
-5. **Results DataGrid**: Sortable table displaying file names, assigned categories, subcategories, move status, and target paths.
-6. **Log Output Console**: Live scrolling log stream.
+Interactive visual checks remain required before release: resize, keyboard navigation, checkbox defaults, responsiveness with 10,000 files, watcher toggling, closing during a transaction, and conflict/error messages. Automated WPF checks run in STA and do not substitute for these visual checks.

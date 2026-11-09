@@ -1,0 +1,247 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Download Organizer Pro - Order From Chaos" Height="780" Width="1180"
+        WindowStartupLocation="CenterScreen" Background="#0c0b09" Foreground="#f5efe1"
+        FontFamily="Segoe UI">
+    <Window.Resources>
+        <!-- Base Button Style -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#131210" />
+            <Setter Property="Foreground" Value="#f5efe1" />
+            <Setter Property="BorderBrush" Value="#3d3830" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="16,10" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#211e18" />
+                                <Setter Property="Foreground" Value="#ff5c1a" />
+                                <Setter Property="BorderBrush" Value="#ff5c1a" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Primary Button Style -->
+        <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#ff5c1a" />
+            <Setter Property="Foreground" Value="#0c0b09" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#f5efe1" />
+                    <Setter Property="Foreground" Value="#0c0b09" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Checkbox Style -->
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#9a9385" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="0,0,24,0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <StackPanel Orientation="Horizontal" Background="Transparent">
+                            <Border Width="16" Height="16" Background="#0c0b09" BorderBrush="#3d3830" BorderThickness="1">
+                                <TextBlock x:Name="CheckMark" Text="v" Foreground="#c8ff3a" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Margin="0,-2,0,0"/>
+                            </Border>
+                            <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#f5efe1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- DataGrid Styling -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#131210" />
+            <Setter Property="Foreground" Value="#f5efe1" />
+            <Setter Property="RowBackground" Value="#131210" />
+            <Setter Property="AlternatingRowBackground" Value="#0c0b09" />
+            <Setter Property="BorderBrush" Value="#2d2922" />
+            <Setter Property="GridLinesVisibility" Value="Horizontal" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#2d2922" />
+            <Setter Property="HeadersVisibility" Value="Column" />
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#1a1813" />
+                        <Setter Property="Foreground" Value="#9a9385" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="FontSize" Value="11" />
+                        <Setter Property="FontFamily" Value="Cascadia Code, Consolas" />
+                        <Setter Property="Padding" Value="12,8" />
+                        <Setter Property="BorderBrush" Value="#2d2922" />
+                        <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Padding" Value="12,8" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridCell">
+                                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#211e18" />
+                                <Setter Property="Foreground" Value="#ff5c1a" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="140"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <Border Background="#ff5c1a" Width="36" Height="36" Margin="0,0,16,0">
+                    <TextBlock Text="DOP" Foreground="#0c0b09" FontWeight="Bold" FontFamily="Cascadia Code, Consolas" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0"/>
+                </Border>
+                <TextBlock FontFamily="Bricolage Grotesque, Segoe UI" FontSize="22" FontWeight="Bold" Foreground="#f5efe1" VerticalAlignment="Center">
+                    DOWNLOAD ORGANIZER <Run Foreground="#ff5c1a">PRO</Run>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock x:Name="TxtVersion" Text="" FontFamily="Cascadia Code, Consolas" FontSize="11" Foreground="#9a9385" HorizontalAlignment="Right"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,0,0">
+                    <Ellipse Width="8" Height="8" Fill="#c8ff3a" Margin="0,0,8,0"/>
+                    <TextBlock Text="SYSTEM OPERATIONAL" FontFamily="Cascadia Code, Consolas" FontSize="10" Foreground="#c8ff3a"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- Path Bar -->
+        <Border Grid.Row="1" Background="#131210" BorderBrush="#2d2922" BorderThickness="1" Padding="16,12" Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="TARGET FOLDER" FontFamily="Cascadia Code, Consolas" FontSize="11" Foreground="#9a9385" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                <TextBox x:Name="TxtFolderPath" Grid.Column="1" Background="#0c0b09" Foreground="#ff8a4d" BorderBrush="#2d2922" BorderThickness="1" Padding="8,6" FontSize="13" FontFamily="Cascadia Code, Consolas" VerticalContentAlignment="Center" CaretBrush="#ff5c1a"/>
+                <Button x:Name="BtnBrowse" Grid.Column="2" Content="BROWSE" Margin="12,0,0,0" Width="100"/>
+            </Grid>
+        </Border>
+
+        <!-- Options Panel -->
+        <Border Grid.Row="2" Background="#131210" BorderBrush="#2d2922" BorderThickness="1" Padding="16,12" Margin="0,0,0,16">
+            <WrapPanel>
+                <CheckBox x:Name="ChkSmartRules" Content="Enable Smart Rules" IsChecked="True"/>
+                <CheckBox x:Name="ChkDryRun" Content="Dry-Run Mode"/>
+                <CheckBox x:Name="ChkRecurse" Content="Recurse Subfolders"/>
+                <CheckBox x:Name="ChkExportHTML" Content="Export HTML Dashboard" IsChecked="True"/>
+                <CheckBox x:Name="ChkExportCSV" Content="Export CSV Report"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- Action Buttons -->
+        <WrapPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,24">
+            <Button x:Name="BtnStart" Content="START ORGANIZING" Style="{StaticResource PrimaryButton}" Width="210" Height="44" Margin="0,0,12,0"/>
+            <Button x:Name="BtnWatcher" Content="START WATCHER" Width="180" Height="44" Margin="0,0,12,0"/>
+            <Button x:Name="BtnUndo" Content="UNDO LAST MOVE" Width="170" Height="44" Margin="0,0,12,0"/>
+            <Button x:Name="BtnReportStats" Content="STATS REPORT" Width="130" Height="44" Margin="0,0,12,0"/>
+            <Button x:Name="BtnSchedule" Content="SCHEDULE" Width="130" Height="44"/>
+        </WrapPanel>
+
+        <!-- KPI Summary Cards -->
+        <Grid Grid.Row="4" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="#131210" BorderBrush="#2d2922" BorderThickness="1" Padding="16,12" Margin="0,0,6,0">
+                <StackPanel>
+                    <TextBlock Text="SCANNED" FontFamily="Cascadia Code, Consolas" FontSize="11" Foreground="#9a9385"/>
+                    <TextBlock x:Name="TxtKpiScanned" Text="0" FontFamily="Bricolage Grotesque, Segoe UI" FontSize="28" FontWeight="Bold" Foreground="#f5efe1" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Background="#131210" BorderBrush="#2d2922" BorderThickness="1" Padding="16,12" Margin="6,0,6,0">
+                <StackPanel>
+                    <TextBlock Text="MOVED" FontFamily="Cascadia Code, Consolas" FontSize="11" Foreground="#9a9385"/>
+                    <TextBlock x:Name="TxtKpiMoved" Text="0" FontFamily="Bricolage Grotesque, Segoe UI" FontSize="28" FontWeight="Bold" Foreground="#c8ff3a" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2" Background="#131210" BorderBrush="#2d2922" BorderThickness="1" Padding="16,12" Margin="6,0,6,0">
+                <StackPanel>
+                    <TextBlock Text="FAILED" FontFamily="Cascadia Code, Consolas" FontSize="11" Foreground="#9a9385"/>
+                    <TextBlock x:Name="TxtKpiFailed" Text="0" FontFamily="Bricolage Grotesque, Segoe UI" FontSize="28" FontWeight="Bold" Foreground="#ff4444" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="3" Background="#131210" BorderBrush="#2d2922" BorderThickness="1" Padding="16,12" Margin="6,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="TOTAL SIZE" FontFamily="Cascadia Code, Consolas" FontSize="11" Foreground="#9a9385"/>
+                    <TextBlock x:Name="TxtKpiSize" Text="0 MB" FontFamily="Bricolage Grotesque, Segoe UI" FontSize="28" FontWeight="Bold" Foreground="#ff8a4d" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Results DataGrid -->
+        <DataGrid x:Name="GridResults" Grid.Row="5" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,0,16">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="FILE NAME" Binding="{Binding File}" Width="2*"/>
+                <DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="1.2*"/>
+                <DataGridTextColumn Header="SUBCATEGORY" Binding="{Binding SubCategory}" Width="1.2*"/>
+                <DataGridTextColumn Header="STATUS" Binding="{Binding Status}" Width="1*"/>
+                <DataGridCheckBoxColumn Header="DUPLICATE" Binding="{Binding IsDuplicate}" Width="90"/>
+                <DataGridTextColumn Header="DESTINATION" Binding="{Binding Destination}" Width="3*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Log Console -->
+        <Border Grid.Row="6" Background="#0a0908" BorderBrush="#2d2922" BorderThickness="1" Padding="12">
+            <TextBox x:Name="TxtLogConsole" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Background="Transparent" Foreground="#ff8a4d" BorderThickness="0" FontFamily="Cascadia Code, Consolas" FontSize="12" TextWrapping="Wrap" CaretBrush="#ff5c1a"/>
+        </Border>
+    </Grid>
+</Window>

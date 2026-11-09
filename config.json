@@ -5,6 +5,7 @@
     "MoveUnknownFiles": true,
     "Overwrite": false,
     "EnableSmartRules": true,
+    "EnableDuplicateDetection": true,
     "CreateCategoryFolders": true,
     "Verbose": false,
     "DryRun": false,

@@ -7,6 +7,7 @@ enum MoveStatus {
     Moved
     Failed
     Skipped
+    Planned
 }
 
 #endregion
@@ -50,6 +51,8 @@ class OrganizerFile {
     [void] SetCategory([string]$Category) {
 
         $this.Category = $Category
+        $this.SubCategory = ''
+        $this.SmartScore = 0
 
         $this.DestinationPath = $Category
 
@@ -77,6 +80,12 @@ class OrganizerFile {
 
         }
 
+    }
+
+    [void] MarkPlanned([string]$Destination) {
+        $this.Status = [MoveStatus]::Planned
+        $this.Destination = $Destination
+        $this.ErrorMessage = ''
     }
 
     [void] MarkMoved(
@@ -122,6 +131,8 @@ class OrganizerSummary {
     [int]$Failed
 
     [int]$Skipped
+    [int]$Planned
+    [int]$Duplicates
 
     [double]$TotalSizeMB
 

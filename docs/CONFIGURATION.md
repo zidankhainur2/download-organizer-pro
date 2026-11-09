@@ -1,419 +1,8 @@
-# Configuration Guide
+# Configuration
 
-**Project:** Download Organizer Pro
+`config.json` has three sections: `Settings`, `Categories`, and `SmartRules`. Paths expand Windows environment variables before validation. `-DownloadsPath` overrides the configured folder before it is checked, so a nonexistent default Downloads folder does not prevent using another folder.
 
----
-
-# Overview
-
-Download Organizer Pro is fully configuration-driven.
-
-Application behavior is controlled through:
-
-```text
-config.json
-```
-
-No source code modifications should be required for normal customization.
-
----
-
-# Configuration Structure
-
-```json
-{
-  "Settings": {},
-  "Categories": {},
-  "SmartRules": {}
-}
-```
-
----
-
-# Settings
-
-Application-level settings.
-
-Example:
-
-```json
-{
-  "Settings": {
-    "DownloadsPath": "%USERPROFILE%\\Downloads",
-    "CreateMissingFolders": true,
-    "OverwriteExisting": false,
-    "RenameDuplicates": true,
-    "GenerateLog": true,
-    "ShowSummary": true
-  }
-}
-```
-
----
-
-## DownloadsPath
-
-Directory to organize.
-
-Example:
-
-```json
-"%USERPROFILE%\\Downloads"
-```
-
-Environment variables are supported.
-
-Examples:
-
-```text
-%USERPROFILE%
-
-%TEMP%
-
-%HOMEDRIVE%
-```
-
----
-
-## CreateMissingFolders
-
-Automatically create destination folders.
-
-Type:
-
-```text
-Boolean
-```
-
-Example:
-
-```json
-true
-```
-
----
-
-## OverwriteExisting
-
-Allow overwriting existing files.
-
-Type:
-
-```text
-Boolean
-```
-
-Default:
-
-```json
-false
-```
-
----
-
-## RenameDuplicates
-
-Automatically rename duplicate filenames.
-
-Type:
-
-```text
-Boolean
-```
-
-Example:
-
-```json
-true
-```
-
----
-
-## GenerateLog
-
-Create a log file after execution.
-
-Type:
-
-```text
-Boolean
-```
-
----
-
-## ShowSummary
-
-Display execution summary.
-
-Type:
-
-```text
-Boolean
-```
-
----
-
-# Categories
-
-Defines extension-to-category mapping.
-
-Example:
-
-```json
-{
-  "Categories": {
-    "Documents": ["pdf", "doc", "docx", "xls", "xlsx"],
-
-    "Images": ["jpg", "jpeg", "png", "gif"],
-
-    "Applications": ["exe", "msi"],
-
-    "Archives": ["zip", "rar", "7z"]
-  }
-}
-```
-
----
-
-## Rules
-
-Extensions:
-
-- are case-insensitive
-- should not include "."
-- must be unique
-
-Correct:
-
-```json
-"pdf"
-```
-
-Incorrect:
-
-```json
-".pdf"
-```
-
----
-
-# Smart Rules
-
-Smart Rules perform keyword-based classification.
-
-Example:
-
-```json
-{
-  "SmartRules": {
-    "CV": {
-      "Category": "Documents",
-      "Keywords": ["resume", "cv", "curriculum vitae"]
-    }
-  }
-}
-```
-
----
-
-## Category
-
-Target category.
-
-Example:
-
-```json
-"Documents"
-```
-
----
-
-## Keywords
-
-List of filename keywords.
-
-Matching is case-insensitive.
-
-Example:
-
-```json
-["resume", "cv", "portfolio"]
-```
-
----
-
-# Example
-
-Filename:
-
-```text
-Resume_John.pdf
-```
-
-Evaluation:
-
-```text
-Extension
-
-↓
-
-Documents
-
-↓
-
-Keyword "resume"
-
-↓
-
-SubCategory = CV
-```
-
-Destination:
-
-```text
-Documents/CV
-```
-
----
-
-# Duplicate Handling
-
-When a destination filename already exists:
-
-If:
-
-```json
-"RenameDuplicates": true
-```
-
-Result:
-
-```text
-Resume.pdf
-
-↓
-
-Resume (1).pdf
-
-↓
-
-Resume (2).pdf
-```
-
-If:
-
-```json
-"OverwriteExisting": true
-```
-
-Existing file will be replaced.
-
-If both are disabled:
-
-File is skipped.
-
----
-
-# Environment Variables
-
-Supported in path settings.
-
-Example:
-
-```text
-%USERPROFILE%\Downloads
-
-%USERPROFILE%\Desktop
-
-%TEMP%
-```
-
-Variables are expanded before validation.
-
----
-
-# Validation Rules
-
-Configuration validation checks:
-
-- Required sections exist
-- Downloads path exists
-- Categories are valid
-- Extensions are unique
-- Smart Rules are valid
-- Required settings are present
-
-Invalid configuration stops execution.
-
----
-
-# Best Practices
-
-- Keep categories focused.
-- Avoid duplicate extensions.
-- Use lowercase extensions.
-- Keep Smart Rules specific.
-- Test configuration before production use.
-
----
-
-# Common Categories
-
-Recommended categories:
-
-```text
-Applications
-
-Archives
-
-Audio
-
-Code
-
-Documents
-
-Fonts
-
-Images
-
-Others
-
-Scripts
-
-Videos
-```
-
----
-
-# Common Smart Rules
-
-Examples:
-
-```text
-CV
-
-Invoices
-
-Taxes
-
-Receipts
-
-Screenshots
-
-Wallpapers
-
-Projects
-
-Backups
-
-Books
-
-Courses
-```
-
----
-
-# Example Configuration
+The following is a complete example. Replace the path with an existing directory (tests substitute their sandbox).
 
 ```json
 {
@@ -422,12 +11,14 @@ Courses
     "CreateLogs": true,
     "MoveUnknownFiles": true,
     "Overwrite": false,
+    "ConflictAction": "Rename",
     "EnableSmartRules": true,
+    "EnableDuplicateDetection": true,
     "CreateCategoryFolders": true,
     "Verbose": false,
     "DryRun": false,
     "Recursive": false,
-    "IgnorePatterns": [ "*.tmp", "*.crdownload", "desktop.ini", ".DS_Store", "*.part" ],
+    "IgnorePatterns": ["*.tmp", "*.crdownload", "*.part"],
     "MinAgeDays": 0,
     "MaxAgeDays": 0,
     "MinSizeBytes": 0,
@@ -438,37 +29,35 @@ Courses
     "ExportJSON": false,
     "ExportHTML": false
   },
-
-  "Categories": {
-    "Documents": ["pdf", "docx", "xlsx"],
-    "Images": ["jpg", "png"],
-    "Archives": ["zip", "rar"],
-    "Applications": ["exe", "msi"]
-  },
-
+  "Categories": {"Documents": ["pdf", "txt"], "Images": ["png"], "Others": []},
   "SmartRules": {
-    "CV": {
-      "Category": "Documents",
-      "Priority": 10,
-      "Keywords": ["resume", "cv"]
-    }
+    "Documents": {"Finance": {"Priority": 90, "Keywords": ["invoice", "annual report"]}}
   }
 }
 ```
 
----
+| Setting | Behavior |
+|---|---|
+| DownloadsPath | Existing directory to organize. |
+| CreateLogs | Write daily operational logs. Safety transactions and requested reports are independent. |
+| MoveUnknownFiles | When false, skip unmatched extensions instead of moving them to Others. |
+| CreateCategoryFolders | When false, skip destinations whose folder does not exist. |
+| ConflictAction | Optional Rename, Skip, or Overwrite. Explicit CLI parameter takes precedence, then this setting, then legacy Overwrite=true, otherwise Rename. |
+| Overwrite | Legacy boolean fallback. Overwrite always retains a recoverable backup. |
+| EnableSmartRules | Enable category-scoped keyword subfolders. |
+| EnableDuplicateDetection | Default true; flag extra SHA256 copies, including empty files. Hash failures never prove duplication. |
+| DryRun | Compute destinations and report Planned without file moves or safety artifacts. |
+| Recursive | Scan descendants without following reparse points or operational folders. |
+| IgnorePatterns | Filename wildcard patterns; ignored downloads can become eligible when renamed. |
+| MinAgeDays / MaxAgeDays | Last-write age bounds; zero disables each bound. |
+| MinSizeBytes / MaxSizeBytes | File length bounds; zero disables each bound. |
+| Verbose | Verbose diagnostics; explicit -Verbose or -Verbose:$false wins. |
+| WatcherDebounceSeconds | Positive integer quiet/stability interval. |
+| ScheduleIntervalMinutes | Positive integer repetition interval for current-user task registration. |
+| ExportCSV / ExportJSON / ExportHTML | Write complete result reports, including duplicate flags and hashes when available. |
 
-# Future Configuration
+CLI switches explicitly supplied to a script invocation override the corresponding configuration boolean. In a PowerShell session, `-DryRun:$false` can disable a configured DryRun. Windows PowerShell 5.1 `powershell.exe -File` does not support every explicit switch boolean form; edit the configuration or invoke the script within a session for that case.
 
-Future versions may introduce:
+Categories and subcategories must be single Windows directory components: no traversal, separators, absolute paths, illegal characters, device names, or trailing dots/spaces. Extensions are simple extension strings, without filename wildcards. Smart rules match words in the filename stem after separator normalization. Score is matching keyword count multiplied by Priority; equal scores preserve declaration order. A rule under Documents cannot classify an Images file.
 
-- Multiple profiles
-- Rule priority
-- Folder templates
-- Ignore patterns
-- Recursive scanning
-- File age rules
-- Size-based rules
-- Plugin configuration
-
-Backward compatibility will be maintained whenever possible.
+Application data lives beside the entrypoint in `logs/`; module callers choose `OperationalPath` explicitly. Do not place ordinary downloads inside operational directories. Logs contain original filenames and destination paths.

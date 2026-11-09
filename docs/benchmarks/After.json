@@ -1,0 +1,12 @@
+﻿{
+    "Implementation":  "After",
+    "Date":  "2026-11-09T10:10:53.8537678+07:00",
+    "Machine":  "ZIDANKHAINUR",
+    "PowerShell":  "5.1.26100.9711",
+    "Count":  10000,
+    "FirstRunSeconds":  349.7334006,
+    "SecondRunSeconds":  65.5096203,
+    "SecondRunMoved":  0,
+    "PeakWorkingSetMB":  332.91,
+    "Notes":  "1000 repeated invoice names across batches; Before has no safety journal or duplicate integration. After includes both."
+}

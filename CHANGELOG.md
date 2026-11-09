@@ -7,6 +7,18 @@ This project follows **Semantic Versioning (SemVer)**.
 
 ---
 
+## [2.2.0]
+
+The portable release scope is complete. GUI/UI redesign and installation tooling belong to a later version. Publication status and verification evidence are recorded in docs/RELEASE.md.
+
+- Added shared CLI/GUI orchestration, category-scoped smart rules, retained duplicate flags, and consistent Planned/Moved/Skipped/Failed outcomes.
+- Added validated literal paths, per-folder locking, durable transaction intent/progress, backed-up overwrite, and retryable partial Undo with legacy manifest support.
+- Repaired Created/Renamed watcher context and cleanup; replaced expression-based scheduling with current-user ScheduledTasks and CLI/GUI controls.
+- Moved GUI execution to a background STA runspace and extracted its XAML. Portable C# launcher now forwards arguments, isolates the GUI mutex, and checks fresh compiler output.
+- Pinned Pester 5.7.1, isolated fixtures and scheduler mocks, and added safety/integration/package/benchmark verification. See docs/RELEASE.md for remaining gates.
+- Fixed watcher workers remaining active after Stop, PowerShell 7 module paths breaking Windows PowerShell workers, clipped action buttons on resize, and missing locked-file reasons in the GUI console.
+- Added a clean versioned portable ZIP, SHA256 sidecar, payload/source manifest, bundled license/release notes, and archive smoke checks. Existing logs, transactions, backups, tests and local verification fixtures are excluded from the download.
+
 ## [2.1.1] - 2026-07-27
 
 ### Fixed
@@ -70,6 +82,13 @@ This project follows **Semantic Versioning (SemVer)**.
 ---
 
 ## Planned
+
+### After 2.2.0
+
+- GUI/UI and logo redesign.
+- Data-location, permissions and application lifecycle work.
+- Installer/uninstaller, upgrade handling and retention of recovery data.
+- Distribution testing and limited beta for those changes. Version numbers will be decided separately.
 
 ### Version 3.0 (Phase 8 — Intelligence & Cloud)
 - Local Offline AI classification engine (`modules/AIClassifier.psm1` via Ollama REST API).

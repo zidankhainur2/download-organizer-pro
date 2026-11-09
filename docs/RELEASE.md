@@ -1,348 +1,106 @@
-# Release Guide
+# Release 2.2.0 - final portable candidate
 
-**Project:** Download Organizer Pro
+The 2.2.0 portable release scope is complete. Local functional verification and user-confirmed GUI observations are complete, and a clean release download is prepared. **Publication remains gated on remote Windows CI for the final source commit.** Further GUI/UI and logo redesign, data-location changes, installer/uninstaller and upgrade tooling are explicitly reserved for later versions, as recorded in [ROADMAP](../ROADMAP.md).
 
----
+## Release preparation
 
-# Release Strategy
+Build the actual release download with `powershell.exe -NoProfile -File .\package.ps1`. It creates:
 
-The project follows **Semantic Versioning (SemVer)**.
+- `dist/DownloadOrganizerPro-2.2.0-portable.zip`
+- `dist/DownloadOrganizerPro-2.2.0-portable.zip.sha256`
+- `dist/DownloadOrganizerPro-2.2.0-release.json`
 
-Version format:
+The ZIP contains 28 allowlisted files, including runtime companions, license, changelog, portable instructions and [consumer release notes](RELEASE_NOTES_2.2.0.md). Existing dist logs, recovery data, development sources, tests and verification fixtures are excluded. Keep the three release files together; the manifest describes the exact payload and source hashes. This is an unsigned portable distribution; checksums establish file integrity, not publisher identity.
 
-```text
-MAJOR.MINOR.PATCH
-```
+The release gate runs **116/116 tests per engine** (Windows PowerShell 5.1 and PowerShell 7), syntax/manifest checks, clean packaging and actual ZIP smoke on both engines. Two added archive regressions reject a corrupt download and a traversal entry even with a matching checksum. ZIP smoke verifies checksum, exact paths, payload/source hashes, extraction, DryRun, silent execution with the GUI mutex held, and Undo. Module coverage remains **83.61%**. The [release preparation record](verification/release.json) records the latest gate, archive hash, byte size and provenance.
 
-Example:
+Application runtime files match the source that passed the 20-scenario GUI verification below; changes in this phase are packaging, test/CI integration and documentation. Existing functional observations are carried forward without repeating unchanged application behavior. The CI workflow now retains the verified ZIP, checksum and manifest and supports a manual run; it does not tag or publish automatically.
 
-```text
-2.0.0
-2.1.0
-2.1.1
-3.0.0
-```
+Remote refs were checked during preparation: main still points to the original base commit and neither `v2.2.0` nor `2.2.0` exists. No final snapshot has been committed/pushed from this workspace. A passing run for that older commit does not satisfy the final release gate. After approval to commit/push, both [Windows CI jobs](https://github.com/zidankhainur2/download-organizer-pro/actions) must pass for the final commit before tagging/publishing the corresponding verified artifact.
 
----
+## Functional verification pass on 2026-11-09
 
-# Version Rules
+This pass started by reproducing the previous **104/104** result on both local engines, then added the isolated [GUI verification harness and checklist](GUI_VERIFICATION.md). Every session has its own runtime, configuration, downloads fixture, logs, reports, recovery journals and GUID task name. No personal Downloads or production scheduled task is a test target.
 
-## MAJOR
+Final automated gate: **114/114** on Windows PowerShell **5.1.26100.9711** and PowerShell **7.6.9**, Pester **5.7.1**, Windows, STA. Measured module command coverage is **83.61%** (1,153/1,379 commands), excluding child processes, launcher C# and human visual behavior. Source identity includes file hashes for the uncommitted working tree; HEAD alone does not identify this tested snapshot. The checked-in [automated gate record](verification/automated.json) contains the source manifest, exact source ID and evidence directory. Parsing, manifest validation, fresh portable build and portable smoke on both engines are included in this gate.
 
-Increment when:
+Reproduce with `powershell.exe -NoProfile -STA -File tests/Invoke-Verification.ps1`. The runner rejects an empty discovery, failed containers/tests, or a source change during verification. Earlier development attempts that failed environment metadata collection or detected a changing source tree are retained locally and are superseded by the final record.
 
-- Public APIs change
-- Breaking changes occur
-- Architecture changes significantly
+### Reproduced findings and fixes
 
-Example:
+| Finding | Reproduction / actual result | Fix and regression |
+|---|---|---|
+| Watcher stop left a worker alive | Stop reported inactive while the session's worker was still writing. | Stop waits for its owned worker to finish; integration test verifies the worker exited and completed its write. Stop may wait as long as that worker's transaction. |
+| Action buttons were clipped on resize | At 800 px window width, an action extended to x=892 and Schedule was outside the client area. | The existing action panel wraps onto another line; a WPF layout regression checks all action bounds at 800 px. No redesign. |
+| Windows PowerShell workers inherited incompatible PowerShell 7 modules | A real watcher started under PS7 produced a Failed report because `Get-FileHash` could not autoload. | Watcher, Background and the C# launcher remove PSModulePath from their child environment so Windows PowerShell constructs compatible defaults. Real watcher/Background tests and PS7 portable smoke cover the paths. Parent environment and public CLI/config/transaction contracts are preserved. |
+| Locked-file reason was hidden in the GUI | The GUI showed Failed: 1, but the actionable reason was only in reports. | Console shows the first failed filename and reason, with reports for the full list; a real locked-file GUI regression verifies the reason and recovered controls. |
+| Portable smoke released a mutex it might not own | The previous probe assumed ownership when another process already owned the GUI mutex. | Probe tracks WaitOne/abandoned ownership and releases only when owned. Portable smoke also passed while a separate public GUI launcher owned the mutex. |
 
-```text
-2.x.x
+The private window's TaskName now defaults to the unchanged production name and is passed through status/register/remove. The harness supplies a GUID name. Public GUI and CLI parameters remain unchanged.
 
-↓
+### GUI scenario status
 
-3.0.0
-```
+The [GUI evidence index](verification/gui.json) distinguishes filesystem assertions from human observations and links local raw evidence. A visually smooth run does not override a failed filesystem assertion. Initial manual attempts that organized an Undo fixture again, used the watcher decoy folder, omitted the feed, or closed before removing the scheduled task remain recorded as failed verification attempts, rather than application failures or passes.
 
----
+| Scenario | Filesystem / automatic interaction | Human visual status |
+|---|---|---|
+| Empty, Single, SmartOff, UnknownOff | lulus | lulus; Single also confirms Browse, environment path and keyboard controls |
+| Mixed, configuration, reports, duplicate preservation | lulus | lulus; user confirmed version, seven results, KPI, duplicate, resize and keyboard navigation |
+| Rename, Skip | lulus | lulus |
+| DryRun, Overwrite | lulus | lulus |
+| Undo, UndoConflict, UndoRetry | lulus | lulus; repeated conflict/retry sessions used Undo directly |
+| Watcher, Scheduler | lulus, including real workers and sandbox task removal | lulus; user observed successful helper sessions after earlier procedure failures |
+| Unavailable, Locked, WorkerError | lulus; locked-file message regression added | lulus |
+| Scale, CloseDuringWork | lulus | lulus; user explicitly identified observation of the automatic test windows |
+| Public launcher, second GUI, Silent with GUI open | lulus, including second script GUI and portable smoke with another mutex owner | lulus; user confirmed the public GUI was visible and closed normally |
 
-## MINOR
+All **20 scenarios** now have successful filesystem evidence and explicit user observations. Helpers automate fixture feeding and button actions for several observations; Single and the recovery cases include direct user interaction. A final [read-only resource check](verification/resources.json) found **zero active session tasks and zero active verification/runtime processes** across the retained session markers. Session files remain available locally as recovery and audit evidence.
 
-Increment when:
+### GUI scale evidence
 
-- New features are added
-- Existing APIs remain compatible
+Fixture: 10,000 small invoice files, 1,000 repeated names across ten batches; recursive scanning, smart rules, durable transactions, operational logging and CSV/JSON/HTML reports enabled. Both sessions preserved the complete content hash multiset and filenames on the second execution; every report accounts for all 10,000 inputs and the GUI contains 500 rows.
 
-Example:
+| Measurement | Scale | Close during active worker |
+|---|---:|---:|
+| First organize duration (report) | 405.52 s | 407.33 s |
+| Second organize duration | 108.86 s | 69.74 s |
+| Second-run moved files | 0 | 0 |
+| Peak host process working set | 408.15 MB | 377.00 MB |
+| Estimated first feedback after sampled busy state | 630 ms | 1,112 ms |
+| Maximum dispatcher sample gap, including startup | 1,944 ms | 2,243 ms |
 
-```text
-2.0.0
+The close session logged that it waited for the active transaction, then closed after the results were complete. Measurements are development observations with other verification work on the same machine, not a controlled benchmark or a claim of uninterrupted responsiveness. The 250 ms timer gives sampled estimates; session wall time includes GUI startup/user waiting and differs from operation duration. The older CLI benchmark below disables logging/reports, so it is not directly comparable. Runtime source hashes are recorded per GUI session; affected error and child-process paths were rerun after fixes.
 
-↓
+Version remains **2.2.0**, pending publication. No commit, push or remote CI execution was performed during functional verification. CI must run the final source snapshot before publication. Visual identity, data-location migration, installation and uninstallation remain separate follow-up work.
 
-2.1.0
-```
+## Earlier local verification on 2026-11-09
 
----
+- Pester 5.7.1: **104/104 passing** on Windows PowerShell 5.1.26100.9711 and PowerShell 7.6.9 (Windows, STA), including sandbox integration.
+- Measured command coverage: **79.15%**, 1,082 of 1,367 commands across 18 implementation modules. This excludes child-process execution, launcher C#, and interactive UI behavior. It is not a 100% coverage claim.
+- Syntax parsing and aggregate manifest validation pass on Windows PowerShell 5.1.
+- Portable launcher build and package smoke pass in a folder containing spaces, brackets, and ampersands. Smoke includes Planned DryRun results, path overrides, silent execution while the GUI mutex is held, and content restoration through Undo.
+- A GUID-named real Scheduled Task was registered for the current user with Interactive/Limited settings, queried successfully, and immediately removed. Unit tests still mock every scheduler operation.
 
-## PATCH
+## Same-machine 10,000-file benchmark
 
-Increment when:
+The final Before and After runs were executed sequentially in fresh Windows PowerShell 5.1 processes on the same machine. Fixture: 10,000 small invoice files, 1,000 repeated names across ten source folders, recursion and smart rules enabled, operational logs/reports disabled. Before uses the original HEAD modules and lacks the new safety journal and integrated duplicate detection. Other development checks occurred on the machine, so these are development measurements rather than laboratory timings.
 
-- Bugs are fixed
-- Documentation is updated
-- Performance is improved
-- Internal refactoring occurs without changing behavior
+| Measurement | Before | After |
+|---|---:|---:|
+| First run | 100.75 s | 349.73 s |
+| Second run | 81.47 s | 65.51 s |
+| Files moved again on second run | 10,000 | **0** |
+| Peak process working set | 262.98 MB | 332.91 MB |
+| Inputs accounted for | 10,000 | 10,000 |
 
-Example:
+Raw records: [Before.json](benchmarks/Before.json), [After.json](benchmarks/After.json). The safe first run costs substantially more time and memory, including content fingerprints and per-file durable progress. Do not describe this as an overall speedup. The second run preserves every organized filename. Later path-resolution, text-encoding and presentation fixes do not change the benchmark fixture's behavior.
 
-```text
-2.1.0
+## Remaining gate
 
-↓
+- [x] Local GUI verification: resize and keyboard navigation, progress with a large folder, close during active moves, watcher and scheduler controls, and error/conflict presentation; successful session assertions paired with user observations.
+- [x] Clean release ZIP, checksum, payload manifest and release notes prepared; archive safety and extracted runtime verified locally on both engines.
+- [ ] Review the next remote Windows CI run before publishing. Local checks of both engines passed; remote CI was configured but not executed from this workspace.
 
-2.1.1
-```
+Keep overwrite backups and transaction/progress files until recovery is no longer needed; retained destination files consume storage. Ambiguous historic DryRun logs cannot reconstruct trustworthy historical failure/run counts and are not rewritten automatically. Legacy manifests lack content fingerprints, so their recovery is necessarily more conservative.
 
----
-
-# Release Workflow
-
-```text
-Feature Complete
-
-↓
-
-Documentation Updated
-
-↓
-
-Tests Pass
-
-↓
-
-Code Review
-
-↓
-
-Version Updated
-
-↓
-
-CHANGELOG Updated
-
-↓
-
-Git Tag
-
-↓
-
-GitHub Release
-```
-
----
-
-# Release Checklist
-
-## Documentation
-
-- [ ] README updated
-- [ ] CHANGELOG updated
-- [ ] ROADMAP updated
-- [ ] Documentation reviewed
-
----
-
-## Code
-
-- [ ] Build successful
-- [ ] No debug code
-- [ ] No TODO comments
-- [ ] No unused functions
-- [ ] No duplicated logic
-
----
-
-## Testing
-
-- [ ] Unit tests pass
-- [ ] Integration tests pass
-- [ ] Manual tests completed
-- [ ] Regression tests pass
-
----
-
-## Configuration
-
-- [ ] Example configuration updated
-- [ ] Configuration validated
-- [ ] New settings documented
-
----
-
-## Repository
-
-- [ ] Version updated
-- [ ] Git tag created
-- [ ] Release notes written
-- [ ] GitHub Release published
-
----
-
-# Version Locations
-
-Update version numbers in:
-
-```text
-DownloadOrganizer.ps1
-
-README.md
-
-CHANGELOG.md
-
-Git Tag
-
-GitHub Release
-```
-
----
-
-# Git Tag Format
-
-Use:
-
-```text
-v2.0.0
-```
-
-Examples:
-
-```text
-v2.0.1
-
-v2.1.0
-
-v3.0.0
-```
-
----
-
-# Commit Freeze
-
-During release preparation:
-
-- No new features
-- Bug fixes only
-- Documentation corrections
-- Critical performance improvements
-
----
-
-# Release Candidate
-
-Release Candidate format:
-
-```text
-2.0.0-rc1
-
-2.0.0-rc2
-```
-
-Purpose:
-
-- Final testing
-- Community feedback
-- Bug verification
-
----
-
-# Stable Release
-
-Requirements:
-
-- All tests pass
-- No known critical issues
-- Documentation complete
-- Changelog complete
-- Version finalized
-
----
-
-# Hotfix Release
-
-Hotfixes are used for critical issues.
-
-Example:
-
-```text
-2.0.0
-
-↓
-
-2.0.1
-```
-
-Only include:
-
-- Critical bug fixes
-- Security fixes
-- Data loss prevention
-
-Do not introduce new features.
-
----
-
-# Release Notes Template
-
-```markdown
-# Version X.Y.Z
-
-## Added
-
--
-
-## Changed
-
--
-
-## Fixed
-
--
-
-## Removed
-
--
-
-## Performance
-
--
-
-## Documentation
-
--
-```
-
----
-
-# Backward Compatibility
-
-Minor and patch releases should preserve compatibility whenever possible.
-
-Breaking changes should be reserved for major releases.
-
----
-
-# Deprecation Policy
-
-Deprecated functionality should:
-
-- Be documented
-- Remain available for at least one major version
-- Provide migration guidance
-- Be removed only in the next major release
-
----
-
-# Post-Release
-
-After publishing a release:
-
-- Update ROADMAP
-- Create next milestone
-- Update version references
-- Close completed issues
-- Review community feedback
-
----
-
-# Release Quality Standard
-
-A release is considered complete when:
-
-- Documentation is current.
-- Automated tests pass.
-- Manual verification is complete.
-- Changelog is accurate.
-- Version numbers are consistent.
-- Repository is ready for public use.
+Publish the clean versioned ZIP with its checksum and release manifest. The user extracts the entire portable folder with its C# launcher, PowerShell scripts, manifest, modules, assets and configuration. Do not publish the executable alone or an archive of a previously used dist folder.

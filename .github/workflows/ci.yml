@@ -1,26 +1,44 @@
-name: CI - Pester Unit Tests
-
+﻿name: CI - Pester
 on:
+  workflow_dispatch:
   push:
     branches: [ main, master, dev ]
   pull_request:
     branches: [ main, master, dev ]
-
+permissions:
+  contents: read
 jobs:
-  pester-tests:
-    name: Run Pester Unit Tests
+  test:
     runs-on: windows-latest
-
+    strategy:
+      matrix:
+        shell: [powershell, pwsh]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run Pester Tests
-        shell: powershell
+      - uses: actions/checkout@v4
+      - name: Install Pester 5.7.1
+        shell: ${{ matrix.shell }}
         run: |
-          $Pester = Get-Module -ListAvailable -Name Pester | Sort-Object Version -Descending | Select-Object -First 1
-          Write-Host "Using Pester Version: $($Pester.Version)"
-          $result = Invoke-Pester .\tests\Unit -PassThru
-          if ($result.FailedCount -gt 0) {
-              throw "$($result.FailedCount) test(s) failed."
-          }
+          Install-Module Pester -RequiredVersion 5.7.1 -Force -SkipPublisherCheck -Scope CurrentUser
+      - name: Unit and integration tests (STA)
+        shell: ${{ matrix.shell }}
+        run: |
+          & '${{ matrix.shell }}' -NoProfile -STA -File ./tests/Invoke-Tests.ps1
+          if ($LASTEXITCODE -ne 0) { throw 'Tests failed.' }
+      - name: Build portable package
+        shell: powershell
+        run: ./package.ps1
+      - name: Smoke portable package with spaces
+        shell: ${{ matrix.shell }}
+        run: |
+          $version = (Import-PowerShellDataFile ./DownloadOrganizerPro.psd1).ModuleVersion
+          ./tests/Smoke-Package.ps1 -PackagePath "./dist/DownloadOrganizerPro-$version-portable.zip"
+      - name: Retain verified portable release files
+        if: matrix.shell == 'powershell'
+        uses: actions/upload-artifact@v4
+        with:
+          name: DownloadOrganizerPro-windows-portable
+          if-no-files-found: error
+          path: |
+            dist/DownloadOrganizerPro-*-portable.zip
+            dist/DownloadOrganizerPro-*-portable.zip.sha256
+            dist/DownloadOrganizerPro-*-release.json

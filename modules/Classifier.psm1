@@ -1,40 +1,5 @@
 Set-StrictMode -Version Latest
 
-#region Private Functions
-
-function Find-CategoryByExtension {
-
-    [CmdletBinding()]
-
-    param(
-
-        [Parameter(Mandatory)]
-        [AllowEmptyString()]
-        [string]$Extension,
-
-        [Parameter(Mandatory)]
-        $Categories
-
-    )
-
-    $extension = $Extension.TrimStart('.').ToLower()
-
-    foreach ($category in $Categories.PSObject.Properties) {
-
-        if ($extension -in $category.Value) {
-
-            return $category.Name
-
-        }
-
-    }
-
-    return "Others"
-
-}
-
-#endregion
-
 #region Public Functions
 
 <#
@@ -84,13 +49,21 @@ function Set-FileCategory {
 
     )
 
+    begin {
+        $lookup = @{}
+        foreach ($category in $Categories.PSObject.Properties) {
+            foreach ($extension in $category.Value) {
+                $key = $extension.TrimStart('.').ToLowerInvariant()
+                if (-not $lookup.ContainsKey($key)) { $lookup[$key] = $category.Name }
+            }
+        }
+    }
     process {
 
         if ($PSCmdlet.ParameterSetName -eq "Pipeline") {
 
-            $category = Find-CategoryByExtension `
-                -Extension $InputObject.Extension `
-                -Categories $Categories
+            $key = $InputObject.Extension.TrimStart('.').ToLowerInvariant()
+            $category = if ($lookup.ContainsKey($key)) { $lookup[$key] } else { 'Others' }
 
             $InputObject.SetCategory($category)
 
@@ -108,9 +81,8 @@ function Set-FileCategory {
 
             foreach ($file in $Files) {
 
-                $category = Find-CategoryByExtension `
-                    -Extension $file.Extension `
-                    -Categories $Categories
+                $key = $file.Extension.TrimStart('.').ToLowerInvariant()
+                $category = if ($lookup.ContainsKey($key)) { $lookup[$key] } else { 'Others' }
 
                 $file.SetCategory($category)
 
@@ -157,26 +129,6 @@ function Invoke-FileClassification {
     )
 
     return Set-FileCategory `
-        -Files $Files `
-        -Categories $Categories
-
-}
-
-function Classify-Files {
-
-    [CmdletBinding()]
-
-    param(
-
-        [Parameter(Mandatory)]
-        [array]$Files,
-
-        [Parameter(Mandatory)]
-        $Categories
-
-    )
-
-    return Invoke-FileClassification `
         -Files $Files `
         -Categories $Categories
 

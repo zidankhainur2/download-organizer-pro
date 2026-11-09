@@ -1,18 +1,27 @@
+BeforeAll {
 $ProjectRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 
-Import-Module "$ProjectRoot\modules\Models.psm1" -Force
-Import-Module "$ProjectRoot\modules\Utils.psm1" -Force
-Import-Module "$ProjectRoot\modules\Summary.psm1" -Force
+Import-Module "$ProjectRoot\modules\Models.psm1"
+Import-Module "$ProjectRoot\modules\Utils.psm1"
+Import-Module "$ProjectRoot\modules\Summary.psm1"
+
+
+. "$ProjectRoot/tests/TestHelpers.ps1"
+$testConfigPath = Join-Path $TestDrive "config.json"
+New-TestConfig $TestDrive | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $testConfigPath
+}
 
 Describe "Summary Module Unit Tests" {
     BeforeEach {
-        $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) ("SummaryTest_" + [Guid]::NewGuid().ToString())
+        $tempDir = Join-Path ($TestDrive) ("SummaryTest_" + [Guid]::NewGuid().ToString())
         New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
     }
 
     AfterEach {
         if (Test-Path $tempDir) {
-            Remove-Item $tempDir -Recurse -Force
+            $resolved = [IO.Path]::GetFullPath($tempDir)
+            if (-not $resolved.StartsWith([IO.Path]::GetFullPath($TestDrive).TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Test cleanup escaped TestDrive.' }
+            Remove-Item -LiteralPath $resolved -Recurse -Force
         }
     }
 
@@ -40,12 +49,12 @@ Describe "Summary Module Unit Tests" {
 
         $summary = Get-OrganizerSummary -Files @($org1, $org2) -Results $results -StartTime $start -EndTime $end
 
-        $summary.TotalFiles | Should Be 2
-        $summary.Moved | Should Be 2
-        $summary.Failed | Should Be 0
-        $summary.Duration.TotalSeconds | Should Be 2
-        $summary.Categories["Documents"] | Should Be 1
-        $summary.Categories["Images"] | Should Be 1
+        $summary.TotalFiles | Should -Be 2
+        $summary.Moved | Should -Be 2
+        $summary.Failed | Should -Be 0
+        $summary.Duration.TotalSeconds | Should -Be 2
+        $summary.Categories["Documents"] | Should -Be 1
+        $summary.Categories["Images"] | Should -Be 1
     }
 
     It "Should display execution summary without error" {
@@ -58,6 +67,6 @@ Describe "Summary Module Unit Tests" {
         $summary.Categories["Documents"] = 3
         $summary.Categories["Images"] = 2
 
-        { Show-OrganizerSummary -Summary $summary -LogFile ".\logs\test.log" } | Should Not Throw
+        { Show-OrganizerSummary -Summary $summary -LogFile ".\logs\test.log" } | Should -Not -Throw
     }
 }

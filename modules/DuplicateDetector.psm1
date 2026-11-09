@@ -1,4 +1,5 @@
 Set-StrictMode -Version Latest
+Import-Module "$PSScriptRoot/Utils.psm1"
 
 #region Public Functions
 
@@ -26,25 +27,27 @@ function Get-DuplicateFiles {
 
         [Parameter(Mandatory)]
         [ValidateNotNull()]
-        [array]$Files
+        [AllowEmptyCollection()][array]$Files
 
     )
 
     $duplicates = New-Object System.Collections.Generic.List[object]
 
     # Pre-filter by file size (SizeBytes)
-    $sizeGroups = $Files | Where-Object { $_.SizeBytes -gt 0 } | Group-Object SizeBytes | Where-Object { $_.Count -gt 1 }
+    foreach ($file in $Files) { $file.IsDuplicate = $false; $file.SHA256Hash = '' }
+    $sizeGroups = $Files | Group-Object SizeBytes | Where-Object { $_.Count -gt 1 }
 
     foreach ($group in $sizeGroups) {
 
         # Compute SHA256 hash for items in size group
         foreach ($file in $group.Group) {
             if ([string]::IsNullOrWhiteSpace($file.SHA256Hash) -and (Test-Path -LiteralPath $file.FullPath)) {
-                $file.SHA256Hash = Get-FileSHA256 -Path $file.FullPath
+                try { $file.SHA256Hash = Get-FileSHA256 -Path $file.FullPath }
+                catch { Write-Warning "Cannot hash '$($file.Name)': $($_.Exception.Message)" }
             }
         }
 
-        $hashGroups = $group.Group | Group-Object SHA256Hash | Where-Object { $_.Count -gt 1 }
+        $hashGroups = $group.Group | Where-Object { $_.SHA256Hash } | Group-Object SHA256Hash | Where-Object { $_.Count -gt 1 }
 
         foreach ($hashGroup in $hashGroups) {
 
@@ -110,7 +113,7 @@ function Test-FileDuplicate {
     $hash1 = Get-FileSHA256 -Path $Path1
     $hash2 = Get-FileSHA256 -Path $Path2
 
-    return ($hash1 -eq $hash2)
+    return (-not [string]::IsNullOrEmpty($hash1) -and $hash1 -eq $hash2)
 
 }
 

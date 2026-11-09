@@ -1,24 +1,33 @@
+BeforeAll {
 $ProjectRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 
-Import-Module "$ProjectRoot\modules\Models.psm1" -Force
-Import-Module "$ProjectRoot\modules\Utils.psm1" -Force
-Import-Module "$ProjectRoot\modules\Config.psm1" -Force
-Import-Module "$ProjectRoot\modules\Classifier.psm1" -Force
-Import-Module "$ProjectRoot\modules\SmartClassifier.psm1" -Force
+Import-Module "$ProjectRoot\modules\Models.psm1"
+Import-Module "$ProjectRoot\modules\Utils.psm1"
+Import-Module "$ProjectRoot\modules\Config.psm1"
+Import-Module "$ProjectRoot\modules\Classifier.psm1"
+Import-Module "$ProjectRoot\modules\SmartClassifier.psm1"
+
+
+. "$ProjectRoot/tests/TestHelpers.ps1"
+$testConfigPath = Join-Path $TestDrive "config.json"
+New-TestConfig $TestDrive | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $testConfigPath
+}
 
 Describe "SmartClassifier Module Unit Tests" {
     BeforeAll {
-        $config = Get-OrganizerConfig -Path "$ProjectRoot\config.json"
+        $config = Get-OrganizerConfig -Path $testConfigPath
     }
 
     BeforeEach {
-        $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) ("SmartClassifierTest_" + [Guid]::NewGuid().ToString())
+        $tempDir = Join-Path ($TestDrive) ("SmartClassifierTest_" + [Guid]::NewGuid().ToString())
         New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
     }
 
     AfterEach {
         if (Test-Path $tempDir) {
-            Remove-Item $tempDir -Recurse -Force
+            $resolved = [IO.Path]::GetFullPath($tempDir)
+            if (-not $resolved.StartsWith([IO.Path]::GetFullPath($TestDrive).TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Test cleanup escaped TestDrive.' }
+            Remove-Item -LiteralPath $resolved -Recurse -Force
         }
     }
 
@@ -31,9 +40,9 @@ Describe "SmartClassifier Module Unit Tests" {
         $orgFile.SetCategory("Documents")
 
         $classified = Invoke-SmartClassification -Files @($orgFile) -SmartRules $config.SmartRules
-        $classified[0].SubCategory | Should Be "CV"
-        $classified[0].SmartScore | Should BeGreaterThan 0
-        $classified[0].DestinationPath | Should Be "Documents\CV"
+        $classified[0].SubCategory | Should -Be "CV"
+        $classified[0].SmartScore | Should -BeGreaterThan 0
+        $classified[0].DestinationPath | Should -Be "Documents\CV"
     }
 
     It "Should evaluate rule priority when multiple keyword rules match" {
@@ -45,7 +54,7 @@ Describe "SmartClassifier Module Unit Tests" {
         $orgFile.SetCategory("Documents")
 
         $classified = Invoke-SmartClassification -Files @($orgFile) -SmartRules $config.SmartRules
-        $classified[0].SubCategory | Should Be "Finance"
+        $classified[0].SubCategory | Should -Be "Finance"
     }
 
     It "Should reset unmatched files to empty subcategory and 0 score" {
@@ -57,13 +66,13 @@ Describe "SmartClassifier Module Unit Tests" {
         $orgFile.SetCategory("Documents")
 
         $classified = Invoke-SmartClassification -Files @($orgFile) -SmartRules $config.SmartRules
-        $classified[0].SubCategory | Should Be ""
-        $classified[0].SmartScore | Should Be 0
-        $classified[0].DestinationPath | Should Be "Documents"
+        $classified[0].SubCategory | Should -Be ""
+        $classified[0].SmartScore | Should -Be 0
+        $classified[0].DestinationPath | Should -Be "Documents"
     }
 
     It "Should return null for Get-SmartCategory when no keywords match" {
         $match = Get-SmartCategory -FileName "no_match.pdf" -SmartRules $config.SmartRules
-        $match | Should Be $null
+        $match | Should -Be $null
     }
 }

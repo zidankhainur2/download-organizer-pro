@@ -1,4 +1,5 @@
 Set-StrictMode -Version Latest
+Import-Module "$PSScriptRoot/Utils.psm1"
 
 #region Public Functions
 
@@ -23,7 +24,7 @@ function Export-OrganizerCSV {
 
         [Parameter(Mandatory)]
         [ValidateNotNull()]
-        [array]$Results,
+        [AllowEmptyCollection()][array]$Results,
 
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -36,7 +37,7 @@ function Export-OrganizerCSV {
         New-Item -ItemType Directory -Path $parentDir -Force | Out-Null
     }
 
-    $Results | Export-Csv -Path $OutputPath -NoTypeInformation -Encoding UTF8
+    $Results | Export-Csv -LiteralPath $OutputPath -NoTypeInformation -Encoding UTF8 -ErrorAction Stop
     return $OutputPath
 
 }
@@ -69,7 +70,7 @@ function Export-OrganizerJSON {
 
         [Parameter(Mandatory)]
         [ValidateNotNull()]
-        [array]$Results,
+        [AllowEmptyCollection()][array]$Results,
 
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -89,7 +90,7 @@ function Export-OrganizerJSON {
     }
 
     $jsonContent = $reportObj | ConvertTo-Json -Depth 10
-    Set-Content -Path $OutputPath -Value $jsonContent -Encoding UTF8
+    Set-Content -LiteralPath $OutputPath -Value $jsonContent -Encoding UTF8 -ErrorAction Stop
     return $OutputPath
 
 }
@@ -122,7 +123,7 @@ function Export-OrganizerHTMLReport {
 
         [Parameter(Mandatory)]
         [ValidateNotNull()]
-        [array]$Results,
+        [AllowEmptyCollection()][array]$Results,
 
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -135,23 +136,30 @@ function Export-OrganizerHTMLReport {
         New-Item -ItemType Directory -Path $parentDir -Force | Out-Null
     }
 
-    $scanned = if ($null -ne $Summary.TotalFiles) { $Summary.TotalFiles } else { $Summary.TotalScanned }
-    $moved   = if ($null -ne $Summary.Moved) { $Summary.Moved } else { $Summary.TotalMoved }
-    $failed  = if ($null -ne $Summary.Failed) { $Summary.Failed } else { $Summary.TotalFailed }
-    $sizeMB  = $Summary.TotalSizeMB
-    $duration = if ($Summary.Duration -is [timespan]) { $Summary.Duration.TotalSeconds } else { $Summary.Duration }
-
-    $categoryRows = ""
-    if ($Summary.Categories -is [hashtable]) {
-        foreach ($key in ($Summary.Categories.Keys | Sort-Object)) {
-            $categoryRows += "<tr><td>$key</td><td>$($Summary.Categories[$key])</td></tr>`n"
-        }
+    $scanned = [Net.WebUtility]::HtmlEncode([string]$Summary.TotalFiles)
+    $moved = [Net.WebUtility]::HtmlEncode([string]$Summary.Moved)
+    $failed = [Net.WebUtility]::HtmlEncode([string]$Summary.Failed)
+    $sizeMB = [Net.WebUtility]::HtmlEncode([string]$Summary.TotalSizeMB)
+    $skipped = [Net.WebUtility]::HtmlEncode([string]$Summary.Skipped)
+    $planned = [Net.WebUtility]::HtmlEncode([string]$Summary.Planned)
+    $duplicates = [Net.WebUtility]::HtmlEncode([string]$Summary.Duplicates)
+    $duration = [Net.WebUtility]::HtmlEncode((Format-Duration $Summary.Duration))
+    $categoryRows = [Text.StringBuilder]::new()
+    foreach ($key in ($Summary.Categories.Keys | Sort-Object)) {
+        $encoded = [Net.WebUtility]::HtmlEncode([string]$key)
+        $count = [Net.WebUtility]::HtmlEncode([string]$Summary.Categories[$key])
+        [void]$categoryRows.AppendLine("<tr><td>$encoded</td><td>$count</td></tr>")
     }
-
-    $fileRows = ""
+    $fileRows = [Text.StringBuilder]::new()
     foreach ($item in $Results) {
-        $statusClass = if ($item.Status -like "*Moved*") { "status-success" } else { "status-failed" }
-        $fileRows += "<tr><td>$($item.File)</td><td>$($item.Category)</td><td>$($item.SubCategory)</td><td><span class='$statusClass'>$($item.Status)</span></td><td>$($item.Destination)</td></tr>`n"
+        $statusClass = switch ($item.Status) { Moved { 'status-success' }; Failed { 'status-failed' }; Planned { 'status-planned' }; default { 'status-skipped' } }
+        [void]$fileRows.Append('<tr>')
+        foreach ($field in @('File', 'Category', 'SubCategory', 'Status', 'Destination', 'IsDuplicate', 'SHA256Hash', 'Reason')) {
+            $value = if ($item.PSObject.Properties[$field]) { [string]$item.$field } else { '' }
+            $value = [Net.WebUtility]::HtmlEncode($value)
+            [void]$fileRows.Append("<td class='$statusClass'>$value</td>")
+        }
+        [void]$fileRows.AppendLine('</tr>')
     }
 
     $dateStr = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -162,7 +170,7 @@ function Export-OrganizerHTMLReport {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Organizer Pro — Execution Report</title>
+    <title>Download Organizer Pro - Execution Report</title>
     <style>
         :root {
             --bg: #0f172a;
@@ -193,12 +201,13 @@ function Export-OrganizerHTMLReport {
 <body>
     <div class="container">
         <h1>Download Organizer Pro</h1>
-        <div class="meta">Report Generated: $dateStr</div>
+        <div class="meta">Report Generated: $dateStr | Duration: $duration</div>
 
         <div class="grid">
             <div class="card"><div class="card-label">Files Scanned</div><div class="card-value">$scanned</div></div>
             <div class="card"><div class="card-label">Files Moved</div><div class="card-value">$moved</div></div>
             <div class="card"><div class="card-label">Failed</div><div class="card-value">$failed</div></div>
+            <div class="card"><div class="card-label">Skipped / Planned / Duplicates</div><div class="card-value">$skipped / $planned / $duplicates</div></div>
             <div class="card"><div class="card-label">Total Size</div><div class="card-value">$sizeMB MB</div></div>
         </div>
 
@@ -213,7 +222,7 @@ function Export-OrganizerHTMLReport {
         <div class="section">
             <h2>File Operations Detail</h2>
             <table>
-                <thead><tr><th>File Name</th><th>Category</th><th>SubCategory</th><th>Status</th><th>Destination</th></tr></thead>
+                <thead><tr><th>File Name</th><th>Category</th><th>SubCategory</th><th>Status</th><th>Destination</th><th>Duplicate</th><th>SHA256</th><th>Reason</th></tr></thead>
                 <tbody>$fileRows</tbody>
             </table>
         </div>
@@ -222,7 +231,7 @@ function Export-OrganizerHTMLReport {
 </html>
 "@
 
-    Set-Content -Path $OutputPath -Value $html -Encoding UTF8
+    Set-Content -LiteralPath $OutputPath -Value $html -Encoding UTF8 -ErrorAction Stop
     return $OutputPath
 
 }
@@ -258,12 +267,13 @@ function Get-OrganizerStatistics {
     }
 
     $logFiles = Get-ChildItem -LiteralPath $LogPath -Filter "*.log" -File
-    $totalExecutions = @($logFiles).Count
+    $totalExecutions = 0
     $totalMoved = 0
     $totalFailed = 0
 
     foreach ($file in $logFiles) {
-        $content = Get-Content $file.FullName
+        $content = Get-Content -LiteralPath $file.FullName -Encoding UTF8 -ErrorAction Stop
+        $totalExecutions += @($content | Where-Object { $_ -match '\[INFO\] Organizer Started$' }).Count
         $totalMoved += @($content | Where-Object { $_ -match "\[SUCCESS\] Moved:" }).Count
         $totalFailed += @($content | Where-Object { $_ -match "\[ERROR\] Failed:" }).Count
     }

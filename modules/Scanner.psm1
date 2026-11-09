@@ -1,4 +1,5 @@
 Set-StrictMode -Version Latest
+Import-Module "$PSScriptRoot/Models.psm1"
 
 #region Private Functions
 
@@ -11,24 +12,26 @@ function Get-FileItems {
         [Parameter(Mandatory)]
         [string]$Path,
 
-        [switch]$Recurse
+        [switch]$Recurse,
+        [string[]]$ExcludePaths = @()
 
     )
 
-    if ($Recurse) {
-        return Get-ChildItem `
-            -LiteralPath $Path `
-            -File `
-            -Recurse `
-            -Force `
-            -ErrorAction Stop
-    }
-    else {
-        return Get-ChildItem `
-            -LiteralPath $Path `
-            -File `
-            -Force `
-            -ErrorAction Stop
+    $stack = [Collections.Generic.Stack[string]]::new()
+    $stack.Push([IO.Path]::GetFullPath($Path))
+    while ($stack.Count -gt 0) {
+        foreach ($item in Get-ChildItem -LiteralPath $stack.Pop() -Force -ErrorAction Stop) {
+            if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { continue }
+            if ($item.Name -eq '.organizer') { continue }
+            $excluded = $false
+            foreach ($excludedPath in $ExcludePaths) {
+                $root = [IO.Path]::GetFullPath($excludedPath).TrimEnd('\', '/')
+                if ($item.FullName -eq $root -or $item.FullName.StartsWith($root + '\', [StringComparison]::OrdinalIgnoreCase)) { $excluded = $true; break }
+            }
+            if ($excluded) { continue }
+            if ($item.PSIsContainer) { if ($Recurse) { $stack.Push($item.FullName) } }
+            else { $item }
+        }
     }
 
 }
@@ -142,7 +145,8 @@ function Get-DownloadFiles {
 
         [Int64]$MinSizeBytes = 0,
 
-        [Int64]$MaxSizeBytes = 0
+        [Int64]$MaxSizeBytes = 0,
+        [string[]]$ExcludePaths = @()
 
     )
 
@@ -156,7 +160,7 @@ function Get-DownloadFiles {
 
     $result = New-Object System.Collections.Generic.List[object]
 
-    $fileItems = Get-FileItems -Path $Path -Recurse:$Recurse
+    $fileItems = Get-FileItems -Path $Path -Recurse:$Recurse -ExcludePaths $ExcludePaths
 
     foreach ($file in $fileItems) {
 
@@ -192,7 +196,7 @@ function Get-DownloadFiles {
 
     }
 
-    return $result
+    return $result.ToArray()
 
 }
 
